@@ -24,7 +24,7 @@ var Map = sequelize.define("map", {
 var Location = sequelize.define("location", {
   name: Sequelize.STRING,
   lat: Sequelize.FLOAT(53),
-  long: Sequelize.FLOAT(53),
+  lon: Sequelize.FLOAT(53),
   map_id: Sequelize.INTEGER
 });
 
