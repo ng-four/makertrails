@@ -17,57 +17,70 @@ var User = sequelize.define("user", {
 
 var Map = sequelize.define("map", {
   name: Sequelize.STRING,
-  description: Sequelize.TEXT
+  description: Sequelize.TEXT,
+  user_id: Sequelize.INTEGER
 });
 
 var Location = sequelize.define("location", {
   name: Sequelize.STRING,
   lat: Sequelize.FLOAT(53),
-  long: Sequelize.FLOAT(53)
+  long: Sequelize.FLOAT(53),
+  map_id: Sequelize.INTEGER
 });
 
-var Progress = sequelize.define("location", {
+var Progress = sequelize.define("progress", {
+  id: {
+    type: Sequelize.INTEGER,
+    primaryKey: true,
+    autoIncrement: true
+  },
   visited: {
     type: Sequelize.BOOLEAN,
     defaultValue: false
-  }
+  },
+  location_id: Sequelize.INTEGER,
+  user_id: Sequelize.INTEGER
 });
 
 // User has many Maps, Map has one User
 Map.belongsTo(User, {
-  foreignKey: user_id
+  foreignKey: 'user_id'
 });
 
 User.hasMany(Map, {
-  foreignKey: user_id
+  foreignKey: 'user_id'
 });
 
 //Map has many Locations, Location has one Map
 Map.hasMany(Location, {
-  foreignKey: map_id
+  foreignKey: 'map_id'
 });
 
 Location.belongsTo(Map, {
-  foreignKey: map_id
+  foreignKey: 'map_id'
 });
 
 Location.belongsToMany(User, {
   through: {
     model: Progress
-  }
+  },
+  foreignKey: 'location_id'
 });
 
 User.belongsToMany(Location, {
   through: {
     model: Progress
   },
-  scope: {} //what is scope??
+  foreignKey: 'user_id'
 });
 
-User.sync();
-Map.sync();
-Location.sync();
-Progress.sync();
+User.sync().then(function(){
+  Map.sync().then(function(){
+    Location.sync().then(function(){
+      Progress.sync();
+    });
+  });
+});
 
 exports.User = User;
 exports.Map = Map;
