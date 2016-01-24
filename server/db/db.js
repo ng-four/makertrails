@@ -1,4 +1,5 @@
 var Sequelize = require("sequelize");
+var buildMap = require("../test/buildMap.js").buildMap;
 
 var sequelize = null;
 if (process.env.DATABASE_URL) {
@@ -77,7 +78,9 @@ User.belongsToMany(Location, {
 User.sync().then(function(){
   Map.sync().then(function(){
     Location.sync().then(function(){
-      Progress.sync();
+      Progress.sync().then(function(){
+        buildMap();
+      });
     });
   });
 });
