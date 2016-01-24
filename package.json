@@ -9,10 +9,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bluebird": "^3.1.2",
     "body-parser": "^1.14.2",
     "express": "^4.13.4",
     "express-session": "^1.13.0",
     "mysql": "^2.10.2",
-    "sequelize": "^3.18.0"
+    "sequelize": "^3.18.0",
+    "underscore": "^1.8.3"
   }
 }
