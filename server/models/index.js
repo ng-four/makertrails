@@ -6,14 +6,54 @@ var db = require('../db/db.js');
 
 
 module.exports = {
+
   mapInfo: {
     get: function (currentMap, callback) {
       db.Location.findAll({
         where: {
           map_id: currentMap
         }
-      }).then(function (locations) {
+      })
+      .then(function (locations) {
         callback(locations)
+      })
+    }
+  },
+
+  login: {
+    post: function (username, password, callback) {
+      db.User.find({
+        where: {
+          name: username
+        }
+      })
+      .then(function (found)  {
+        if (found && found.password === password) {
+          callback(true)
+        } else {
+          callback(false)
+        }
+      })
+    }
+  },
+
+  signup: {
+    post: function (username, password, email, callback) {
+      db.User.findOrCreate({
+        where: {
+          $or:[{name: username}, {email: email}]
+        }
+      })
+      .spread(function (found, create) {
+        if (create) {
+          found.name = username;
+          found.password = password;
+          found.email = email;
+          found.save();
+          callback(true);
+        }else{
+          callback(false);
+        }
       })
     }
   }
