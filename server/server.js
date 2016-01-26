@@ -23,18 +23,20 @@ app.set("port", process.env.PORT || 8000);
 
 // Logging and parsing
 app.use(parser.json());
+
+//Use cors
 app.use(function(req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
   res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
   next();
 });
-// Serving static files from client directory.
 
+// Serving static files from client directory.
 app.use(express.static(__dirname + '/client/'));
 
 // Set up our routes
 app.use("/", router);
 
-  app.listen(app.get("port"));
-  console.log("Listening on", app.get("port"));
+app.listen(app.get("port"));
+console.log("Listening on", app.get("port"));
