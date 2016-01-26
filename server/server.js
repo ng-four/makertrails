@@ -4,7 +4,7 @@ var session = require('express-session');
 
 //Middleware
 var parser = require('body-parser');
-// var router = require('./routes.js');
+var router = require('./routes/routes.js');
 
 // Router
 var app = express();
@@ -29,7 +29,7 @@ app.use(parser.json());
 app.use(express.static(__dirname + '/client/'));
 
 // Set up our routes
-// app.use("/", router);
+app.use("/", router);
 
 if (!module.parent) {
     app.listen(app.get("port"));
