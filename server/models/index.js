@@ -36,10 +36,10 @@ module.exports = {
           var created = []
           _.each(locations, function (location) {
             created.push(db.Progress.create({
-                          location_id: location.id,
-                          user_id: userId,
-                          map_id: mapId
-                        }))
+              location_id: location.id,
+              user_id: userId,
+              map_id: mapId
+            }))
           })
           Promise.all(created)
           .then(function (createdProgress) {
@@ -117,6 +117,3 @@ module.exports = {
 
 // // Database Requirements
 // var mysql = require('mysql');
-
-
-
