@@ -1,5 +1,6 @@
 // Models
 var db = require('../db/db.js');
+var _ = require('underscore');
 
 // Sequelize Extras to enable raw SQL
 // var seq = require('../db/db.js').seq;
@@ -16,6 +17,31 @@ module.exports = {
       })
       .then(function (locations) {
         callback(locations)
+      })
+    }
+  },
+
+  progress: {
+    post: function (mapId, locations, userId, callback) {
+
+      db.Progress.findAll({
+        where: {
+          user_id: userId,
+          map_id: mapId
+        }
+      })
+      .then(function (stuff) {
+        if(stuff.length === 0){
+          console.log("locations: ", locations)
+          _.each(locations, function (location) {
+            console.log("location: ", location)
+            db.Progress.create({
+              location_id: location.id,
+              user_id: userId,
+              map_id: mapId
+            })
+          })
+        }
       })
     }
   },
