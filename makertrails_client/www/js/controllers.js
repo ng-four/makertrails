@@ -40,7 +40,7 @@ angular.module('app.controllers', [])
 
       google.maps.event.addDomListener(window, 'load', function() {
 
-        var myLatlng = new google.maps.LatLng(34.0192076, -118.49428549999999);
+        var myLatlng = new google.maps.LatLng(34.0192076, -118.49428549999999); //34.0192076, -118.49428549999999
      
         var mapOptions = {
             center: myLatlng,

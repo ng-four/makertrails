@@ -32,7 +32,6 @@ app.use(express.static(__dirname + '/client/'));
 // Set up our routes
 app.use("/", router);
 
-if (!module.parent) {
-    app.listen(app.get("port"));
-    console.log("Listening on", app.get("port"));
-}
+  app.listen(app.get("port"));
+  console.log("Listening on", app.get("port"));
+
