@@ -25,7 +25,6 @@ module.exports = {
   progress: {
     post: function (mapId, locations, userId, callback) {},
     get: function (mapId, locations, userId, callback) {
-
       db.Progress.findAll({
         where: {
           user_id: userId,
@@ -49,6 +48,22 @@ module.exports = {
         } else {
           callback(progressLocations)
         }
+      })
+    },
+    put: function (progressId, callback) {
+      db.Progress.find({
+        where: {
+          id: progressId
+        }
+      })
+      .then(function (locationCollided){
+        if(locationCollided.visited === false){
+          locationCollided.visited = true;
+          locationCollided.save()
+          callback(true)
+        } else{
+          callback(false)
+        };
       })
     }
   },
