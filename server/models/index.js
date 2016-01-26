@@ -1,5 +1,6 @@
 // Models
 var db = require('../db/db.js');
+var Promise = require('bluebird');
 var _ = require('underscore');
 
 // Sequelize Extras to enable raw SQL
@@ -8,11 +9,11 @@ var _ = require('underscore');
 
 module.exports = {
 
-  mapInfo: {
-    get: function (currentMap, callback) {
+  location: {
+    get: function (mapId, callback) {
       db.Location.findAll({
         where: {
-          map_id: currentMap
+          map_id: mapId
         }
       })
       .then(function (locations) {
@@ -22,7 +23,8 @@ module.exports = {
   },
 
   progress: {
-    post: function (mapId, locations, userId, callback) {
+    post: function (mapId, locations, userId, callback) {},
+    get: function (mapId, locations, userId, callback) {
 
       db.Progress.findAll({
         where: {
@@ -30,17 +32,22 @@ module.exports = {
           map_id: mapId
         }
       })
-      .then(function (stuff) {
-        if(stuff.length === 0){
-          console.log("locations: ", locations)
+      .then(function (progressLocations) {
+        if(progressLocations.length === 0){
+          var created = []
           _.each(locations, function (location) {
-            console.log("location: ", location)
-            db.Progress.create({
-              location_id: location.id,
-              user_id: userId,
-              map_id: mapId
-            })
+            created.push(db.Progress.create({
+                          location_id: location.id,
+                          user_id: userId,
+                          map_id: mapId
+                        }))
           })
+          Promise.all(created)
+          .then(function (createdProgress) {
+            callback(createdProgress)
+          })
+        } else {
+          callback(progressLocations)
         }
       })
     }
