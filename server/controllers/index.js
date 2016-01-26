@@ -11,6 +11,28 @@ module.exports = {
     post: function (request, response) {}
   },
 
+  progress: {
+    get: function (request, response) {
+
+    },
+    post: function (request, response) {
+      var mapId = request.body.mapId;
+      var userId = request.body.id; // TO DO!!!
+      models.mapInfo.get(mapId, function (locations) {
+        models.progress.post(mapId, locations, userId, function (stuff) {
+          if (stuff) {
+            response.sendStatus(200)
+          }else{
+            response.sendStatus(400)
+          }
+        })
+      })
+    },
+    put: function (request, response) {
+
+    }
+  },
+
   login: {
     get: function (request, response) {},
     post: function (request, response) {

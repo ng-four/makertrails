@@ -47,7 +47,8 @@ exports.buildMap = function(){
             _.each(createdLocations, function (createdLocation) {
               db.Progress.create({
                 location_id: createdLocation.id,
-                user_id: user.id
+                user_id: user.id,
+                map_id: map.id
               });
             });
           });

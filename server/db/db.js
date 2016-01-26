@@ -14,12 +14,16 @@ var User = sequelize.define("user", {
   name: Sequelize.STRING,
   email: Sequelize.STRING,
   password: Sequelize.STRING
+}, {
+  timestamps: false
 });
 
 var Map = sequelize.define("map", {
   name: Sequelize.STRING,
   description: Sequelize.TEXT,
   user_id: Sequelize.INTEGER
+}, {
+  timestamps: false
 });
 
 var Location = sequelize.define("location", {
@@ -27,6 +31,8 @@ var Location = sequelize.define("location", {
   lat: Sequelize.FLOAT(53),
   lon: Sequelize.FLOAT(53),
   map_id: Sequelize.INTEGER
+}, {
+  timestamps: false
 });
 
 var Progress = sequelize.define("progress", {
@@ -41,6 +47,8 @@ var Progress = sequelize.define("progress", {
   },
   location_id: Sequelize.INTEGER,
   user_id: Sequelize.INTEGER
+}, {
+  timestamps: false
 });
 
 // User has many Maps, Map has one User
@@ -73,6 +81,14 @@ User.belongsToMany(Location, {
     model: Progress
   },
   foreignKey: 'user_id'
+});
+
+Map.hasMany(Progress, {
+  foreignKey: 'map_id'
+});
+
+Progress.belongsTo(Map, {
+  foreignKey: 'map_id'
 });
 
 User.sync().then(function(){
