@@ -1,6 +1,7 @@
 var mysql = require('mysql');
 var express = require('express');
 var session = require('express-session');
+var cors = require('cors');
 
 //Middleware
 var parser = require('body-parser');
@@ -23,7 +24,7 @@ app.set("port", process.env.PORT || 8000);
 
 // Logging and parsing
 app.use(parser.json());
-
+app.use(cors());
 // Serving static files from client directory.
 
 app.use(express.static(__dirname + '/client/'));
