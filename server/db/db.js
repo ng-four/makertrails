@@ -10,14 +10,23 @@ var sequelize = null;
 //   sequelize = new Sequelize('trails', 'root', null);
 // }
 
-if(process.env.CLEARDB_DATABASE_URL){
-  sequelize = new Sequelize(process.env.CLEARDB_DATABASE_URL);
-// } else if(process.env.DATABASE_URL){
-//   sequelize = new Sequelize(process.env.DATABASE_URL);
-} else {
-  // the application is executed on the local machine ... use mysql
-  sequelize = new Sequelize("trails", "root", "");
-}
+// if(process.env.CLEARDB_DATABASE_URL){
+//   sequelize = new Sequelize(process.env.CLEARDB_DATABASE_URL);
+// // } else if(process.env.DATABASE_URL){
+// //   sequelize = new Sequelize(process.env.DATABASE_URL);
+// } else {
+//   // the application is executed on the local machine ... use mysql
+//   sequelize = new Sequelize("trails", "root", "");
+// }
+
+var sequelize = new Sequelize(
+  "cuatro_tacos",
+  "cuatrotacos",
+  "1Qaz2wsx3edc", {
+    "host": "mysqlcluster6.registeredsite.com",
+    "port": "3306"
+  }
+)
 
 
 var User = sequelize.define("user", {
