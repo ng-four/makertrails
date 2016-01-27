@@ -9,6 +9,31 @@ var _ = require('underscore');
 
 module.exports = {
 
+  mapInfo: {
+    post: function (newLocations, callback) {
+      db.Map.create({
+        name: newLocations.mapInfo.name,
+        description: newLocations.mapInfo.description,
+        user_id: newLocations.mapInfo.user_id
+      })
+      .then(function (newMap) {
+        var newLocationsCreated = [];
+        _.each(newLocations.locationsInfo, function (newLocation) {
+          db.Location.create({
+            map_id: newMap.id,
+            lat: newLocation.lat,
+            lon: newLocation.lng,
+            name: newLocation.name
+          })
+        })
+        Promise.all(newLocationsCreated)
+        .then(function () {
+          callback(newMap)
+        })
+      })
+    }
+  },
+
   location: {
     get: function (mapId, callback) {
       db.Location.findAll({

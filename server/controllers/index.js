@@ -5,7 +5,14 @@ module.exports = {
 
   mapInfo: {
     get: function (request, response) {},
-    post: function (request, response) {},
+    post: function (request, response) {
+      var newLocations = request.body;
+      models.mapInfo.post(newLocations, function (newMap) {
+        models.location.get(newMap.dataValues.id, function (locations) {
+          response.json({ locations });
+        })
+      })
+    },
     put: function (request, response) {}
   },
 

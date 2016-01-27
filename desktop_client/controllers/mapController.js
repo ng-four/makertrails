@@ -60,10 +60,20 @@ $(document).ready(function(){
     $('#markers-with-coordinates').append('<li><a href="#" class="pan-to-marker" data-marker-lat="' + marker.getPosition().lat() + '" data-marker-lng="' + marker.getPosition().lng() + '">' + marker.title + '</a></li>');
   });
 
+  var locationsSelected = []
+
   GMaps.on('click', map.map, function(event) {
     var index = map.markers.length;
     var lat = event.latLng.lat();
     var lng = event.latLng.lng();
+
+    // lat/lng added on click, sent to array
+    locationsSelected.push({
+      lat: lat,
+      lng: lng
+    })
+
+    console.log("+++ 76  Desktop_CLient mapController.js: ", JSON.stringify(locationsSelected, null, "\t"));
 
     var template = $('#edit_marker_template').text();
 
