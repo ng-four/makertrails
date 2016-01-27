@@ -64,7 +64,7 @@
 <row name="lon" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
-<row name="id_maps" null="1" autoincrement="0">
+<row name="map_id" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>NULL</default><relation table="maps" row="id" />
 </row>
@@ -75,11 +75,11 @@
 <part>id</part>
 </key>
 </table>
-<table x="501" y="437" name="maps">
+<table x="513" y="435" name="maps">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
-<row name="id_users" null="1" autoincrement="0">
+<row name="user_id" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>NULL</default><relation table="users" row="id" />
 </row>
@@ -97,11 +97,11 @@
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
-<row name="id_locations" null="1" autoincrement="0">
+<row name="location_id" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>NULL</default><relation table="locations" row="id" />
 </row>
-<row name="id_users" null="1" autoincrement="0">
+<row name="user_id" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>NULL</default><relation table="users" row="id" />
 </row>
@@ -119,11 +119,11 @@
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
-<row name="id_locations" null="1" autoincrement="0">
+<row name="location_id" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>NULL</default><relation table="locations" row="id" />
 </row>
-<row name="id_users" null="1" autoincrement="0">
+<row name="user_id" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>NULL</default><relation table="users" row="id" />
 </row>
@@ -134,21 +134,25 @@
 <part>id</part>
 </key>
 </table>
-<table x="479" y="596" name="progress">
+<table x="528" y="41" name="progress">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
-<row name="id_users" null="1" autoincrement="0">
+<row name="user_id" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>NULL</default><relation table="users" row="id" />
 </row>
-<row name="id_locations" null="1" autoincrement="0">
+<row name="location_id" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>NULL</default><relation table="locations" row="id" />
 </row>
 <row name="visited" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
+<row name="map_id" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default><relation table="maps" row="id" />
+</row>
 <key type="PRIMARY" name="">
 <part>id</part>
 </key>
