@@ -2,13 +2,23 @@ var Sequelize = require("sequelize");
 var buildMap = require("../test/buildMap.js").buildMap;
 
 var sequelize = null;
-if (process.env.DATABASE_URL) {
-  //For future deployment on heroku
-  sequelize = new Sequelize(process.env.DATABASE_URL);
+// if (process.env.DATABASE_URL) {
+//   //For future deployment on heroku
+//   sequelize = new Sequelize(process.env.DATABASE_URL);
+// } else {
+//   //If the application is executed on the local machine ... use mysql
+//   sequelize = new Sequelize('trails', 'root', null);
+// }
+
+if(process.env.CLEARDB_DATABASE_URL){
+  sequelize = new Sequelize(process.env.CLEARDB_DATABASE_URL);
+// } else if(process.env.DATABASE_URL){
+//   sequelize = new Sequelize(process.env.DATABASE_URL);
 } else {
-  //If the application is executed on the local machine ... use mysql
-  sequelize = new Sequelize('trails', 'root', null);
+  // the application is executed on the local machine ... use mysql
+  sequelize = new Sequelize("trails", "root", "");
 }
+
 
 var User = sequelize.define("user", {
   name: Sequelize.STRING,
