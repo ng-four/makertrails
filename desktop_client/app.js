@@ -1,7 +1,17 @@
 angular.module("App", [
-  'uirouter',
+  'ui.router',
+  'App.login',
   'App.createMap',
   'App.map'
-])
-.config(function($stateProvider, $urlRouterProvider){
-})
+  ])
+  .config(function($stateProvider, $urlRouterProvider){
+    $stateProvider
+      .state('login',{
+        url: '/login',
+        templateUrl: 'templates/login.html',
+        controller: 'LoginController',
+        authenticate: true
+      })
+    $urlRouterProvider
+      .otherwise('/login');
+  })
