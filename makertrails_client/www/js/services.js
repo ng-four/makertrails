@@ -28,4 +28,68 @@ angular.module('app.services', [])
       return dist ? dist <= m : false;
     }
   };
+})
+.factory('MapFactory', function($stateParams, $ionicLoading, $http) {
+
+    var renderMap = function(){
+      $ionicLoading.show({
+        template: 'Getting your current location...',
+        showBackdrop: true,
+      });
+
+      var myLocation = new google.maps.LatLng(34.0192118,-118.4942816);
+      var mapOptions = {
+          center: myLocation,
+          zoom: 18,
+          mapTypeId: google.maps.MapTypeId.ROADMAP,
+          enableHighAccuracy: true,
+          timeout: 10000,
+          maximumAge: 0
+      };
+
+      var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+      return map;
+    };
+
+    var getMapLocations = function(http){  
+      $http.get('http://makertrails.herokuapp.com/progress?mapId=1&userId=1')
+      .then(function(data) {
+        var map = renderMap();
+        var locations = data.data;
+        console.log(data)
+
+        var marker = null;
+
+          for(var i = 0; i < locations.length; i++){
+            var marker = new google.maps.Marker({
+              position: new google.maps.LatLng(locations[i].lat, locations[i].lon),
+              map: map
+            })
+            console.log(locations[i].lat, locations[i].lon);
+          }
+          function err(err){
+            console.log("error(" + err.code + "): " + err.message);
+          }
+
+          var myLocation = null;
+
+          navigator.geolocation.watchPosition(function(pos) {
+            var currentLatLng = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
+            map.setCenter(currentLatLng);
+            if(myLocation !== null){
+              myLocation.setPosition(currentLatLng);
+            } else {
+              myLocation = new google.maps.Marker({
+                position: currentLatLng,
+                animation: google.maps.Animation.DROP,
+                map: map
+              });
+            }
+          $ionicLoading.hide();
+        }, err);
+      })
+    }
+  return {
+    getMapLocations: getMapLocations
+  };
 });
