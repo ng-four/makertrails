@@ -1,5 +1,5 @@
 angular.module("App.createMap", []) //Placeholder name
-.controller("MapCtrl", MapController)
+.controller("MapController", MapController)
 
 function MapController(MapFactory){
 
