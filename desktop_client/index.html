@@ -6,29 +6,18 @@
   <script src="bower_components/gmaps/gmaps.js"></script>
   <script src="bower_components/jquery/dist/jquery.min.js"></script>
   <script src="bower_components/underscore/underscore-min.js"></script>
+  <script src="controllers/mapController.js"></script>
   <style type="text/css">
     #map {
-      width: 400px;
+      width: 100%;
       height: 400px;
     }
   </style>
 </head>
 <body>
+hello
   <div id="map"></div>
-  <script src="controllers/mapController.js"></script>
-  <script type="text/html" id="edit_marker_template">
-    <h4>Edit Marker</h4>
-    <form class="edit_marker" action="#" method="post" data-marker-index="{{index}}">
-      <p>
-        <label for="marker_{{index}}_lat">Latitude:</label>
-        <input type="text" id="marker_{{index}}_lat" value="{{lat}}" />
-      </p>
-      <p>
-        <label for="marker_{{index}}_lng">Longitude:</label>
-        <input type="text" id="marker_{{index}}_lng" value="{{lng}}" />
-      </p>
-      <input type="submit" value="Update position" />
-    </form>
-  </script>
+  <div id="markers-with-coordinates"></div>
+
 </body>
 </html>
