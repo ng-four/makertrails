@@ -1,26 +1,8 @@
 angular.module("App", [
- // "mapController",
-  // ])
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// angular.module('Auth',[
   'ui.router',
-  'App.login'
+  'App.login',
+  'App.createMap',
+  'App.map'
   ])
   .config(function($stateProvider, $urlRouterProvider){
     $stateProvider
