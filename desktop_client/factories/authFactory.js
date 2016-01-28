@@ -1,5 +1,5 @@
-angular.module('Auth')
-  .factory('AuthFactory', function($http){
+angular.module('App')
+  .factory('AppFactory', function($http){
     var login = function(username, password){
       return $http ({
         method: 'POST',
@@ -15,3 +15,4 @@ angular.module('Auth')
         console.log(err);
       })
     };
+  })

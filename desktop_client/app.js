@@ -1,15 +1,5 @@
-angular.module("App", ["mapController"])
-
-
-
-
-
-
-
-
-
-
-
+angular.module("App", ["mapController",
+  // ])
 
 
 
@@ -41,15 +31,3 @@ angular.module("App", ["mapController"])
     $urlRouterProvider
       .otherwise('/login');
   })
-
-
-
-
-
-
-
-
-
-
-
-
