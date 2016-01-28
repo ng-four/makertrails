@@ -1,5 +1,5 @@
 angular.module("App", [
-  // "mapController",
+ // "mapController",
   // ])
 
 
@@ -27,7 +27,8 @@ angular.module("App", [
       .state('login',{
         url: '/login',
         templateUrl: 'templates/login.html',
-        controller: 'LoginController'
+        controller: 'LoginController',
+        authenticate: true
       })
     $urlRouterProvider
       .otherwise('/login');
