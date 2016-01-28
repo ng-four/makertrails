@@ -1,4 +1,5 @@
-angular.module("App", ["mapController",
+angular.module("App", [
+  // "mapController",
   // ])
 
 
@@ -19,7 +20,7 @@ angular.module("App", ["mapController",
 
 // angular.module('Auth',[
   'ui.router',
-  'Auth.login'
+  'App.login'
   ])
   .config(function($stateProvider, $urlRouterProvider){
     $stateProvider
