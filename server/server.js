@@ -35,8 +35,7 @@ app.use(function(req, res, next) {
 
 // Serving static files from client directory.
 app.use(express.static(__dirname + '../desktop_client'));
-app.use('/bower_components',  express.static(path.join(__dirname, '../desktop_client/bower_components')));
-app.use('/controllers',  express.static(path.join(__dirname, '../desktop_client/controllers')));
+app.use('/',  express.static(path.join(__dirname, '../desktop_client/')));
 // Set up our routes
 app.use("/", router);
 
