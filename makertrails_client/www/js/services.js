@@ -25,11 +25,11 @@ angular.module('app.services', [])
   return {
     withinRange: function(lat1, lng1, lat2, lng2, m) {
       var dist = haversine(lat1, lng1, lat2, lng2);
-      return dist ? dist <= m : false;
+      return dist <= m;
     }
   };
 })
-.factory('MapFactory', function($stateParams, $ionicLoading, $http) {
+.factory('MapFactory', function($http, $ionicLoading, $ionicPopup, CollisionFactory) {
 
     var renderMap = function(){
       $ionicLoading.show({
@@ -59,13 +59,12 @@ angular.module('app.services', [])
         console.log(data)
 
         var marker = null;
-
+        var markers = {};
           for(var i = 0; i < locations.length; i++){
             var marker = new google.maps.Marker({
               position: new google.maps.LatLng(locations[i].lat, locations[i].lon),
               map: map
             })
-            console.log(locations[i].lat, locations[i].lon);
           }
           function err(err){
             console.log("error(" + err.code + "): " + err.message);
@@ -75,6 +74,22 @@ angular.module('app.services', [])
 
           navigator.geolocation.watchPosition(function(pos) {
             var currentLatLng = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
+            var lat = pos.coords.latitude;
+            var lon = pos.coords.longitude;
+
+            for(var key in locations){
+              if(CollisionFactory.withinRange(lat, lon, locations[key].lat, locations[key].lon, 10)){
+                var alertPopup = $ionicPopup.alert({
+                  template: 'Collision!!' + locations[key].progress_id
+                });
+                $http.put('http://makertrails.herokuapp.com/progress', {'progressId' : locations[key].progress_id}, {'currentMap' : locations[key].id, 'Content-Type' : 'applicaiton/json'})
+                .then(function(data){
+                  console.log("success", data)
+                }, function(err){
+                  console.log(err);
+                })
+              }
+            }
             map.setCenter(currentLatLng);
             if(myLocation !== null){
               myLocation.setPosition(currentLatLng);
