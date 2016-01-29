@@ -3,7 +3,18 @@
   <trail-map></trail-map>
   <ul>
     <li ng-repeat="location in selectedLocations">
-      {{location.name}}
+      <div ng-switch on="location.editing">
+        <div ng-switch-when="true">
+          <form ng-submit="location.editing = false">
+            <input type="text" ng-model="location.name">
+            <input type="submit" value="Save">
+          </form>
+        </div>
+        <div ng-switch-when="false"
+            ng-click="location.editing = true">
+          {{location.name}}
+        </div>
+      </div>
     </li>
   </ul>
 </div>

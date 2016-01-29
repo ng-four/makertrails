@@ -11,8 +11,6 @@ function trailMap(MapFactory) {
       zoom: 15
     });
 
-    console.log("+++14 directive before the click")
-
     GMaps.on('click', map.map, function(event) {
       var index = map.markers.length;
       var lat = event.latLng.lat();
@@ -22,7 +20,8 @@ function trailMap(MapFactory) {
       $scope.selectedLocations.push({
         lat: lat,
         lng: lng,
-        name: "Location " + (index + 1)
+        name: "Location " + (index + 1),
+        editing: false
       })
       $scope.$apply();
 
