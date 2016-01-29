@@ -1,4 +1,4 @@
-angular.module('App.createMap')
+angular.module('App')
 .factory('MapFactory', MapFactory)
 
 function MapFactory(){
