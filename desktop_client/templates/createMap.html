@@ -1,4 +1,9 @@
+<div ng-controller="MapController">
 <div>
-  hello
   <trail-map></trail-map>
+  <ul>
+    <li ng-repeat="location in selectedLocations">
+      {{location.name}}
+    </li>
+  </ul>
 </div>
