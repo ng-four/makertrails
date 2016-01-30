@@ -1,13 +1,15 @@
 <div ng-controller="MapController">
 <div>
-  <trail-map></trail-map>
+  <trail-map ng-model="selectedLocations"></trail-map>
   <ul>
     <li ng-repeat="location in selectedLocations">
       <div ng-switch on="location.editing">
         <div ng-switch-when="true">
-          <form ng-submit="location.editing = false">
-            <input type="text" ng-model="location.name">
-            <input type="submit" value="Save">
+          <form>
+            <input type="text" ng-model="location.name" autofocus onfocus="this.select()">
+            <input type="submit" value="Save" ng-click="refreshMap(selectedLocations, $index, map)">
+            <button ng-click="removeLocation(selectedLocations, $index, map)">X</button><br>
+            
           </form>
         </div>
         <div ng-switch-when="false"
