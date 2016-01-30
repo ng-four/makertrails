@@ -12,11 +12,11 @@ angular.module('app.routes', [])
     //   templateUrl: 'templates/signup.html',
     //   controller: 'SignupController'
     // })
-    // .state('home', {
-    //   url: '/home',
-    //   templateUrl: 'templates/home.html',
-    //   controller: 'HomeController'
-    // })
+    .state('home', {
+      url: '/home',
+      templateUrl: 'templates/home.html',
+      controller: 'HomeController'
+    })
     .state('makerMap', {
       url: '/makerMap',
       templateUrl: 'templates/makerMap.html',
