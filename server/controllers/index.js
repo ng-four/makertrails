@@ -4,7 +4,11 @@ var utils = require('../helpers/utils.js');
 module.exports = {
 
   mapInfo: {
-    get: function (request, response) {},
+    get: function (request, response) {
+      models.mapInfo.get(function (allMaps) {
+        response.json({ allMaps });
+      })
+    },
     post: function (request, response) {
       var newLocations = request.body;
       models.mapInfo.post(newLocations, function (newMap) {
@@ -86,7 +90,4 @@ module.exports = {
     },
     put: function (request, response) {}
   }
-
-
-
 }
