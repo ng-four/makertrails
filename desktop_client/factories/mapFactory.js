@@ -32,6 +32,10 @@ function MapFactory(){
         }
       });
     });
+  };
+
+  mapFactory.postNewMap = function(newMap) {
+
   }
 
   return mapFactory;
