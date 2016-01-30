@@ -4,7 +4,8 @@ angular.module('app', [
   'app.routes',
   'app.CollisionFactory',
   'app.MakerMapController',
-  'app.MakerMapFactory'
+  'app.MakerMapFactory',
+  'app.HomeController'
 ])
 
 .run(function($ionicPlatform) {
