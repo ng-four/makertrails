@@ -102,7 +102,7 @@ module.exports = {
       })
       .then(function (found)  {
         if (found && found.password === password) {
-          callback(true)
+          callback(found)
         } else {
           callback(false)
         }

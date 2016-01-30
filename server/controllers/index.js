@@ -60,6 +60,7 @@ module.exports = {
       models.login.post(username, password, function (isUser) {
         // response.redirect('/app') // PROBABLY GOOD IDEA TO REDIRECT TO ROUTE APP (HOW?)
         if (isUser) {
+          console.log("isUser: ", isUser)
          response.sendStatus(200);
         }else{
          response.sendStatus(400);
