@@ -10,6 +10,12 @@ var _ = require('underscore');
 module.exports = {
 
   mapInfo: {
+    get: function (callback) {
+      db.Map.findAll()
+      .then(function (allMaps) {
+        callback(allMaps)
+      })
+    },
     post: function (newLocations, callback) {
       db.Map.create({
         name: newLocations.mapInfo.name,
