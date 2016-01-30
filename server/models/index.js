@@ -129,7 +129,7 @@ module.exports = {
           found.password = password;
           found.email = email;
           found.save();
-          callback(true);
+          callback(found);
         }else{
           callback(false);
         }
