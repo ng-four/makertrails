@@ -12,12 +12,12 @@ var app = express();
 module.exports.app = app;
 
 // Establish session
-// app.use(session({
-//  secret: 'dgdjkgd34',
-//  resave: true,
-//  saveUninitialized: false,
-//  cookie: {maxAge: 1000*60*60}
-// }));
+app.use(session({
+ secret: 'dgdjkgd34',
+ resave: true,
+ saveUninitialized: false,
+ cookie: {maxAge: 1000*60*60}
+}));
 
 // Set what we are listening on.
 app.set("port", process.env.PORT || 8000);

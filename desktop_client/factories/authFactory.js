@@ -3,7 +3,7 @@ angular.module('App')
     var login = function(username, password){
       return $http ({
         method: 'POST',
-        url: 'http://makertrails.herokuapp.com/login',
+        url: '/login',
         data: {
           username: username,
           password: password
@@ -18,7 +18,7 @@ angular.module('App')
     var signup = function(username, password, email){
       return $http ({
         method: 'POST',
-        url: 'http://makertrails.herokuapp.com/signup',
+        url: '/signup',
         data: {
           username: username,
           password: password,
@@ -26,7 +26,7 @@ angular.module('App')
         }
       })
       .then(function(success){
-        $state.go('createNewMap')
+        $state.go('createNewMap') // THIS WILL REDIRECT TO HOME
       }, function(err){
         console.log(err);
       })

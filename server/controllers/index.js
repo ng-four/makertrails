@@ -59,13 +59,15 @@ module.exports = {
   login: {
     get: function (request, response) {},
     post: function (request, response) {
-      var username = request.body.username;
+      var username = request.body.username; //stringify because chris
       var password = request.body.password;// need to bcrypt
+
       models.login.post(username, password, function (isUser) {
         // response.redirect('/app') // PROBABLY GOOD IDEA TO REDIRECT TO ROUTE APP (HOW?)
         if (isUser) {
-          console.log("isUser: ", isUser)
-         response.sendStatus(200);
+          utils.createSession(request, response, isUser, function (newUser) {
+           response.sendStatus(200);
+          })
         }else{
          response.sendStatus(400);
         };
@@ -80,11 +82,13 @@ module.exports = {
       var username = request.body.username;
       var password = request.body.password; // need to bcrypt
       var email = request.body.email;
-      models.signup.post(username, password, email, function (user) {
-        if(!user){
-          response.sendStatus(400);
+      models.signup.post(username, password, email, function (isUser) {
+        if(isUser){
+          utils.createSession(request, response, isUser, function (newUser) {
+            response.sendStatus(200);
+          })
         }else{
-          response.sendStatus(200);
+          response.sendStatus(400);
         };
       })
     },
