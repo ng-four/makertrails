@@ -5,7 +5,13 @@
   "main": "server/server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server/server.js"
+    "start": "node server/server.js",
+    "deploy":
+      "echo 'makertrails_client/ ' >> .gitignore &&
+      git add .gitignore &&
+      git commit -m '[deploy] add mobile client to .gitignore' &&
+      git push heroku master:deploy &&
+      sed -i '' -e '$d' .gitignore"
   },
   "author": "",
   "license": "ISC",
