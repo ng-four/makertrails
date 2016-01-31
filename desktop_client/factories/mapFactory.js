@@ -34,9 +34,19 @@ function MapFactory(){
     });
   };
 
-  mapFactory.postNewMap = function(newMap) {
-
-  }
+  mapFactory.postMap = function(newMap) {
+    $http ({
+      method: 'POST',
+      url: '/mapInfo',
+      data: newMap
+    })
+    .then(function(success){
+      console.log("You created a new Map!")
+    }, function(err){
+      console.log("You failed to create a new map");
+      console.log(err);
+    });
+  };
 
   return mapFactory;
 }

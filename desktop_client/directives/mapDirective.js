@@ -15,7 +15,6 @@ function trailMap(MapFactory) {
         lat: lat,
         lng: lng,
         name: "Location " + (index + 1),
-        description: "",
         editing: false
       }
       // lat/lng added on click, sent to array
