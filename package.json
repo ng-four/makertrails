@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server/server.js",
     "postinstall": "./node_modules/bower/bin/bower install",
-    "deploy": "./bin/deploy.sh"
+    "deploy": "sudo ./bin/deploy.sh"
   },
   "author": "",
   "license": "ISC",
