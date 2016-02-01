@@ -2,8 +2,8 @@ angular.module('app.HomeController', [])
 
 .controller('HomeController', homeController);
 
-function homeController($scope) {
+function homeController($scope, $state) {
   $scope.goToMapList = function() {
-    //get map stuff
+    $state.go('selectMap');
   };
 }
