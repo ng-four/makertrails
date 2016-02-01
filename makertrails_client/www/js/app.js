@@ -7,7 +7,8 @@ angular.module('app', [
   'app.MakerMapFactory',
   'app.LoginController',
   'app.LoginFactory',
-  'app.HomeController'
+  'app.HomeController',
+  'app.SelectMapController'
 ])
 
 .run(function($ionicPlatform) {

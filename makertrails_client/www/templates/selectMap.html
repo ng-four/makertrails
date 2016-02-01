@@ -1,0 +1,11 @@
+<ion-view title="Select Map">
+  <ion-content>
+    <div class="list">
+      <a class="item item-thumbnail-left" ui-sref="makerMap" ng-repeat="map in allMaps">
+        <!-- <img ng-src="#"> -->
+        <h2>{{map.name}}</h2>
+        <p>{{map.description}}</p>
+      </a>
+    </div>
+  </ion-content>
+</ion-view>

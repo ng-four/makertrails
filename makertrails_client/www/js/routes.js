@@ -21,6 +21,11 @@ angular.module('app.routes', [])
       url: '/makerMap',
       templateUrl: 'templates/makerMap.html',
       controller: 'MakerMapController'
+    })
+    .state('selectMap', {
+      url: '/selectMap',
+      templateUrl: 'templates/selectMap.html',
+      controller: 'SelectMapController'
     });
 
   // if none of the above states are matched, use this as the fallback
