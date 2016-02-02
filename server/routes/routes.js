@@ -14,6 +14,7 @@ router.get('/#/', utils.checkUser, function (request, response) {
 })
 
 router.get('/mapInfo', utils.checkUser, function (request, response) {
+  console.log("+++ 17 routes.js request: ", request)
   controllers.mapInfo.get(request, response)
 })
 
@@ -83,4 +84,4 @@ router.get('/logout', function (request, response) {
 //   .post(mobileControllers[route].post)
 // }
 //
-// module.exports = router;
+module.exports = router;
