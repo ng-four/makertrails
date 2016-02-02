@@ -8,7 +8,6 @@ router.get('/', function(request, response){
   response.status(202).sendFile(path.resolve(__dirname + "../../../desktop_client/index.html"));
 })
 
-<<<<<<< 9b664f4fabd15332b4755a0b6e606bb63258d880
 router.get('/mapInfo', utils.checkUser, function (request, response) {
   controllers.mapInfo.get(request, response)
 })

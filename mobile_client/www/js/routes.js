@@ -5,27 +5,34 @@ angular.module('app.routes', [])
     .state('login', {
       url: '/login',
       templateUrl: 'templates/login.html',
-      controller: 'LoginController'
+      controller: 'LoginController',
+      authenticate: false
     })
     .state('signup', {
       url: '/signup',
       templateUrl: 'templates/signup.html',
-      controller: 'SignupController'
+      controller: 'SignupController',
+      authenticate: false
+
     })
     .state('home', {
       url: '/home',
       templateUrl: 'templates/home.html',
-      controller: 'HomeController'
+      controller: 'HomeController',
+      authenticate: true
     })
     .state('makerMap', {
       url: '/makerMap',
       templateUrl: 'templates/makerMap.html',
-      controller: 'MakerMapController'
+      controller: 'MakerMapController',
+      authenticate: true
     })
     .state('selectMap', {
       url: '/selectMap',
       templateUrl: 'templates/selectMap.html',
-      controller: 'SelectMapController'
+      controller: 'SelectMapController',
+      authenticate: true
+
     });
 
   // if none of the above states are matched, use this as the fallback
