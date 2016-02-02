@@ -12,9 +12,11 @@ exports.formatProgress = function(locations, progresses) {
 
 //create session
 exports.createSession = function(request, response, isUser, callback) {
+  console.log("+++ 15 utils.js request.sessionID: ", request.sessionID)
   request.session.regenerate(function() {
     request.session.user = isUser.id
-    callback(request.session.user)
+    console.log("+++ 17 utils.js request.sessionID: ", request.sessionID)
+    callback(request.session.user, request.sessionID)
   })
 }
 
