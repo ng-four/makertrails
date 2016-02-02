@@ -1,7 +1,6 @@
 angular.module('App.login', [])
-  .controller('LoginController', function($scope, $http, $state, AppFactory){
+  .controller('LoginController', function($scope, $http, $state, $window, AppFactory){
     $scope.login = function(){
-      // $state.go('createNewMap');
-      AppFactory.login($scope.username, $scope.password)
+      AppFactory.login($scope.username, $scope.password, $window)
     }
   });
