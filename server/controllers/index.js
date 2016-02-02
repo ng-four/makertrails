@@ -94,7 +94,8 @@ module.exports = {
   logout:{
     get: function (request, response, callback) {
       utils.logout(request, response, function (loggedOut){
-        response.redirect('/#/login')
+      console.log("+++ 96 index.js Logout BACKEND")
+        response.sendStatus(200)
       })
     }
   }

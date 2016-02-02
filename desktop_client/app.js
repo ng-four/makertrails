@@ -2,6 +2,7 @@ angular.module("App", [
   'ui.router',
   'App.login',
   'App.signup',
+  'App.logout',
   'App.createMap'
   ])
 .config(function($stateProvider, $urlRouterProvider){

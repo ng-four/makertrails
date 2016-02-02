@@ -3,8 +3,19 @@ angular.module('App')
 
     var authenticate = false;
 
-    function varToggle () {
-      authenticate = !authenticate
+    function logout () {
+      window.localStorage.removeItem('makerTrailsSession');
+      window.localStorage.removeItem('makerTrailsUserID');
+      $http({
+        method: 'GET',
+        url: 'http://localhost:8000/logout'
+      })
+      .then(function (loggedOut) {
+        if (loggedOut.status === 200) {
+          $state.go('login')
+          return
+        };
+      })
     }
 
     function authenticateFunction () {
@@ -54,6 +65,6 @@ angular.module('App')
       login: login,
       signup: signup,
       authenticateFunction: authenticateFunction,
-      varToggle: varToggle
+      logout: logout
     }
   })
