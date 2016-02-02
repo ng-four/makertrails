@@ -12,7 +12,16 @@ module.exports = {
           location_id: locationId
         }
       }).then(function(reviews){
-        callback(reviews);
+        var queries = [];
+        _.each(reviews, function(review){
+          queries.push(db.User.findById(review.user_id).then(function(user){
+            review.dataValues.author = user.name;
+          }));
+        })
+        Promise.all(queries)
+        .then(function(){
+          callback(reviews);
+        })
       })
     },
     post: function(review, callback){
