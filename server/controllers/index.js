@@ -80,10 +80,10 @@ module.exports = {
       var password = request.body.password; // need to bcrypt
       var email = request.body.email;
       models.signup.post(username, password, email, function (isUser) {
+        console.log("+++ 83 index.js isUser: ", isUser)
         if(isUser){
-          utils.createSession(request, response, isUser, function (newUser) {
-            response.sendStatus(200);
-          })
+          console.log("+++ 86 index.js newUser inside 200 response: ", isUser)
+          response.status(200).json(isUser);
         }else{
           response.sendStatus(400);
         };
