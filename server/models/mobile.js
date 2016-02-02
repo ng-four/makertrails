@@ -14,11 +14,21 @@ module.exports = {
       }).then(function(reviews){
         callback(reviews);
       })
+    },
+    post: function(review, callback){
+      db.Review.create({
+        location_id: review.location_id,
+        user_id: review.user_id,
+        body: review.body,
+        rating: review.rating
+      }).then(function(postedReview){
+        callback(postedReview);
+      })
     }
-  },
-
-  photo: {
-    get: function(){},
-    post: function(){}
   }
+
+  // photo: {
+  //   get: function(){},
+  //   post: function(){}
+  // }
 }

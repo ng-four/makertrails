@@ -164,4 +164,6 @@ exports.User = User;
 exports.Map = Map;
 exports.Location = Location;
 exports.Progress = Progress;
+exports.Review = Review;
+exports.Photo = Photo;
 exports.sequelize = sequelize;

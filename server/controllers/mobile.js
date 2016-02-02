@@ -12,16 +12,17 @@ module.exports = {
     post: function(request, response) {
       var review = request.body;
       models.review.post(review, function(postedReview){
-        response.sendStatus(200)
-      })
-    }
-  },
-  photo: {
-    get: function(request, response){
-      var locationId = request.query.locationId;
-      models.photo.get(locationId, function(result){
-        response //something
+        response.status(200).send(postedReview);
       })
     }
   }
+  // ,
+  // photo: {
+  //   get: function(request, response){
+  //     var locationId = request.query.locationId;
+  //     models.photo.get(locationId, function(result){
+  //       response //something
+  //     })
+  //   }
+  // }
 }
