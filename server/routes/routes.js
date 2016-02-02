@@ -10,16 +10,36 @@ router.get('/', function(request, response){
 })
 
 for(var route in controllers){
-  router.route("/" + route)
-  .get(controllers[route].get)
-  .post(controllers[route].post)
-  .put(controllers[route].put)
+  if(route === 'signup' || route === 'login'){
+    router.route("/" + route)
+    .get(controllers[route].get)
+    .post(controllers[route].post)
+    .put(controllers[route].put)
+  } else{
+    router.route("/" + route)
+    .get(utils.checkUser, controllers[route].get)
+    .post(utils.checkUser, controllers[route].post)
+    .put(utils.checkUser, controllers[route].put)
+
+
+    // router.route("/" + route)
+    // router.get(route, util.checkUser, controller[route].get)
+  };
 }
 
-for(var route in mobileControllers){
-  router.route("/" + route)
-  .get(mobileControllers[route].get)
-  .post(mobileControllers[route].post)
-}
-
-module.exports = router;
+// This works without authentication for localhost
+//
+// for(var route in controllers){
+//   router.route("/" + route)
+//   .get(controllers[route].get)
+//   .post(controllers[route].post)
+//   .put(controllers[route].put)
+// }
+//
+// for(var route in mobileControllers){
+//   router.route("/" + route)
+//   .get(mobileControllers[route].get)
+//   .post(mobileControllers[route].post)
+// }
+//
+// module.exports = router;
