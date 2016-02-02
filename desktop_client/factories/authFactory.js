@@ -1,5 +1,5 @@
 angular.module('App')
-  .factory('AppFactory', function($http, $state){
+  .factory('AppFactory', function($http, $state, $window){
 
     var authenticate = false;
 
@@ -55,8 +55,9 @@ angular.module('App')
           email: email
         }
       })
-      .then(function(success){
-        $state.go('createNewMap') // THIS WILL REDIRECT TO HOME
+      .then(function(isUser){
+        console.log("+++ 59 authFactory.js success: ", isUser)
+        login(isUser.data.name, isUser.data.password, $window)
       }, function(err){
         console.log(err);
       })
