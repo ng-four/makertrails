@@ -1,7 +1,7 @@
 angular.module('app.LoginController', [])
 
 .controller('AuthController', function($scope, $location, $state, $ionicPopup, LoginFactory, AUTH_EVENTS) {
-    $scope.username = AuthService.username();
+    $scope.username = LoginFactory.username();
 
     $scope.$on(AUTH_EVENTS.notAuthorized, function(event){
         var alertPopup = $ionicPopup.alert({
@@ -11,7 +11,7 @@ angular.module('app.LoginController', [])
     });
 
     $scope.$on(AUTH_EVENTS.notAuthenticated, function(event){
-        AuthService.logout();
+        LoginFactory.logout();
         $state.go('login');
         var alertPopup = $ionicPopup.alert({
             title: 'Session Lost',
@@ -23,13 +23,13 @@ angular.module('app.LoginController', [])
         $scope.username = name;
     };
 })
-.controller('LoginController', function($scope, $state, $ionicPopup, AuthService){
+.controller('LoginController', function($scope, $state, $ionicPopup, LoginFactory){
     $scope.data = {};
 
     $scope.login = function(data){
-      AuthService.login(data.username, data.password)
+      LoginFactory.login(data.username, data.password)
       .then(function(authenticated){
-        $scope.go('mapMaker', {}, {reload: true});
+        $state.go('makerMap', {}, {reload: true});
         $scope.setCurrentUsername(data.username);
       },
       function(err){
@@ -40,10 +40,10 @@ angular.module('app.LoginController', [])
     })
   };
 })
-.controller('AuthRoutes', function($scope, $state, $http, $ionicPopup, AuthService){
+.controller('AuthRoutes', function($scope, $state, $http, $ionicPopup, LoginFactory){
 
   $scope.logout = function(){
-    AuthService.logout();
+    LoginFactory.logout();
     $state.go('login');
   };
 

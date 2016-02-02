@@ -26,19 +26,19 @@ angular.module('app', [
     }
   });
 })
-.run(function($rootScope, $state, AuthService, AUTH_EVENTS){
+.run(function($rootScope, $state, LoginFactory, AUTH_EVENTS){
 
   $rootScope.$on('$stateChangesStart' , function(event, next, nextParams, fromState) {
 
     if('data' in next && 'authorizedRoles' in next.data){
       var authorizedRoles = next.data.authorizedRoles;
-      if(!AuthService.isAuthorized(authorizedRoles)){
+      if(!LoginFactory.isAuthorized(authorizedRoles)){
         event.preventDefault();
         $state.go($state.current, {}, {reload: true});
         $rootScope.$broadcast(AUTH_EVENTS.notAuthorized);
       }
     }
-    if(!AuthService.isAuthenticated()){
+    if(!LoginFactory.isAuthenticated()){
       if(next.name !== 'login'){
         event.preventDefault();
         $state.go('login');

@@ -1,5 +1,6 @@
 angular.module('app.LoginFactory', [])
 .factory('LoginFactory', function($q, $http, USER_ROLES){
+  
   var LOCAL_TOKEN_KEY = 'yourTokenKey';
   var username = '';
   var isAuthenticated = false;
@@ -14,9 +15,8 @@ angular.module('app.LoginFactory', [])
   }
 
   function storeUserCredentials(token) {
-    window.localStorage.setItem(LOCAL_TOKEN_KEY, token){
-      userCredentials(token);
-    }
+    window.localStorage.setItem(LOCAL_TOKEN_KEY, token);
+    userCredentials(token);
   }
 
   function userCredentials(token){
