@@ -1,16 +1,33 @@
 angular.module('App')
   .factory('AppFactory', function($http, $state){
+
+    var authenticate = false;
+
+    function varToggle () {
+      authenticate = !authenticate
+    }
+
+    function authenticateFunction () {
+      return authenticate
+    }
+
     var login = function(username, password){
-      return $http ({
+      console.log("+++ 4 authFactory.js Login")
+      $http ({
         method: 'POST',
-        url: '/login',
+        url: 'http://localhost:8000/login',
         data: {
           username: username,
           password: password
         }
       })
       .then(function(success){
-        $state.go('createNewMap') // THIS WILL REDIRECT TO HOME
+        console.log("+++ 14 authFactory.js Success: ", success)
+        if (success.status === 200 && authenticate === false) {
+          console.log("+++ 16 authFactory.js 200")
+          varToggle();
+          $state.go('createNewMap') // THIS WILL REDIRECT TO HOME
+        };
       }, function(err){
         console.log(err);
       })
@@ -33,6 +50,8 @@ angular.module('App')
     };
     return{
       login: login,
-      signup: signup
+      signup: signup,
+      authenticateFunction: authenticateFunction,
+      varToggle: varToggle
     }
   })

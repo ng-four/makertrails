@@ -9,37 +9,36 @@ router.get('/', function(request, response){
   response.status(202).sendFile(path.resolve(__dirname + "../../../desktop_client/index.html"));
 })
 
-for(var route in controllers){
-  if(route === 'signup' || route === 'login'){
-    router.route("/" + route)
-    .get(controllers[route].get)
-    .post(controllers[route].post)
-    .put(controllers[route].put)
-  } else{
-    router.route("/" + route)
-    .get(utils.checkUser, controllers[route].get)
-    .post(utils.checkUser, controllers[route].post)
-    .put(utils.checkUser, controllers[route].put)
+router.get('/mapInfo', utils.checkUser, function (request, response) {
+  controllers.mapInfo.get(request, response)
+})
 
+router.post('/mapInfo', utils.checkUser, function (request, response) {
+  controllers.mapInfo.post(request, response)
+})
 
-    // router.route("/" + route)
-    // router.get(route, util.checkUser, controller[route].get)
-  };
-}
+router.get('/location', utils.checkUser, function (request, response) {
+  controllers.location.get(request, response)
+})
 
-// This works without authentication for localhost
-//
-// for(var route in controllers){
-//   router.route("/" + route)
-//   .get(controllers[route].get)
-//   .post(controllers[route].post)
-//   .put(controllers[route].put)
-// }
-//
-// for(var route in mobileControllers){
-//   router.route("/" + route)
-//   .get(mobileControllers[route].get)
-//   .post(mobileControllers[route].post)
-// }
-//
-// module.exports = router;
+router.get('/progress', utils.checkUser, function (request, response) {
+  controllers.progress.get(request, response)
+})
+
+router.put('/progress', utils.checkUser, function (request, response) {
+  controllers.progress.put(request, response)
+})
+
+router.post('/signup', function (request, response) {
+  controllers.signup.post(request, response)
+})
+
+router.post('/login', function (request, response) {
+  controllers.login.post(request, response)
+})
+
+router.get('/logout', function (request, response) {
+  controllers.logout.get(request, response)
+})
+
+module.exports = router;
