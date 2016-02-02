@@ -5,6 +5,7 @@ module.exports = {
 
   mapInfo: {
     get: function (request, response) {
+      console.log("+++ 8 index.js request.sessionID mapInfo call: ", request.sessionID)
       models.mapInfo.get(function (allMaps) {
         response.json({ allMaps });
       })
@@ -54,13 +55,17 @@ module.exports = {
   login: {
     get: function (request, response) {},
     post: function (request, response) {
+      console.log("+++ 57 index.js request login: ", request.sessionID)
       var username = request.body.username; //stringify because chris
       var password = request.body.password;// need to bcrypt
       models.login.post(username, password, function (isUser) {
         // response.redirect('/app') // PROBABLY GOOD IDEA TO REDIRECT TO ROUTE APP (HOW?)
         if (isUser) {
-          utils.createSession(request, response, isUser, function (newUser) {
-           response.sendStatus(200);
+          utils.createSession(request, response, isUser, function (newUser, sessionID) {
+           response.status(200).json( {
+             'sessionID': sessionID,
+             "userID": newUser
+            } );
           })
         }else{
          response.sendStatus(400);

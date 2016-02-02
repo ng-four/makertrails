@@ -8,11 +8,10 @@ angular.module('App')
     }
 
     function authenticateFunction () {
-      return authenticate
+      return !!window.localStorage.makerTrailsSession
     }
 
-    var login = function(username, password){
-      console.log("+++ 4 authFactory.js Login")
+    var login = function(username, password, window){
       $http ({
         method: 'POST',
         url: 'http://localhost:8000/login',
@@ -23,11 +22,14 @@ angular.module('App')
       })
       .then(function(success){
         console.log("+++ 14 authFactory.js Success: ", success)
-        if (success.status === 200 && authenticate === false) {
-          console.log("+++ 16 authFactory.js 200")
-          varToggle();
-          $state.go('createNewMap') // THIS WILL REDIRECT TO HOME
-        };
+
+        window.localStorage.setItem('makerTrailsSession', success.data.sessionID)
+        window.localStorage.setItem('makerTrailsUserID', success.data.userID)
+        if (authenticateFunction()) {
+          $state.go('createNewMap')
+        }else{
+          $state.go('login')
+        }
       }, function(err){
         console.log(err);
       })
