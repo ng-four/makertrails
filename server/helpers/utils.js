@@ -34,7 +34,7 @@ exports.checkUser = function(request, response, next) {
   if (isLoggedIn(request)) {
     next();
   } else {
-    response.redirect('/#/login')
+    response.sendStatus(401);
   }
 }
 
