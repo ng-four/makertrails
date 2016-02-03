@@ -1,5 +1,6 @@
 angular.module('app.LoginController', [])
 
+<<<<<<< HEAD
 .controller('AuthController', function($scope, $location, $state, $ionicPopup, LoginFactory, AUTH_EVENTS) {
     $scope.username = AuthService.username();
 
@@ -69,4 +70,11 @@ angular.module('app.LoginController', [])
       $scope.response = err;
     });
   };
+=======
+.controller('LoginController', function($scope, $state, $window, LoginFactory){
+  $scope.data = {};
+  $scope.login = function(){
+    LoginFactory.login($scope.data.username, $scope.data.password, $window);
+  }
+>>>>>>> MobileLogin
 });
