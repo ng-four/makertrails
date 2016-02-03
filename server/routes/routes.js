@@ -24,7 +24,7 @@ router.get('/progress', utils.checkUser, function (request, response) {
   controllers.progress.get(request, response)
 })
 
-router.put('/progress', utils.checkUser, function (request, response) {
+router.put('/progress', function (request, response) {
   controllers.progress.put(request, response)
 })
 

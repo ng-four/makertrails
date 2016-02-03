@@ -7,6 +7,7 @@ angular.module('app', [
   'app.MakerMapFactory',
   'app.LoginController',
   'app.LoginFactory',
+  'app.SignupController',
   'app.HomeController',
   'app.SelectMapController'
 ])
@@ -22,6 +23,19 @@ angular.module('app', [
     if(window.StatusBar) {
       // org.apache.cordova.statusbar required
       StatusBar.styleDefault();
+    }
+  });
+})
+.run(function($rootScope, $state, LoginFactory, $window){
+
+  $rootScope.$on('$stateChangeStart' , function(event, toState) {
+    if(!toState.authenticate || LoginFactory.authenticateFunction()){
+      return;
+    }
+    event.preventDefault();
+    if(toState.authenticate){
+      $state.go('login')
+      return
     }
   });
 });
