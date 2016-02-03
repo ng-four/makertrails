@@ -117,6 +117,7 @@ module.exports = {
       var userId = request.body.userId;
       var photoData = request.body.photoData;
       models.photos.post(locationId, userId, photoData, function (photoAdded){
+        console.log("+++ 108 index.js photoAdded BE controller: ", photoAdded)
         response.json(photoAdded)
       })
     }
