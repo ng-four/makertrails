@@ -1,6 +1,7 @@
 //ROOT APP
 angular.module('app', [
   'ionic',
+  'ngCordova',
   'app.routes',
   'app.CollisionFactory',
   'app.MakerMapController',
@@ -9,7 +10,8 @@ angular.module('app', [
   'app.LoginFactory',
   'app.SignupController',
   'app.HomeController',
-  'app.SelectMapController'
+  'app.SelectMapController',
+  'app.CameraFactory'
 ])
 
 .run(function($ionicPlatform) {

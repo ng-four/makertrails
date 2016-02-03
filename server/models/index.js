@@ -170,6 +170,20 @@ module.exports = {
         }
       })
     }
+  },
+
+  photos: {
+    post: function (locationId, userId, photoData, callback) {
+      db.Photo.create({
+        location_id: locationId,
+        user_id: userId,
+        link: photoData
+      })
+      .then(function (photoAdded) {
+        console.log("+++ 148 index.js photoAdded BE model: ", photoAdded)
+        callback(photoAdded)
+      })
+    }
   }
 
 }
