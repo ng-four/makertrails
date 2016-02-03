@@ -5,13 +5,13 @@ module.exports = {
 
   mapInfo: {
     get: function (request, response) {
-      console.log("+++ 8 index.js request.sessionID mapInfo call: ", request.sessionID)
       models.mapInfo.get(function (allMaps) {
         response.json({ allMaps });
       })
     },
     post: function (request, response) {
       var newLocations = request.body;
+      newLocations.mapInfo.user_id = request.session.user
       models.mapInfo.post(newLocations, function (newMap) {
         models.location.get(newMap.dataValues.id, function (locations) {
           response.json({ locations });
@@ -32,7 +32,7 @@ module.exports = {
   progress: {
     get: function (request, response) {
       var mapId = request.query.mapId;
-      var userId = request.query.userId;
+      var userId = request.session.user;
       models.location.get(mapId, function (locations) {
         models.progress.get(mapId, locations, userId, function (progresses) {
           var formattedProgress = utils.formatProgress(locations, progresses);
@@ -52,10 +52,25 @@ module.exports = {
     }
   },
 
+  review: {
+    get: function(request, response){
+      var locationId = request.query.locationId;
+      models.review.get(locationId, function(reviews){
+        response.json({reviews})
+      });
+    },
+    post: function(request, response) {
+      var review = request.body;
+      review.user_id = request.session.user;
+      models.review.post(review, function(postedReview){
+        response.status(200).send(postedReview);
+      })
+    }
+  },
+
   login: {
     get: function (request, response) {},
     post: function (request, response) {
-      console.log("+++ 57 index.js request login: ", request.sessionID)
       var username = request.body.username; //stringify because chris
       var password = request.body.password;// need to bcrypt
       models.login.post(username, password, function (isUser) {
@@ -80,9 +95,7 @@ module.exports = {
       var password = request.body.password; // need to bcrypt
       var email = request.body.email;
       models.signup.post(username, password, email, function (isUser) {
-        console.log("+++ 83 index.js isUser: ", isUser)
         if(isUser){
-          console.log("+++ 86 index.js newUser inside 200 response: ", isUser)
           response.status(200).json(isUser);
         }else{
           response.sendStatus(400);
@@ -94,7 +107,6 @@ module.exports = {
   logout:{
     get: function (request, response, callback) {
       utils.logout(request, response, function (loggedOut){
-      console.log("+++ 96 index.js Logout BACKEND")
         response.sendStatus(200)
       })
     }
