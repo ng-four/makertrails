@@ -3,11 +3,11 @@ angular.module('app.LoginFactory', [])
   var authenticate = false;
 
   function logout () {
-    window.localStorage.removeItem('makerTrailsSession');
-    window.localStorage.removeItem('makerTrailsUserID');
+    $window.localStorage.removeItem('makerTrailsSession');
+    $window.localStorage.removeItem('makerTrailsUserID');
     $http({
       method: 'GET',
-      url: 'http://localhost:8000/logout'
+      url: 'http://makertrails.herokuapp.com/logout'
     })
     .then(function(loggedOut) {
       if(loggedOut.status === 200){
@@ -17,13 +17,14 @@ angular.module('app.LoginFactory', [])
     })
   }
   function authenticateFunction(){
-    return !!window.localStorage.makerTrailsSession;
+    return !!$window.localStorage.makerTrailsSession;
   }
 
   var login = function(username, password, window){
+    console.log('username and password', username, password)
     $http({
       method: 'POST',
-      url: 'http://localhost:8000/login',
+      url: 'http://makertrails.herokuapp.com/login',
       data: {
         username: username,
         password: password
@@ -38,14 +39,14 @@ angular.module('app.LoginFactory', [])
         $state.go('login')
       }
     }, function(err){
-        console.error(err)
+        console.log(err)
     })
   }
 
   var signup = function(username, password, email){
     return $http({
       method: 'POST',
-      url: 'signup',
+      url: 'http://makertrails.herokuapp.com/signup',
       data: {
         username: username,
         password: password,

@@ -28,7 +28,7 @@ angular.module('app', [
 })
 .run(function($rootScope, $state, LoginFactory, $window){
 
-  $rootScope.$on('$stateChangesStart' , function(event, toState) {
+  $rootScope.$on('$stateChangeStart' , function(event, toState) {
     if(!toState.authenticate || LoginFactory.authenticateFunction()){
       return;
     }

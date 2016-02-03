@@ -28,10 +28,11 @@ function makerMapFactory($http, $ionicLoading, $ionicPopup, CollisionFactory) {
   };
 
   var getMapLocations = function(http) {
-    $http.get('http://makertrails.herokuapp.com/progress?mapId=1&userId=1')
+    $http.get('http://makertrails.herokuapp.com/progress')
       .then(function(data) {
         var map = renderMap(); //returns map
         var locations = data.data; //save locations array
+        console.log("locations data", data);
 
         //iterate through locations array, create marker for each location and place on map
         for (var i = 0; i < locations.length; i++) {

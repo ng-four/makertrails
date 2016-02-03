@@ -8,6 +8,7 @@ function collisionFactory() {
   };
 
   var haversine = function(lat1, lng1, lat2, lng2) {
+    console.log('lat longs from haversine', lat1, lng1, lat2, lng2)
     lat1 = toRadians(lat1);
     lng1 = toRadians(lng1);
     lat2 = toRadians(lat2);
