@@ -3,7 +3,6 @@ var controllers = require("../controllers")
 var router = require('express').Router();
 var path = require('path')
 var utils = require('../helpers/utils.js');
-var mobileControllers =  require("../controllers/mobile.js")
 
 router.get('/', function(request, response){
   response.status(202).sendFile(path.resolve(__dirname + "../../../desktop_client/index.html"));
