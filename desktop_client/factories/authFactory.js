@@ -1,14 +1,17 @@
 angular.module('App')
   .factory('AppFactory', function($http, $state, $window){
 
-    var authenticate = false;
+    // Switch between local and deployed server
+    var url;
+    url = 'http://localhost:8000';
+    // url = 'http://makertrails.herokuapp.com'
 
     function logout () {
       window.localStorage.removeItem('makerTrailsSession');
       window.localStorage.removeItem('makerTrailsUserID');
       $http({
         method: 'GET',
-        url: 'http://localhost:8000/logout'
+        url: url + '/logout'
       })
       .then(function (loggedOut) {
         if (loggedOut.status === 200) {
@@ -25,15 +28,13 @@ angular.module('App')
     var login = function(username, password, window){
       $http ({
         method: 'POST',
-        url: 'http://localhost:8000/login',
+        url: url + '/login',
         data: {
           username: username,
           password: password
         }
       })
       .then(function(success){
-        console.log("+++ 14 authFactory.js Success: ", success)
-
         window.localStorage.setItem('makerTrailsSession', success.data.sessionID)
         window.localStorage.setItem('makerTrailsUserID', success.data.userID)
         if (authenticateFunction()) {
@@ -48,7 +49,7 @@ angular.module('App')
     var signup = function(username, password, email){
       return $http ({
         method: 'POST',
-        url: '/signup',
+        url: url + '/signup',
         data: {
           username: username,
           password: password,
@@ -56,7 +57,6 @@ angular.module('App')
         }
       })
       .then(function(isUser){
-        console.log("+++ 59 authFactory.js success: ", isUser)
         login(isUser.data.name, isUser.data.password, $window)
       }, function(err){
         console.log(err);
