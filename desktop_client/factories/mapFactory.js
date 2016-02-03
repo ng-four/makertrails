@@ -4,6 +4,11 @@ angular.module('App')
 function MapFactory(){
   var mapFactory = {}
 
+  // Switch between local and deployed server
+  var url;
+  url = 'http://localhost:8000';
+  // url = 'http://makertrails.herokuapp.com'
+
   mapFactory.removeLocation = function(selectedLocations, index, map){
     selectedLocations.splice(index,1);
     map.removeMarkers();
@@ -37,7 +42,7 @@ function MapFactory(){
   mapFactory.postMap = function(newMap) {
     $http ({
       method: 'POST',
-      url: '/mapInfo',
+      url: url + '/mapInfo',
       data: newMap
     })
     .then(function(success){

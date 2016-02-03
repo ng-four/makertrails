@@ -29,6 +29,14 @@ router.put('/progress', utils.checkUser, function (request, response) {
   controllers.progress.put(request, response)
 })
 
+router.get('/review', utils.checkUser, function (request, response) {
+  controllers.review.get(request, response)
+})
+
+router.post('/review', utils.checkUser, function (request, response) {
+  controllers.review.post(request, response)
+})
+
 router.post('/signup', function (request, response) {
   controllers.signup.post(request, response)
 })
