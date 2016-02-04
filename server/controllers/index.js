@@ -42,11 +42,7 @@ module.exports = controllers = {
   progress: {
     get: function (request, response) {
       var mapId = request.query.mapId;
-<<<<<<< HEAD
-      var userId = request.session.user
-=======
       var userId = utils.decodeToken(request).userId;
->>>>>>> [feature] implement token authentication
       models.location.get(mapId, function (locations) {
         models.progress.get(mapId, locations, userId, function (progresses) {
           var formattedProgress = utils.formatProgress(locations, progresses);
@@ -130,6 +126,9 @@ module.exports = controllers = {
       var photoData = request.body.photoData;
       models.photos.post(locationId, userId, photoData, function (photoAdded){
         console.log("+++ 108 index.js photoAdded BE controller: ", photoAdded)
+      // var userId = request.body.userId;
+      // var photoData = request.body.photoData;
+      // models.photos.post(locationId, userId, photoData, function (photoAdded){
         response.json(photoAdded)
       })
     }
