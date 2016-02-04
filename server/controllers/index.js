@@ -20,6 +20,15 @@ module.exports = {
     }
   },
 
+  userMaps: {
+    get: function (request, response) {
+      var userId = request.session.user;
+      models.userMaps.get(userId, function (userMaps) {
+        response.json( userMaps )
+      })
+    }
+  },
+
   location: {
     get: function (request, response){
      var mapId = request.query.mapId;
@@ -32,7 +41,7 @@ module.exports = {
   progress: {
     get: function (request, response) {
       var mapId = request.query.mapId;
-      var userId = request.session.user;
+      var userId = request.session.user
       models.location.get(mapId, function (locations) {
         models.progress.get(mapId, locations, userId, function (progresses) {
           var formattedProgress = utils.formatProgress(locations, progresses);
@@ -110,5 +119,36 @@ module.exports = {
         response.sendStatus(200)
       })
     }
+  },
+  photos: {
+    post: function (request, response, callback) {
+      var locationId = request.body.locationId;
+      var userId = request.session.user
+      var photoData = request.body.photoData;
+      models.photos.post(locationId, userId, photoData, function (photoAdded){
+        console.log("+++ 108 index.js photoAdded BE controller: ", photoAdded)
+        response.json(photoAdded)
+      })
+    }
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

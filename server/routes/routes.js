@@ -16,6 +16,10 @@ router.post('/mapInfo', utils.checkUser, function (request, response) {
   controllers.mapInfo.post(request, response)
 })
 
+router.get('/userMaps', utils.checkUser, function (request, response) {
+  controllers.userMaps.get(request, response)
+})
+
 router.get('/location', utils.checkUser, function (request, response) {
   controllers.location.get(request, response)
 })
