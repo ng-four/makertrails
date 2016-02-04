@@ -9,6 +9,7 @@ angular.module('app', [
   'app.LoginFactory',
   'app.SignupController',
   'app.HomeController',
+  'app.SelectMapFactory',
   'app.SelectMapController'
 ])
 
