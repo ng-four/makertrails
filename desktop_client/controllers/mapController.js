@@ -13,7 +13,7 @@ function MapController($scope, MapFactory){
     lng: -118.4943091,
     zoom: 15
   });
-  $scope.submitMap = function(){
+  $scope.mapInfo = function(){
     console.log("You at least clicked on submit map...")
     // $scope.postMap({
     //   "mapInfo": $scope.mapInfo,

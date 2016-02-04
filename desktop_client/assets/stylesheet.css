@@ -6,7 +6,12 @@ COLORS
 #E8E3DE
 #FFF2E5
 #2C2E2F
+<<<<<<< HEAD
 #BBD530 // Buttons
+=======
+#BBD530 // Green button
+#D53030 // Red button
+>>>>>>> featStyling
 \*==============================*/
 
 /*==============================*\
@@ -17,7 +22,6 @@ body{
   padding: 0;
   border: none;
   width: 100%;
-  max-width: 720px;
   margin: 0 auto;
   background-color: #FFFCF9;
   text-decoration: none !important;
@@ -87,4 +91,23 @@ MAP SECTION
 
 #mapContainer{
   padding: 10px;
+}
+
+#map{
+  width: 100%;
+  height: 500px;
+}
+
+#trailsForm{
+  margin-top: 15px;
+  margin-left: 150px;
+}
+
+.redButton{
+  border: 0px;
+  height: 30px;
+  min-width: 30px;
+  border-radius: 25px;
+  background-color: #D53030;
+  outline: none;
 }
