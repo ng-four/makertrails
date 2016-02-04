@@ -33,7 +33,7 @@ angular.module('app', [
 .run(function($rootScope, $state, LoginFactory, $window){
 
   $rootScope.$on('$stateChangeStart' , function(event, toState) {
-    if(!toState.authenticate || LoginFactory.authenticateFunction()){
+    if(!toState.authenticate || LoginFactory.isAuthenticated()){
       return;
     }
     event.preventDefault();
@@ -43,3 +43,21 @@ angular.module('app', [
     }
   });
 });
+// .config(function($httpProvider) {
+//   $httpProvider.interceptors.push('AttachTokens');
+// })
+// .factory('AttachTokens', function($window) {
+//   var attach = {
+//     request: function(object) {
+//       var token = $window.localStorage.getItem('makertrails-token');
+//       if (token) {
+//         object.headers['makertrails-token'] = token;
+//       }
+//       object.headers['Allow-Control-Allow-Origin'] = '*';
+
+//       return object;
+//     }
+//   };
+
+//   return attach;
+// });
