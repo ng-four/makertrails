@@ -1,12 +1,12 @@
 <div ng-controller="MapController">
-<div>
+<div id="mapContainer">
   <trail-map ng-model="selectedLocations"></trail-map>
   <form ng-submit="submitMap">
     <label for="map-name">Trail Name:</label><br>
     <input type="text" id="map-name" ng-model="mapInfo.name"><br>
     <label for="map-description">Trail Description:</label><br>
     <textarea id="map-description" ng-model="mapInfo.description" rows=4></textarea><br>
-    <p>Trail Locations:</p>
+    Trail Locations:
     <ul>
       <li ng-repeat="location in selectedLocations">
         <div class="edit-location" ng-switch on="location.editing">
@@ -24,7 +24,11 @@
         </div>
       </li>
     </ul>
-    <input type="submit" id="submit" value="Submit Your Trail">
+    <div class="section">
+      <button class="button" type="submit" id="submit" value="Submit Your Trail">Create Map</button>
+    </div>
   </form>
-  <button ng-controller="LogoutController" ng-click="logout()">Logout</button>
+  <div class="section">
+    <button class="button" ng-controller="LogoutController" ng-click="logout()">Logout</button>
+  </div>
 </div>
