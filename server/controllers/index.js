@@ -110,5 +110,15 @@ module.exports = {
         response.sendStatus(200)
       })
     }
+  },
+  photos: {
+    post: function (request, response, callback) {
+      var locationId = request.body.locationId;
+      var userId = request.body.userId;
+      var photoData = request.body.photoData;
+      models.photos.post(locationId, userId, photoData, function (photoAdded){
+        response.json(photoAdded)
+      })
+    }
   }
 }
