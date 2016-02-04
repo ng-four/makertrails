@@ -3,7 +3,9 @@ angular.module("App", [
   'App.login',
   'App.signup',
   'App.logout',
-  'App.createMap'
+  'App.createMap',
+  'App.createNewMap',
+  'ngMessages'
   ])
 .config(function($stateProvider, $urlRouterProvider){
   $stateProvider
