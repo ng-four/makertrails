@@ -1,6 +1,6 @@
 <h5> How token authentication works </h5>
 
-<h4>You have to npm install for this to work!!!!<h4>
+<h4>You have to npm install for this to work!!!!</h4>
 
 *Login and Signup will now return an object that follow this format:*
 
