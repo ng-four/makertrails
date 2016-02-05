@@ -25,7 +25,10 @@ angular.module('app.routes', [])
       url: '/makerMap',
       templateUrl: 'templates/makerMap.html',
       controller: 'MakerMapController',
-      authenticate: true
+      authenticate: true,
+      params: {
+        'mapID': null
+      }
     })
     .state('selectMap', {
       url: '/selectMap',

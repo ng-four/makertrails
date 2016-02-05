@@ -43,21 +43,3 @@ angular.module('app', [
     }
   });
 })
-// .config(function($httpProvider) {
-//   $httpProvider.interceptors.push('AttachTokens');
-// })
-// .factory('AttachTokens', function($window) {
-//   var attach = {
-//     request: function(object) {
-//       var token = $window.localStorage.getItem('makertrails-token');
-//       if (token) {
-//         object.headers['makertrails-token'] = token;
-//       }
-//       object.headers['Allow-Control-Allow-Origin'] = '*';
-
-//       return object;
-//     }
-//   };
-
-//   return attach;
-// });
