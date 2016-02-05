@@ -5,12 +5,12 @@ angular.module('app.SelectMapFactory', [])
 
   function displayMaps() {
     return $http({
-        method: 'GET',
-        url: 'http://makertrails.herokuapp.com/mapInfo',
-        "headers": {
-          "content-type": "application/json",
-          "makertrails-token": window.localStorage['makertrails-token'];
-        }
+        method: "GET",
+        url: 'https://makertrails.herokuapp.com/mapInfo'
+        // headers: {
+        //   "Content-Type": "application/json;charset=utf-8",
+        //   "makertrails-token": window.localStorage["makertrails-token"]
+        // }
       })
       .then(function(data) {
         allMaps = data.data.allMaps;
