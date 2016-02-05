@@ -24,7 +24,7 @@ angular.module('app', [
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
       cordova.plugins.Keyboard.disableScroll(true);
     }
-    if(window.StatusBar) {
+    if(window.StatussBar) {
       // org.apache.cordova.statusbar required
       StatusBar.styleDefault();
     }
@@ -42,22 +42,4 @@ angular.module('app', [
       return
     }
   });
-});
-// .config(function($httpProvider) {
-//   $httpProvider.interceptors.push('AttachTokens');
-// })
-// .factory('AttachTokens', function($window) {
-//   var attach = {
-//     request: function(object) {
-//       var token = $window.localStorage.getItem('makertrails-token');
-//       if (token) {
-//         object.headers['makertrails-token'] = token;
-//       }
-//       object.headers['Allow-Control-Allow-Origin'] = '*';
-
-//       return object;
-//     }
-//   };
-
-//   return attach;
-// });
+})
