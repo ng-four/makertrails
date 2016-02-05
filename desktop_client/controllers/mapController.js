@@ -13,11 +13,14 @@ function MapController($scope, MapFactory){
     lng: -118.4943091,
     zoom: 15
   });
-  $scope.mapInfo = function(){
-    console.log("You at least clicked on submit map...")
-    // $scope.postMap({
-    //   "mapInfo": $scope.mapInfo,
-    //   "locationsInfo": $scope.selectedLocations
-    // })
+  $scope.createMap = function(){
+    MapFactory.createMap($scope.mapInfo, $scope.selectedLocations)
+    .then(function (success) {
+      $scope.selectedLocations = [];
+      MapFactory.refreshMap($scope.selectedLocations, null, $scope.map)
+      $scope.mapInfo = {
+        "user": 1 //Hardcoded until backend is fixed
+      };
+    })
   }
 }
