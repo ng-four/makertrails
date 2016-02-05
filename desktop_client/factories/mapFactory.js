@@ -25,9 +25,7 @@ function MapFactory($http, $q){
   };
 
   mapFactory.refreshMap = function(selectedLocations, index, map) {
-    console.log("+++ 28 mapFactory.js before")
     if(index === undefined){
-      console.log("+++ 29 mapFactory.js Here")
       selectedLocations[index].editing = false;
     }
     map.removeMarkers();
@@ -44,13 +42,11 @@ function MapFactory($http, $q){
   };
 
   mapFactory.renameLocation = function (selectedLocations, index, newName) {
-    console.log("+++ 47 mapFactory.js when does this work?")
     selectedLocations[index].name = newName;
     selectedLocations[index].editing = false;
   }
 
   mapFactory.createMap = function (mapInfo, selectedLocations) {
-    console.log("+++ 47 mapFactory.js NO!!")
     var dfr = $q.defer()
       $http ({
         method: 'POST',

@@ -27,5 +27,6 @@ function MapController($scope, MapFactory){
   }
   $scope.renameLocation = function (selectedLocations, index, newName) {
     MapFactory.renameLocation(selectedLocations, index, newName)
+    MapFactory.refreshMap(selectedLocations, null, $scope.map)
   }
 }
