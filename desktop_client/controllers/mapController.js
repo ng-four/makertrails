@@ -14,13 +14,18 @@ function MapController($scope, MapFactory){
     zoom: 15
   });
   $scope.createMap = function(){
-    MapFactory.createMap($scope.mapInfo, $scope.selectedLocations)
-    .then(function (success) {
-      $scope.selectedLocations = [];
-      MapFactory.refreshMap($scope.selectedLocations, null, $scope.map)
-      $scope.mapInfo = {
-        "user": 1 //Hardcoded until backend is fixed
-      };
-    })
+    if($scope.selectedLocations.length !== 0){
+      MapFactory.createMap($scope.mapInfo, $scope.selectedLocations)
+      .then(function (success) {
+        $scope.selectedLocations = [];
+        MapFactory.refreshMap($scope.selectedLocations, null, $scope.map)
+        $scope.mapInfo = {
+          "user": 1 //Hardcoded until backend is fixed
+        };
+      })
+    }
+  }
+  $scope.renameLocation = function (selectedLocations, index, newName) {
+    MapFactory.renameLocation(selectedLocations, index, newName)
   }
 }
