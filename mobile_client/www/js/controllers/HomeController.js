@@ -10,6 +10,7 @@ function homeController($scope, $state, Camera) {
     // $state.go('selectMap');
     Camera.getPicture()
     .then(function (imageData) {
+      $scope.imageData = imageData
       console.log("+++ 13 HomeController.js imageData: ", imageData)
       Camera.storeImage(1, 1, 123123123123123)
     })
