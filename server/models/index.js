@@ -17,6 +17,7 @@ module.exports = {
       })
     },
     post: function (newLocations, callback) {
+      console.log("+++ 20 index.js newLocations: ", newLocations)
       db.Map.create({
         name: newLocations.mapInfo.name,
         description: newLocations.mapInfo.description,

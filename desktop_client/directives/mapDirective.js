@@ -20,7 +20,7 @@ function trailMap(MapFactory) {
       // lat/lng added on click, sent to array
       $scope.selectedLocations.push(newLocation)
       $scope.$apply();
-      console.log("+++ 76 Desktop_CLient mapController.js: ", JSON.stringify($scope.selectedLocations, null, "\t"));
+      console.log("+++ 23 Desktop_CLient mapController.js: ", JSON.stringify($scope.selectedLocations, null, "\t"));
 
       $map.addMarker({
         lat: newLocation.lat,

@@ -2,7 +2,7 @@
 <div id="mapContainer">
   <trail-map ng-model="selectedLocations"></trail-map>
   <div id="trailsForm">
-    <form ng-submit="mapInfo()">
+    <form ng-submit="createMap()">
       <label for="map-name">Trail Name:</label><br>
       <input type="text" id="map-name" ng-model="mapInfo.name" autocomplete="off"><br>
       <label for="map-description">Trail Description:</label><br>
@@ -12,11 +12,9 @@
         <li ng-repeat="location in selectedLocations">
           <div class="edit-location" ng-switch on="location.editing">
             <div ng-switch-when="true">
-              <form>
                 <input type="text" ng-model="location.name" autofocus onfocus="this.select()">
                 <button class="button" type="submit" value="Save" ng-click="refreshMap(selectedLocations, $index, map)">Save</button>
                 <button class="redButton" ng-click="removeLocation(selectedLocations, $index, map)">X</button><br>
-              </form>
             </div>
             <div ng-switch-when="false"
                 ng-click="location.editing = true">
@@ -26,7 +24,7 @@
         </li>
       </ul>
       <div class="section">
-        <button class="button" type="submit" value="Submit Your Trail">Create Map</button>
+        <button class="button" type="submit">Create Map</button>
       </div>
     </form>
     <div class="section">
