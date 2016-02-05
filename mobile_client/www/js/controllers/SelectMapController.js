@@ -4,7 +4,8 @@ angular.module('app.SelectMapController', [])
   $scope.data = {};
 
   $scope.selectMap = function(map) {
-    $state.go('makerMap', {mapID: map});
+    $state.go('makerMap', {mapID: map}, {reload: true});
+    return;
   }
 
   $scope.$on('$ionicView.loaded', function(){
