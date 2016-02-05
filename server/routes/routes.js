@@ -17,6 +17,7 @@ router.post('/mapInfo', utils.checkUser, function (request, response) {
 })
 
 router.post('/photos', utils.checkUser, function (request, response) {
+  console.log("+++ 20 routes.js photos route hit")
   controllers.photos.post(request, response)
 })
 
