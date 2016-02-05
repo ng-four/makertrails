@@ -7,8 +7,8 @@ function loginFactory($q, $http, $state, $ionicPopup) {
 
   function setTokenAndHttpHeaders(token) {
     isAuthenticated = true;
-    window.localStorage.setItem('makertrails-token', token); //store token locally
-    // $http.defaults.headers.common['makertrails-token'] = token; //send token in header with every http request
+    // window.localStorage.setItem('makertrailsToken', token); //store token locally
+    $http.defaults.headers.common['makertrails-token'] = token; //send token in header with every http request
   }
 
   var login = function(name, pass) {
@@ -22,6 +22,8 @@ function loginFactory($q, $http, $state, $ionicPopup) {
     })
     .then(function(success) {
       username = name;
+      console.log(name)
+      console.log(success.data['makertrails-token'])
       setTokenAndHttpHeaders(success.data['makertrails-token']);
       $state.go('home');
     }, function(err) {
@@ -36,7 +38,7 @@ function loginFactory($q, $http, $state, $ionicPopup) {
     username = '';
     isAuthenticated = false;
     window.localStorage['makertrails-token'] = undefined;
-    // $http.defaults.headers.common['makertrails-token'] = undefined;
+    $http.defaults.headers.common['makertrails-token'] = undefined;
     $state.go('login');
   };
 

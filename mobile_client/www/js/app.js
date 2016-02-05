@@ -24,7 +24,7 @@ angular.module('app', [
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
       cordova.plugins.Keyboard.disableScroll(true);
     }
-    if(window.StatusBar) {
+    if(window.StatussBar) {
       // org.apache.cordova.statusbar required
       StatusBar.styleDefault();
     }
@@ -42,7 +42,7 @@ angular.module('app', [
       return
     }
   });
-});
+})
 // .config(function($httpProvider) {
 //   $httpProvider.interceptors.push('AttachTokens');
 // })
