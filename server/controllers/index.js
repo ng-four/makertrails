@@ -122,26 +122,11 @@ module.exports = controllers = {
   photos: {
     post: function (request, response, callback) {
       var locationId = request.body.locationId;
-      var userId = request.session.user
+      var userId = request.body.userId;
       var photoData = request.body.photoData;
       models.photos.post(locationId, userId, photoData, function (photoAdded){
-        console.log("+++ 108 index.js photoAdded BE controller: ", photoAdded)
-      // var userId = request.body.userId;
-      // var photoData = request.body.photoData;
-      // models.photos.post(locationId, userId, photoData, function (photoAdded){
         response.json(photoAdded)
       })
     }
   }
-  // photos: {
-  //   post: function (request, response, callback) {
-  //     var locationId = request.body.locationId;
-  //     var userId = request.body.userId;
-  //     var photoData = request.body.photoData;
-  //     models.photos.post(locationId, userId, photoData, function (photoAdded){
-  //       console.log("+++ 108 index.js photoAdded BE controller: ", photoAdded)
-  //       response.json(photoAdded)
-  //     })
-  //   }
-  // }
 }
