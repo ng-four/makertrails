@@ -3,17 +3,13 @@ angular.module('app.MakerMapFactory', [])
 .factory('MakerMapFactory', makerMapFactory);
 
 function makerMapFactory($http, $ionicLoading, $ionicPopup, $stateParams, CollisionFactory, SelectMapFactory) {
-  // var mapSelected = SelectMapFactory.selectMap();
-  // console.log("this is map selected", mapSelected)
-  var selectMap = $stateParams.mapID.id;
   var renderMap = function() {
     //displays loading animation
     $ionicLoading.show({
       template: 'Getting your current location...',
       showBackdrop: true,
     });
-    console.log("this is stateParams.mapID", $stateParams.mapID.id)
-    // var selectMap = $stateParams.mapID.id;
+
     //config options for default map
     var myLocation = new google.maps.LatLng(34.0192118, -118.4942816);
     var mapOptions = {
@@ -30,12 +26,12 @@ function makerMapFactory($http, $ionicLoading, $ionicPopup, $stateParams, Collis
     return map;
   };
 
-  var getMapLocations = function(http) {
-    $http.get('http://makertrails.herokuapp.com/location?mapId='+selectMap)
+  var getMapLocations = function(scope) {
+    $http.get('http://makertrails.herokuapp.com/location?mapId='+scope.map)
       .then(function(data) {
         var map = renderMap(); //returns map
-        var locations = data.data.locations; //save locations array
-        console.log("locations data", data);
+        scope.locations = data.data.locations; //save locations array
+        var locations = scope.locations;
 
         //iterate through locations array, create marker for each location and place on map
         for (var i = 0; i < locations.length; i++) {
