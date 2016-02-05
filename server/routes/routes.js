@@ -50,6 +50,7 @@ router.post('/signup', function (request, response) {
 })
 
 router.post('/login', function (request, response) {
+  console.log("+++ 53 routes.js login")
   controllers.login.post(request, response)
 })
 
