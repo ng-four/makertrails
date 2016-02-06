@@ -35,10 +35,7 @@ function photo($http, $q, $ionicPopup) {
   var retrievePhotos = function (locationId) {
     $http({
       method: 'GET',
-      url: url + '/photos',
-      data: {
-        locationId: locationId
-      }
+      url: url + '/photos?locationId=' + locationId
     })
     .then(function (locationPhotos) {
        locationPhotos = JSON.stringify(locationPhotos)
