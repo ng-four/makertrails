@@ -13,7 +13,8 @@ angular.module('app', [
   'app.SelectMapController',
   'app.photoFactory',
   'app.SelectMapFactory',
-  'app.SelectMapController'
+  'app.SelectMapController',
+  'app.TestLocationController'
 ])
 
 .run(function($ionicPlatform) {

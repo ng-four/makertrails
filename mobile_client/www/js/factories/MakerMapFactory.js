@@ -100,7 +100,7 @@ function makerMapFactory($http, $ionicLoading, $ionicPopup, $stateParams, Collis
             }
           }
 
-          if (colllided===false){
+          if (collided===false){
             scope.collision = null;
           }
 

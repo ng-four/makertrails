@@ -35,7 +35,16 @@ angular.module('app.routes', [])
       templateUrl: 'templates/selectMap.html',
       controller: 'SelectMapController',
       authenticate: true
-
+    })
+    .state('testLocation', {
+      url: '/testLocation',
+      templateUrl: 'templates/testLocation.html',
+      controller: 'TestLocationController',
+      authenticate: true,
+      params: {
+        "currentMap": null,
+        "currentLocation": null
+      }
     });
 
   // if none of the above states are matched, use this as the fallback
