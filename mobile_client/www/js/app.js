@@ -44,6 +44,3 @@ angular.module('app', [
     }
   });
 })
-
-
-
