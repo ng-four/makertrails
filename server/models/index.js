@@ -211,7 +211,7 @@ module.exports = {
       })
     },
     get: function (locationId, callback) {
-      console.log("+++ 214 index.js models BE photo get")
+      console.log("+++ 214 index.js models BE photo get: locationId: ", locationId)
       db.Photo.findAll({
         where: {
           location_id: locationId

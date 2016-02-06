@@ -130,6 +130,7 @@ module.exports = controllers = {
     },
     get: function (request, response) {
       var locationId = request.query.locationId;
+      console.log("+++ 133 index.js locationId")
       models.photos.get(locationId, function (locationPhotos) {
         response.status(200).json(locationPhotos)
       })

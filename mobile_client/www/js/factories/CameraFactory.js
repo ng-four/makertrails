@@ -41,6 +41,7 @@ function photo($http, $q, $ionicPopup) {
       }
     })
     .then(function (locationPhotos) {
+       locationPhotos = JSON.stringify(locationPhotos)
       $ionicPopup.alert({
           title: locationPhotos
         })
