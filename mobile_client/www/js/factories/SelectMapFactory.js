@@ -2,11 +2,14 @@ angular.module('app.SelectMapFactory', [])
 
 .factory('SelectMapFactory', function($http) {
   var allMaps;
-
+  var url;
+  // url = 'http://localhost:8000';
+  url = 'http://still-sands-90078.herokuapp.com'
+  // url = 'http://makertrails.herokuapp.com'
   function displayMaps() {
     return $http({
         method: "GET",
-        url: 'https://makertrails.herokuapp.com/mapInfo'
+        url: url + '/mapInfo'
         // headers: {
         //   "Content-Type": "application/json;charset=utf-8",
         //   "makertrails-token": window.localStorage["makertrails-token"]
