@@ -1,5 +1,5 @@
 angular.module('app.LocationInfoController', [])
-.controller('LocationInfoController', function($scope, $state, LocationInfoFactory){
+.controller('LocationInfoController', function($scope, $stateParams, LocationInfoFactory){
   $scope.data = {};
   $scope.locationInfo = function(){
     
