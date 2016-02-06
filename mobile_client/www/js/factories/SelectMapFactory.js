@@ -7,6 +7,10 @@ angular.module('app.SelectMapFactory', [])
     return $http({
         method: "GET",
         url: 'https://makertrails.herokuapp.com/mapInfo'
+        // headers: {
+        //   "Content-Type": "application/json;charset=utf-8",
+        //   "makertrails-token": window.localStorage["makertrails-token"]
+        // }
       })
       .then(function(data) {
         allMaps = data.data.allMaps;
