@@ -30,5 +30,10 @@ function homeController($scope, $state, $cordovaCamera, Photo) {
 
   $scope.retrievePhotos = function () {
     Photo.retrievePhotos(1)
+    .then(function (locationPhotos) {
+      console.log("+++ 34 HomeController.js locationPhotos: ", locationPhotos.data)
+      $scope.locationPhotos = locationPhotos.data
+
+    })
   }
 }

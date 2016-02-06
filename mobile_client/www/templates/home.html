@@ -14,5 +14,7 @@
     </div><button class="button button-block button-balanced" ng-click="retrievePhotos()">
       RETRIEVE PICTURE
     </button>
+    <div ng-repeat='photo in locationPhotos'>
+       <img data-ng-src="image/png;base64,{{photo.link.data}}"/>
   </ion-content>
 </ion-view>

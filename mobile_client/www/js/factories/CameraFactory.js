@@ -33,15 +33,14 @@ function photo($http, $q, $ionicPopup) {
   };
 
   var retrievePhotos = function (locationId) {
-    $http({
+    return $http({
       method: 'GET',
       url: url + '/photos?locationId=' + locationId
     })
     .then(function (locationPhotos) {
-       locationPhotos = JSON.stringify(locationPhotos)
-      $ionicPopup.alert({
-          title: locationPhotos
-        })
+       thing = String.fromCharCode(locationPhotos.data[1].link.data)
+       console.log("+++ 42 CameraFactory.js thing: ", thing)
+    return locationPhotos
     },
     function (err) {
       $ionicPopup.alert({
