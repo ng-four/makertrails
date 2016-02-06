@@ -45,6 +45,16 @@ angular.module('app.routes', [])
         "currentMap": null,
         "currentLocation": null
       }
+    })
+    .state('locationInfo', {
+      url: '/locationInfo',
+      templateUrl: 'templates/locationInfo.html',
+      controlller: 'LocationInfoController',
+      authenticate: false,
+      params: {
+        'locationId': null,
+        'mapId': null
+      }
     });
 
   // if none of the above states are matched, use this as the fallback
