@@ -11,4 +11,12 @@ function makerMapController($scope, $stateParams, MakerMapFactory) {
     $scope.locations = [];
     MakerMapFactory.getMapLocations($scope);
   });
+
+  $scope.learnMore = function() {
+    $state.go('testLocation', {
+      currentMap: $stateParams.mapId.id,
+      currentLocation: $scope.collision
+    }, {reload: true});
+    return;
+  }
 }

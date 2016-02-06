@@ -126,21 +126,31 @@ module.exports = {
   },
 
   review: {
-    get: function(locationId, callback){
-      db.Review.findAll({
-        where: {
-          location_id: locationId
-        }
-      }).then(function(reviews){
-        var queries = [];
-        _.each(reviews, function(review){
-          queries.push(db.User.findById(review.user_id).then(function(user){
-            review.dataValues.author = user.name;
-          }));
-        })
-        Promise.all(queries)
-        .then(function(){
-          callback(reviews);
+    get: function(locationId, mapId, callback){
+      db.Location.find(
+        {attributes: ["map_id"],
+        where: {id: locationId}
+      })
+      .then(function(mapId){
+        console.log("+++MAPID", mapId)
+        db.Map.findById(mapId.map_id)
+        .then(function(mapInfo){
+          db.Review.findAll({
+            where: {
+              location_id: locationId
+            }
+          }).then(function(reviews){
+            var queries = [];
+            _.each(reviews, function(review){
+              queries.push(db.User.findById(review.user_id).then(function(user){
+                review.dataValues.author = user.name;
+              }));
+            })
+            Promise.all(queries)
+            .then(function(){
+              callback({"mapInfo": mapInfo, "reviews": reviews});
+            })
+          })
         })
       })
     },
