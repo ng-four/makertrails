@@ -11,7 +11,7 @@ angular.module('app', [
   'app.SignupController',
   'app.HomeController',
   'app.SelectMapController',
-  'app.CameraFactory',
+  'app.photoFactory',
   'app.SelectMapFactory',
   'app.SelectMapController'
 ])
@@ -43,3 +43,6 @@ angular.module('app', [
     }
   });
 })
+
+
+
