@@ -1,13 +1,14 @@
 angular.module('App')
 .factory('MapFactory', MapFactory)
 
+// Switch between local and deployed server
+var url;
+// url = 'http://localhost:8000';
+url = 'http://http://still-sands-90078.herokuapp.com/'
+// url = 'http://makertrails.herokuapp.com'
+
 function MapFactory($http, $q){
   var mapFactory = {}
-
-  // Switch between local and deployed server
-  var url;
-  url = 'http://localhost:8000';
-  // url = 'http://makertrails.herokuapp.com'
 
   mapFactory.removeLocation = function(selectedLocations, index, map){
     selectedLocations.splice(index,1);
