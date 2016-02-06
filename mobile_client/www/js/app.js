@@ -13,7 +13,9 @@ angular.module('app', [
   'app.SelectMapController',
   'app.CameraFactory',
   'app.SelectMapFactory',
-  'app.SelectMapController'
+  'app.SelectMapController',
+  'app.LocationInfoController',
+  'app.LocationInfoFactory'
 ])
 
 .run(function($ionicPlatform) {

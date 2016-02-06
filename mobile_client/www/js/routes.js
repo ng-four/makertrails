@@ -35,8 +35,17 @@ angular.module('app.routes', [])
       templateUrl: 'templates/selectMap.html',
       controller: 'SelectMapController',
       authenticate: true
-
-    });
+    })
+    .state('locationInfo', {
+      url: '/locationInfo',
+      templateUrl: 'templates/locationInfo.html',
+      controlller: 'LocationInfoController',
+      authenticate: false,
+      params: {
+        'locationId': null,
+        'mapId': null
+      }
+    })
 
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/login');
