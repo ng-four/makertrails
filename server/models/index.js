@@ -89,7 +89,6 @@ module.exports = {
         }
       })
       .then(function (progressLocations) {
-        console.log("+++ 92 index.js progressLocations: ", progressLocations)
         if(progressLocations.length === 0){
           var created = []
           _.each(locations, function (location) {
@@ -101,6 +100,7 @@ module.exports = {
           })
           Promise.all(created)
           .then(function (createdProgress) {
+            console.log("+++ 103 index.js createdProgress: ", createdProgress)
             callback(createdProgress)
           })
         } else {
