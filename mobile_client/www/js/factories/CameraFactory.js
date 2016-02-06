@@ -38,8 +38,8 @@ function photo($http, $q, $ionicPopup) {
       url: url + '/photos?locationId=' + locationId
     })
     .then(function (locationPhotos) {
-       thing = String.fromCharCode(locationPhotos.data[1].link.data)
-       console.log("+++ 42 CameraFactory.js thing: ", thing)
+       // thing = String.fromCharCode(locationPhotos.data[1].link.data)
+       // console.log("+++ 42 CameraFactory.js thing: ", thing)
     return locationPhotos
     },
     function (err) {
