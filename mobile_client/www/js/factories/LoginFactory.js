@@ -14,7 +14,7 @@ function loginFactory($q, $http, $state, $ionicPopup) {
   var login = function(name, pass) {
     $http({
       method: 'POST',
-      url: 'http://makertrails.herokuapp.com/login',
+      url: 'http://still-sands-90078.herokuapp.com/login',
       data: {
         username: name,
         password: pass

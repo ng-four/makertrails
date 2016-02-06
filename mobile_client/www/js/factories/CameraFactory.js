@@ -1,7 +1,8 @@
-angular.module('app.CameraFactory', [])
-  .factory('Camera', camera);
+angular.module('app.photoFactory', [])
+  .factory('Photo', photo);
 
-function camera($http, $q, $ionicPopup) {
+function photo($http, $q, $ionicPopup) {
+  console.log("+++ 5 CameraFactory.js camera")
   var getPicture = function(options) {
     var q = $q.defer();
     navigator.camera.getPicture(onSuccess, onFail, {
@@ -26,7 +27,7 @@ function camera($http, $q, $ionicPopup) {
   var storeImage = function(locationId, userId, imageData) {
     $http({
         method: 'POST',
-        url: ('http://makertrails.herokuapp.com/photos'),
+        url: ('http://still-sands-90078.herokuapp.com/photos'),
         data: {
           locationId: locationId,
           userId: userId,
@@ -36,9 +37,15 @@ function camera($http, $q, $ionicPopup) {
       .then(function(photoAdded) {
         console.log("+++ 27 CameraFactory.js photoAdded: ", photoAdded)
         $ionicPopup.alert({
-          title: 'Photo taken'
+          title: 'Photo added'
         })
-      })
+      },
+      function (err) {
+        $ionicPopup.alert({
+          title: 'Photo failed you loser'
+        })
+      }
+      )
   };
   return {
     getPicture: getPicture,

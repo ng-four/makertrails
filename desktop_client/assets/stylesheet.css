@@ -80,6 +80,12 @@ AUTH SECTION
   left: 50%;
   text-align: center;
 }
+
+#authContainer img{
+  height: 400px;
+  width: 400px;
+}
+
 #authCenter{
   margin: auto;
   width: 60%;
