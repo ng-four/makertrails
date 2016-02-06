@@ -35,6 +35,7 @@ router.get('/location', utils.checkUser, function (request, response) {
 })
 
 router.get('/progress', utils.checkUser, function (request, response) {
+  console.log("+++ 38 routes.js Here")
   controllers.progress.get(request, response)
 })
 

@@ -42,6 +42,7 @@ module.exports = controllers = {
   progress: {
     get: function (request, response) {
       var mapId = request.query.mapId;
+      console.log("+++ 45 index.js mapId: ", mapId)
       var userId = utils.decodeToken(request).userId;
       models.location.get(mapId, function (locations) {
         models.progress.get(mapId, locations, userId, function (progresses) {

@@ -56,7 +56,7 @@ function makerMapFactory($http, $ionicLoading, $ionicPopup, $stateParams, Collis
   }
 
   var getMapLocations = function(scope) {
-
+    console.log("+++ 59 MakerMapFactory.js scope: ", scope)
     $http.get(url + '/progress?mapId='+scope.mapID)
       .then(function(data) {
         renderMap(scope); //returns map

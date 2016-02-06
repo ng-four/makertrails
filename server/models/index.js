@@ -89,6 +89,7 @@ module.exports = {
         }
       })
       .then(function (progressLocations) {
+        console.log("+++ 92 index.js progressLocations: ", progressLocations)
         if(progressLocations.length === 0){
           var created = []
           _.each(locations, function (location) {
