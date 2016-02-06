@@ -127,6 +127,12 @@ module.exports = controllers = {
       models.photos.post(locationId, userId, photoData, function (photoAdded){
         response.json(photoAdded)
       })
+    },
+    get: function (request, response) {
+      var locationId = request.query.locationId;
+      models.photos.get(locationId, function (locationPhotos) {
+        response.status(200).json(locationPhotos)
+      })
     }
   }
 }

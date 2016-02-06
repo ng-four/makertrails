@@ -3,10 +3,15 @@ angular.module('app.photoFactory', [])
 
 function photo($http, $q, $ionicPopup) {
 
+  var url;
+  // url = 'http://localhost:8000';
+  url = 'http://still-sands-90078.herokuapp.com'
+  // url = 'http://makertrails.herokuapp.com'
+
   var storeImage = function(locationId, userId, imageData) {
     $http({
         method: 'POST',
-        url: ('http://makertrails.herokuapp.com/photos'),
+        url: url + '/photos',
         data: {
           locationId: locationId,
           userId: userId,
@@ -21,40 +26,37 @@ function photo($http, $q, $ionicPopup) {
       },
       function (err) {
         $ionicPopup.alert({
-          title: 'Photo failed you loser'
+          title: 'Photo failed'
         })
       }
       )
   };
+
+  var retrievePhotos = function (locationId) {
+    $http({
+      method: 'GET',
+      url: url + '/photos',
+      data: {
+        locationId: locationId
+      }
+    })
+    .then(function (locationPhotos) {
+      $ionicPopup.alert({
+          title: locationPhotos
+        })
+    },
+    function (err) {
+      $ionicPopup.alert({
+          title: 'Photo didnt load narf'
+        })
+    }
+    )
+
+  };
+
   return {
-    storeImage: storeImage
+    storeImage: storeImage,
+    retrievePhotos: retrievePhotos
   }
 }
 
-
-
-
-
-
-
-
-
-// .factory('Camera', ['$q', function($q) {
-//     var getPicture = function(options) {
-//       var q = $q.defer();
-//       navigator.camera.getPicture(function(result) {
-//         q.resolve(result);
-//       }, function(err) {
-//         q.reject(err);
-//       }, options);
-
-//       return q.promise;
-//     }
-
-//     var storeImage = function (imageBlob) {
-
-//     }
-//   return {
-//     getPicture: getPicture
-//   }
-// }]);

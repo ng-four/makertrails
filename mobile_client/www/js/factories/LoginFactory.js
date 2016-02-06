@@ -5,6 +5,10 @@ function loginFactory($q, $http, $state, $ionicPopup) {
   var username = '';
   var isAuthenticated = false;
 
+  var url;
+  // url = 'http://localhost:8000';
+  url = 'http://still-sands-90078.herokuapp.com'
+  // url = 'http://makertrails.herokuapp.com'
   function setTokenAndHttpHeaders(token) {
     isAuthenticated = true;
     // window.localStorage.setItem('makertrailsToken', token); //store token locally
@@ -14,7 +18,7 @@ function loginFactory($q, $http, $state, $ionicPopup) {
   var login = function(name, pass) {
     $http({
       method: 'POST',
-      url: 'http://makertrails.herokuapp.com/login',
+      url: url + '/login',
       data: {
         username: name,
         password: pass

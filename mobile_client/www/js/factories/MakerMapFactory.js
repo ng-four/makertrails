@@ -3,6 +3,11 @@ angular.module('app.MakerMapFactory', [])
 .factory('MakerMapFactory', makerMapFactory);
 
 function makerMapFactory($http, $ionicLoading, $ionicPopup, $stateParams, CollisionFactory, SelectMapFactory) {
+  var url;
+  // url = 'http://localhost:8000';
+  url = 'http://still-sands-90078.herokuapp.com'
+  // url = 'http://makertrails.herokuapp.com'
+
   var renderMap = function(scope) {
     //displays loading animation
     $ionicLoading.show({
@@ -50,7 +55,7 @@ function makerMapFactory($http, $ionicLoading, $ionicPopup, $stateParams, Collis
   }
 
   var getMapLocations = function(scope) {
-    $http.get('http://makertrails.herokuapp.com/progress?mapId='+scope.mapID)
+    $http.get(url + '/progress?mapId='+scope.mapID)
       .then(function(data) {
         renderMap(scope); //returns map
         // console.log("+++33 what's in the data", data)
@@ -81,7 +86,7 @@ function makerMapFactory($http, $ionicLoading, $ionicPopup, $stateParams, Collis
                 var alertPopup = $ionicPopup.alert({
                   template: 'Collision!! at ' + locations[i].progress_id
                 });
-                $http.put('http://makertrails.herokuapp.com/progress', {
+                $http.put(url + '/progress', {
                   'progressId': locations[i].progress_id
                 }, {
                   'Content-Type': 'application/json'
@@ -100,7 +105,7 @@ function makerMapFactory($http, $ionicLoading, $ionicPopup, $stateParams, Collis
             }
           }
 
-          if (colllided===false){
+          if (collided===false){
             scope.collision = null;
           }
 
