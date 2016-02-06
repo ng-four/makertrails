@@ -67,7 +67,7 @@ var Review = sequelize.define("review", {
 var Photo = sequelize.define("photo", {
   location_id: Sequelize.INTEGER,
   user_id: Sequelize.INTEGER,
-  link: Sequelize.STRING
+  link: Sequelize.BLOB
 })
 
 // User has many Maps, Map has one User
