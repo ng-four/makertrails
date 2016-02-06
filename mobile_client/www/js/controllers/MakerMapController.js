@@ -4,7 +4,9 @@ angular.module('app.MakerMapController', [])
 
 function makerMapController($scope, $stateParams, MakerMapFactory) {
   $scope.$on('$ionicView.enter', function($scope){
-    $scope.map = $stateParams.mapID.id;
+    $scope.mapID = $stateParams.mapID.id;
+    $scope.map;
+    $scope.markers = [];
     $scope.locations = [];
     MakerMapFactory.getMapLocations($scope);
   });

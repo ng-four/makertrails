@@ -3,7 +3,7 @@ angular.module('app.MakerMapFactory', [])
 .factory('MakerMapFactory', makerMapFactory);
 
 function makerMapFactory($http, $ionicLoading, $ionicPopup, $stateParams, CollisionFactory, SelectMapFactory) {
-  var renderMap = function() {
+  var renderMap = function(scope) {
     //displays loading animation
     $ionicLoading.show({
       template: 'Getting your current location...',
@@ -22,25 +22,46 @@ function makerMapFactory($http, $ionicLoading, $ionicPopup, $stateParams, Collis
     };
 
     //creates default map with above options
-    var map = new google.maps.Map(document.getElementById("map"), mapOptions);
-    return map;
+    scope.map = new google.maps.Map(document.getElementById("map"), mapOptions);
   };
 
+  var deleteMarkers = function(markers){
+    for(i=0; i<markers.length; i++){
+        markers[i].setMap(null);
+    }
+    markers = [];
+  }
+
+  var setMarkers = function(locations, map, markers) {
+    for (var i = 0; i < locations.length; i++) {
+      var marker = new google.maps.Marker({
+        position: new google.maps.LatLng(locations[i].lat, locations[i].lon),
+        icon: {
+          path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
+          fillColor: locations[i].visited ? "green" : "red",
+          fillOpacity: 1,
+          strokeWeight: 2,
+          scale: 5
+        },
+        map: map
+      })
+      markers.push(marker);
+    }
+  }
+
   var getMapLocations = function(scope) {
-    $http.get('http://makertrails.herokuapp.com/location?mapId='+scope.map)
+    $http.get('http://makertrails.herokuapp.com/progress?mapId='+scope.mapID)
       .then(function(data) {
-        var map = renderMap(); //returns map
-        scope.locations = data.data.locations; //save locations array
+        renderMap(scope); //returns map
+        // console.log("+++33 what's in the data", data)
+        scope.locations = data.data; //save locations array
         var locations = scope.locations;
-
+        var map = scope.map;
+        var markers = scope.markers;
+        console.log("+++36 MakerMapFactory our locations:",scope.locations)
         //iterate through locations array, create marker for each location and place on map
-        for (var i = 0; i < locations.length; i++) {
-          var marker = new google.maps.Marker({
-            position: new google.maps.LatLng(locations[i].lat, locations[i].lon),
-            map: map
-          })
-        }
-
+        setMarkers(scope.locations, map, markers)
+        console.log("+++64 MakerMap markers", markers)
         var myLocation = null;
 
         //sets interval to track changes in user position
@@ -54,21 +75,27 @@ function makerMapFactory($http, $ionicLoading, $ionicPopup, $stateParams, Collis
 
           for (var i = 0; i < locations.length; i++) {
             if (CollisionFactory.withinRange(lat, lon, locations[i].lat, locations[i].lon, 10)) {
-              var alertPopup = $ionicPopup.alert({
-                template: 'Collision!!' + locations[i].progress_id
-              });
-
-              $http.put('http://makertrails.herokuapp.com/progress', {
+              if (!locations[i].visited){
+                //Alert for first time ever
+                var alertPopup = $ionicPopup.alert({
+                  template: 'Collision!! at ' + locations[i].progress_id
+                });
+                $http.put('http://makertrails.herokuapp.com/progress', {
                   'progressId': locations[i].progress_id
                 }, {
-                  'currentMap': locations[i].id,
-                  'Content-Type': 'applicaiton/json'
+                  'Content-Type': 'application/json'
                 })
                 .then(function(data) {
-                  console.log("success", data)
+                  console.log("COLLISION!", data)
+                  location[i].visited = true;
+                  deleteMarkers(markers);
+                  setMarkers(scope.locations, map, markers);
                 }, function(err) {
                   console.log(err);
                 })
+              }
+              //set scope variable that declares collision
+              //display slidey link that gives information for that location
             }
           }
 
