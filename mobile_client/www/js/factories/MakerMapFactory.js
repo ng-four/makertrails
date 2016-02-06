@@ -72,6 +72,7 @@ function makerMapFactory($http, $ionicLoading, $ionicPopup, $stateParams, Collis
           var lat = pos.coords.latitude;
           var lon = pos.coords.longitude;
           var currentLatLng = new google.maps.LatLng(lat, lon);
+          var collided = false;
 
           for (var i = 0; i < locations.length; i++) {
             if (CollisionFactory.withinRange(lat, lon, locations[i].lat, locations[i].lon, 10)) {
@@ -94,9 +95,13 @@ function makerMapFactory($http, $ionicLoading, $ionicPopup, $stateParams, Collis
                   console.log(err);
                 })
               }
-              //set scope variable that declares collision
-              //display slidey link that gives information for that location
+              collided = true;
+              scope.collision = location.id
             }
+          }
+
+          if (colllided===false){
+            scope.collision = null;
           }
 
           map.setCenter(currentLatLng);
