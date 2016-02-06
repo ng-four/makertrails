@@ -29,7 +29,7 @@ function homeController($scope, $state, $cordovaCamera, Photo) {
   }
 
   $scope.retrievePhotos = function () {
-    Photo.retrievePhotos(1)
+    Photo.retrievePhotos(1) // the "1" needs to become the locationId
     .then(function (locationPhotos) {
       $scope.locationPhotos = locationPhotos.data
 
