@@ -6,7 +6,7 @@ function photo($http, $q, $ionicPopup) {
   var storeImage = function(locationId, userId, imageData) {
     $http({
         method: 'POST',
-        url: ('http://still-sands-90078.herokuapp.com/photos'),
+        url: ('http://makertrails.herokuapp.com/photos'),
         data: {
           locationId: locationId,
           userId: userId,
