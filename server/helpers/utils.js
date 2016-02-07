@@ -4,6 +4,7 @@ var jwt  = require('jwt-simple');
 
 exports.formatProgress = function(locations, progresses) {
   for (var i=0; i < locations.length; i++) {
+    console.log("+++ 7 utils.js locations.length: ", locations.length)
     var progress = _.findWhere(progresses, {location_id: locations[i].id});
     console.log("+++ 9 utils.js progress: ", progress)
     locations[i].dataValues.visited = progress.visited;
