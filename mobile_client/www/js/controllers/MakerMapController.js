@@ -4,7 +4,10 @@ angular.module('app.MakerMapController', [])
 
 function makerMapController($scope, $stateParams, MakerMapFactory) {
   $scope.$on('$ionicView.enter', function($scope){
-    $scope.collision = null;
+    $scope.collision = {
+      contact: false,
+      locationID: null
+    };
     $scope.mapID = $stateParams.mapID.id;
     $scope.map;
     $scope.markers = [];
