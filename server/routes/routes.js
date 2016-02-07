@@ -35,7 +35,6 @@ router.get('/location', utils.checkUser, function (request, response) {
 })
 
 router.get('/progress', utils.checkUser, function (request, response) {
-  console.log("+++ 38 routes.js Here")
   controllers.progress.get(request, response)
 })
 
@@ -56,7 +55,6 @@ router.post('/signup', function (request, response) {
 })
 
 router.post('/login', function (request, response) {
-  console.log("+++ 53 routes.js login")
   controllers.login.post(request, response)
 })
 

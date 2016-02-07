@@ -3,11 +3,8 @@ var session = require('express-session');
 var jwt  = require('jwt-simple');
 
 exports.formatProgress = function(locations, progresses) {
-  console.log("+++ 6 utils.js locations: ", locations)
-    console.log("+++ 7 utils.js locations.length: ", locations.length)
   for (var i=0; i < locations.length; i++) {
     var progress = _.findWhere(progresses, {location_id: locations[i].id});
-    console.log("+++ 9 utils.js progress.dataValues: ", progress.dataValues)
     locations[i].dataValues.visited = progress.visited;
     locations[i].dataValues.progress_id = progress.id;
   }

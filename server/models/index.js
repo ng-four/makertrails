@@ -17,7 +17,6 @@ module.exports = {
       })
     },
     post: function (newLocations, callback) {
-      console.log("+++ 20 index.js newLocations: ", newLocations)
       db.Map.create({
         name: newLocations.mapInfo.name,
         description: newLocations.mapInfo.description,
@@ -89,7 +88,6 @@ module.exports = {
         }
       })
       .then(function (progressLocations) {
-        console.log("+++ 92 index.js progressLocations: ", progressLocations)
         if(progressLocations.length === 0){
           var created = []
           _.each(locations, function (location) {
@@ -101,7 +99,6 @@ module.exports = {
           })
           Promise.all(created)
           .then(function (createdProgress) {
-            console.log("+++ 103 index.js createdProgress: ", createdProgress)
             callback(createdProgress)
           })
         } else {
@@ -134,7 +131,6 @@ module.exports = {
         where: {id: locationId}
       })
       .then(function(mapId){
-        console.log("+++MAPID", mapId)
         db.Map.findById(mapId.map_id)
         .then(function(mapInfo){
           db.Review.findAll({
@@ -218,18 +214,15 @@ module.exports = {
         link: photoData
       })
       .then(function (photoAdded) {
-        console.log("+++ 148 index.js photoAdded BE model: ", photoAdded)
         callback(photoAdded)
       })
     },
     get: function (locationId, callback) {
-      console.log("+++ 214 index.js models BE photo get: locationId: ", locationId)
       db.Photo.findAll({
         where: {
           location_id: locationId
         }
       }).then(function (locationPhotos) {
-        console.log("+++ 220 index.js locationPhotos: ", locationPhotos)
         callback(locationPhotos)
       })
     }
