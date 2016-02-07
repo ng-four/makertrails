@@ -2,14 +2,14 @@ angular.module('app.MakerMapFactory', [])
 
 .factory('MakerMapFactory', makerMapFactory);
 
-function makerMapFactory($http, $state, $ionicLoading, $ionicPopup, $stateParams, CollisionFactory, SelectMapFactory) {
+function makerMapFactory($http, $q, $state, $ionicLoading, $ionicPopup, $stateParams, CollisionFactory, SelectMapFactory) {
 
   var url;
   // url = 'http://localhost:8000';
   url = 'http://still-sands-90078.herokuapp.com'
   // url = 'http://makertrails.herokuapp.com'
 
-  var renderMap = function(scope) {
+  var renderMap = function() {
     //displays loading animation
     $ionicLoading.show({
       template: 'Getting your current location...',
@@ -28,7 +28,8 @@ function makerMapFactory($http, $state, $ionicLoading, $ionicPopup, $stateParams
     };
 
     //creates default map with above options
-    scope.map = new google.maps.Map(document.getElementById("map"), mapOptions);
+    // scope.map = new google.maps.Map(document.getElementById("map"), mapOptions);
+    return new google.maps.Map(document.getElementById("map"), mapOptions);
   };
 
   var deleteMarkers = function(markers){
@@ -38,7 +39,8 @@ function makerMapFactory($http, $state, $ionicLoading, $ionicPopup, $stateParams
     markers = [];
   }
 
-  var setMarkers = function(locations, map, markers) {
+  var setMarkers = function(locations, map) {
+    var markers = []
     for (var i = 0; i < locations.length; i++) {
       var marker = new google.maps.Marker({
         position: new google.maps.LatLng(locations[i].lat, locations[i].lon),
@@ -53,22 +55,34 @@ function makerMapFactory($http, $state, $ionicLoading, $ionicPopup, $stateParams
       })
       markers.push(marker);
     }
+    return markers;
   }
 
-  var getMapLocations = function(scope) {
-
-    $http.get(url + '/progress?mapId='+scope.mapID)
+  var getMapLocations = function(mapID) {
+    var q = $q.defer();
+    $http.get(url + '/progress?mapId='+mapID)
       .then(function(data) {
-        renderMap(scope); //returns map
-        // console.log("+++33 what's in the data", data)
-        scope.locations = data.data; //save locations array
-        var locations = scope.locations;
-        var map = scope.map;
-        var markers = scope.markers;
-        console.log("+++36 MakerMapFactory our locations:",scope.locations)
-        //iterate through locations array, create marker for each location and place on map
-        setMarkers(scope.locations, map, markers)
-        console.log("+++64 MakerMap markers", markers)
+        q.resolve(data);
+      },function(err) {
+        q.reject(err);
+      });
+    return q.promise;
+  }
+  // renderMap(scope); //returns map
+  // // console.log("+++33 what's in the data", data)
+  // scope.locations = data.data; //save locations array
+  // var locations = scope.locations;
+  // var map = scope.map;
+  // var markers = scope.markers;
+  // console.log("+++36 MakerMapFactory our locations:",scope.locations)
+  // //iterate through locations array, create marker for each location and place on map
+  // setMarkers(scope.locations, map, markers)
+  // console.log("+++64 MakerMap markers", markers)
+
+
+
+
+  var theRestOfIt = function(scope, locations, map){
         var myLocation = null;
 
         //sets interval to track changes in user position
@@ -133,6 +147,13 @@ function makerMapFactory($http, $state, $ionicLoading, $ionicPopup, $stateParams
             myLocation = new google.maps.Marker({
               position: currentLatLng,
               animation: google.maps.Animation.DROP,
+              icon: {
+                path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
+                fillColor: "blue",
+                fillOpacity: 1,
+                strokeWeight: 0,
+                scale: 5
+              },
               map: map
             });
           }
@@ -143,10 +164,12 @@ function makerMapFactory($http, $state, $ionicLoading, $ionicPopup, $stateParams
         function userLocationError(err) {
           console.log("user location failed", err);
         }
-      });
   }
 
   return {
-    getMapLocations: getMapLocations
+    renderMap: renderMap,
+    setMarkers: setMarkers,
+    getMapLocations: getMapLocations,
+    theRestOfIt: theRestOfIt
   };
 }
