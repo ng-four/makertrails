@@ -89,7 +89,8 @@ module.exports = {
         }
       })
       .then(function (progressLocations) {
-        if(progressLocations.length === 0){
+        console.log("+++ 92 index.js progressLocations: ", progressLocations)
+        if(progressLocations.length > 0){
           var created = []
           _.each(locations, function (location) {
             created.push(db.Progress.create({
