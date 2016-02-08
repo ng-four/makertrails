@@ -14,6 +14,9 @@ COLORS
 >>>>>>> featStyling
 \*==============================*/
 
+@import url(https://fonts.googleapis.com/css?family=Lobster);
+@import url(https://fonts.googleapis.com/css?family=Arimo);
+
 /*==============================*\
 MAIN SECTION
 \*==============================*/
@@ -25,7 +28,7 @@ body{
   margin: 0 auto;
   background-color: #FFFCF9;
   text-decoration: none !important;
-  font-family: "Helvetica", sans-serif;
+  font-family: 'Lobster', cursive;
   font-weight: 100;
   font-size: 24px;
   outline: none;
@@ -39,6 +42,7 @@ input{
   text-align: center;
   margin-bottom: 5px;
   border-radius: 25px;
+  font-family: 'Arimo', sans-serif;
   outline: none;
 }
 
@@ -49,7 +53,13 @@ textarea{
   font-size: 24px;
   margin-bottom: 5px;
   border-radius: 25px;
+  font-family: 'Arimo', sans-serif;
   outline: none;
+}
+
+p{
+  font-size: 75px;
+  margin: 0px;
 }
 
 .section{
@@ -61,9 +71,11 @@ textarea{
 .button{
   border: 0px;
   height: 32px;
-  width: 100px;
+  width: 111px;
   border-radius: 25px;
   background-color: #BBD530;
+  font-family: 'Lobster', cursive;
+  font-size: 16px;
   outline: none;
 }
 
@@ -130,5 +142,7 @@ MAP SECTION
   min-width: 30px;
   border-radius: 25px;
   background-color: #D53030;
+  font-size: 16px;
+  font-family: 'Lobster', cursive;
   outline: none;
 }
