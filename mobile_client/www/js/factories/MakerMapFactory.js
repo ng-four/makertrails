@@ -122,7 +122,7 @@ function makerMapFactory($http, $state, $ionicLoading, $ionicPopup, $stateParams
           }
 
           if (collided===false){
-            scope.collision.contact = false;
+            scope.collision = null;
           }
 
           map.setCenter(currentLatLng);
