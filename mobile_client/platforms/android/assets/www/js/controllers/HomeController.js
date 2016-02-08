@@ -2,7 +2,9 @@ angular.module('app.HomeController', [])
 
 .controller('HomeController', homeController);
 
-function homeController($scope, $state, $cordovaCamera, Photo) {
+function homeController($scope, $state, $cordovaCamera, Photo, Reviews, LoginFactory) {
+  $scope.username = LoginFactory.username();
+
   $scope.goToMapList = function() {
     $state.go('selectMap');
   };
@@ -22,7 +24,7 @@ function homeController($scope, $state, $cordovaCamera, Photo) {
 
     $cordovaCamera.getPicture(options).then(function(imageData) {
       $scope.imgURI = "data:image/jpeg;base64," + imageData;
-      Photo.storeImage(1, 1, $scope.imgURI) //1s are hard coded for locationId and userId
+      Photo.storeImage(109, 1, $scope.imgURI) //1s are hard coded for locationId and userId
     }, function(err) {
         // An error occured. Show a message to the user
     });
@@ -34,5 +36,13 @@ function homeController($scope, $state, $cordovaCamera, Photo) {
       $scope.locationPhotos = locationPhotos.data
 
     })
+  }
+
+  $scope.retrieveReviews = function () {
+    Reviews.retrieveReviews(1, 1) // the "1" needs to become the locationId
+    .then(function (locationReviews) {
+      $scope.locationReviews = locationReviews.data
+    })
+
   }
 }

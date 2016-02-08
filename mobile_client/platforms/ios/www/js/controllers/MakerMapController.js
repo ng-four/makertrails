@@ -4,7 +4,10 @@ angular.module('app.MakerMapController', [])
 
 function makerMapController($scope, $stateParams, MakerMapFactory) {
   $scope.$on('$ionicView.enter', function($scope){
-    $scope.collision = null;
+    $scope.collision = {
+      contact: false,
+      locationID: null
+    };
     $scope.mapID = $stateParams.mapID.id;
     $scope.map;
     $scope.markers = [];
@@ -12,11 +15,11 @@ function makerMapController($scope, $stateParams, MakerMapFactory) {
     MakerMapFactory.getMapLocations($scope);
   });
 
-  $scope.learnMore = function() {
-    $state.go('testLocation', {
-      currentMap: $stateParams.mapId.id,
-      currentLocation: $scope.collision
-    }, {reload: true});
-    return;
-  }
+  // $scope.learnMore = function() {
+  //   $state.go('locationInfo', {
+  //     currentMap: $stateParams.mapId.id,
+  //     currentLocation: $scope.collision
+  //   }, {reload: true});
+  //   return;
+  // }
 }

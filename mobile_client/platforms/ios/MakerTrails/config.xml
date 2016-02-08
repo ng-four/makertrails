@@ -56,13 +56,14 @@
     <splash height="480" src="resources/ios/splash/Default~iphone.png" width="320" />
     <name>MakerTrails</name>
     <description>
-        An Ionic Framework and Cordova project.
+        Makertrails!
     </description>
     <author email="you@example.com" href="http://example.com.com/">
-      Your Name Here
+      MKS-MakerTrails Team
     </author>
     <content src="index.html" />
     <access origin="*" />
+    <allow-navigation href="*" />
     <preference name="webviewbounce" value="false" />
     <preference name="UIWebViewBounce" value="false" />
     <preference name="DisallowOverscroll" value="true" />
