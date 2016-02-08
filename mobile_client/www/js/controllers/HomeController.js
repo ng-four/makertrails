@@ -2,7 +2,9 @@ angular.module('app.HomeController', [])
 
 .controller('HomeController', homeController);
 
-function homeController($scope, $state, $cordovaCamera, Photo) {
+function homeController($scope, $state, $cordovaCamera, Photo, LoginFactory) {
+  $scope.username = LoginFactory.username();
+
   $scope.goToMapList = function() {
     $state.go('selectMap');
   };
