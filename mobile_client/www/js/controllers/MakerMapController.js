@@ -15,11 +15,11 @@ function makerMapController($scope, $stateParams, MakerMapFactory) {
     MakerMapFactory.getMapLocations($scope);
   });
 
-  $scope.learnMore = function() {
-    $state.go('testLocation', {
-      currentMap: $stateParams.mapId.id,
-      currentLocation: $scope.collision
-    }, {reload: true});
-    return;
-  }
+  // $scope.learnMore = function() {
+  //   $state.go('locationInfo', {
+  //     currentMap: $stateParams.mapId.id,
+  //     currentLocation: $scope.collision
+  //   }, {reload: true});
+  //   return;
+  // }
 }

@@ -14,7 +14,9 @@ angular.module('app', [
   'app.photoFactory',
   'app.SelectMapFactory',
   'app.SelectMapController',
-  'app.TestLocationController'
+  'app.TestLocationController',
+  'app.LocationInfoController',
+  'app.LocationInfoFactory'
 ])
 
 .run(function($ionicPlatform) {
