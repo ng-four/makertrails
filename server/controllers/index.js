@@ -114,7 +114,8 @@ module.exports = controllers = {
           utils.createToken(request, response, isUser, function (token, name) {
            response.status(200).json( {
              "username": name,
-             'makertrails-token': token
+             'makertrails-token': token,
+             'userId': isUser.dataValues.id
             } );
           })
         }else{
