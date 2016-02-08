@@ -19,7 +19,11 @@ angular.module('app.routes', [])
       url: '/home',
       templateUrl: 'templates/home.html',
       controller: 'HomeController',
-      authenticate: true
+      authenticate: true,
+      params: {
+        'currentMap': null,
+        'mapId': null       
+      }
     })
     .state('makerMap', {
       url: '/makerMap',
@@ -49,13 +53,13 @@ angular.module('app.routes', [])
     .state('locationInfo', {
       url: '/locationInfo',
       templateUrl: 'templates/locationInfo.html',
-      controlller: 'LocationInfoController',
-      authenticate: false,
+      controller: 'LocationInfoController',
+      authenticate: true,
       params: {
-        'locationId': null,
+        'currentMap': null,
         'mapId': null
       }
-    })
+    });
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/login');
 });

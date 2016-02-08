@@ -16,7 +16,7 @@ function makerMapController($scope, $stateParams, MakerMapFactory) {
   });
 
   $scope.learnMore = function() {
-    $state.go('testLocation', {
+    $state.go('locationInfo', {
       currentMap: $stateParams.mapId.id,
       currentLocation: $scope.collision
     }, {reload: true});
