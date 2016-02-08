@@ -57,7 +57,7 @@ angular.module('app.routes', [])
       authenticate: true,
       params: {
         'currentMap': null,
-        'mapId': null
+        'currentLocation': null
       }
     });
   // if none of the above states are matched, use this as the fallback

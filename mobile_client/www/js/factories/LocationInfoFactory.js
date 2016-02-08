@@ -3,6 +3,7 @@ angular.module('app.LocationInfoFactory', [])
 
 function locationInfoFactory($http, $q){
   function locationInfo(locationId){
+    console.log('inside loction info infactory', locationId)
     var q = $q.defer();
     // 'http://makertrails.herokuapp.com/photos?locationId='
     $http.get('http://makertrails.herokuapp.com/review?locationId=' + locationId)

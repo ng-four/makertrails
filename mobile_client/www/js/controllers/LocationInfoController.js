@@ -6,12 +6,12 @@ angular.module('app.LocationInfoController', [])
     console.log('$stateParams.currentLocation', $stateParams.currentLocation)
     $scope.mapID = $stateParams.currentMap; //mapid
     $scope.currentLocation = $stateParams.currentLocation;
-    locationInfo();
+    locationInfo($scope.currentLocation);
   })
-  function locationInfo(){
+  function locationInfo(location){
     // console.log("inside locaitoninfo")
     // console.log($scope.currentLocation, "$scope.currentLocation")
-    LocationInfoFactory.locationInfo($scope.currentLocation)
+    LocationInfoFactory.locationInfo(location)
     .then(function(data){
       console.log(data)
       $scope.mapData = data;
