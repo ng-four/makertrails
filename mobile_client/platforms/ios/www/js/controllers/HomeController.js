@@ -2,7 +2,9 @@ angular.module('app.HomeController', [])
 
 .controller('HomeController', homeController);
 
-function homeController($scope, $state, $cordovaCamera, Photo) {
+function homeController($scope, $state, $cordovaCamera, Photo, Reviews, LoginFactory) {
+  $scope.username = LoginFactory.username();
+
   $scope.goToMapList = function() {
     $state.go('selectMap');
   };
@@ -29,11 +31,18 @@ function homeController($scope, $state, $cordovaCamera, Photo) {
   }
 
   $scope.retrievePhotos = function () {
-    Photo.retrievePhotos(1)
+    Photo.retrievePhotos(1) // the "1" needs to become the locationId
     .then(function (locationPhotos) {
-      console.log("+++ 34 HomeController.js locationPhotos: ", locationPhotos.data)
       $scope.locationPhotos = locationPhotos.data
 
     })
+  }
+
+  $scope.retrieveReviews = function () {
+    Reviews.retrieveReviews(1, 1) // the "1" needs to become the locationId
+    .then(function (locationReviews) {
+      $scope.locationReviews = locationReviews.data
+    })
+
   }
 }

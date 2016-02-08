@@ -2,7 +2,7 @@ angular.module('app.MakerMapFactory', [])
 
 .factory('MakerMapFactory', makerMapFactory);
 
-function makerMapFactory($http, $ionicLoading, $ionicPopup, $stateParams, CollisionFactory, SelectMapFactory) {
+function makerMapFactory($http, $state, $ionicLoading, $ionicPopup, $stateParams, CollisionFactory, SelectMapFactory) {
 
   var url;
   // url = 'http://localhost:8000';
@@ -72,7 +72,7 @@ function makerMapFactory($http, $ionicLoading, $ionicPopup, $stateParams, Collis
         var myLocation = null;
 
         //sets interval to track changes in user position
-        navigator.geolocation.watchPosition(userLocationChange, userLocationError);
+        var watchPositionTracker = navigator.geolocation.watchPosition(userLocationChange, userLocationError);
 
         //success callback for navigator.geolocation.watchPosition()
         function userLocationChange(pos) {
@@ -82,21 +82,22 @@ function makerMapFactory($http, $ionicLoading, $ionicPopup, $stateParams, Collis
           var collided = false;
 
           for (var i = 0; i < locations.length; i++) {
+            var currentLocation = locations[i];
             if (CollisionFactory.withinRange(lat, lon, locations[i].lat, locations[i].lon, 10)) {
-              if (!locations[i].visited){
+              if (!currentLocation.visited){
                 //Alert for first time ever
-                var alertPopup = $ionicPopup.alert({
-                  template: 'Collision!! at ' + locations[i].progress_id
-                });
+                // var alertPopup = $ionicPopup.alert({
+                //   template: 'Collision!! at ' + locations[i].progress_id
+                // });
 
                 $http.put(url + '/progress', {
-                  'progressId': locations[i].progress_id
+                  'progressId': currentLocation.progress_id
                 }, {
                   'Content-Type': 'application/json'
                 })
                 .then(function(data) {
                   console.log("COLLISION!", data)
-                  location[i].visited = true;
+                  currentLocation.visited = true;
                   deleteMarkers(markers);
                   setMarkers(scope.locations, map, markers);
                 }, function(err) {
@@ -104,7 +105,20 @@ function makerMapFactory($http, $ionicLoading, $ionicPopup, $stateParams, Collis
                 })
               }
               collided = true;
-              scope.collision = location.id
+              scope.collision.contact = true;
+              scope.collision.locationID = currentLocation.id;
+              var alertPopup = $ionicPopup.alert({
+                template: 'Collision!! at ' + currentLocation.progress_id
+              });
+              alertPopup.then(function(res) {
+               console.log('Tapped!', res);
+               window.navigator.geolocation.clearWatch(watchPositionTracker); //stop watchPosition
+               $state.go('locationInfo', {
+                 currentMap: $stateParams.mapID.id,
+                 currentLocation: scope.collision.locationID
+               }, {reload: true});
+               return;
+            });
             }
           }
 

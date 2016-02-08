@@ -5,5 +5,14 @@
         {{mapData.mapInfo.description}}
       </div>
     </div>
+    <button class="button button-block button-balanced" ng-click="takePicture()">
+      TAKE PICTURE
+    </button>
+    <div>
+      <img ng-src="{{imgURI}}">
+    </div>
+    <div ng-repeat="photo in locationPhotos">
+      <img ng-src="{{photo.link}}" />
+    </div>
   </ion-content>
 </ion-view>

@@ -3,6 +3,7 @@ angular.module('app.LoginFactory', [])
 
 function loginFactory($q, $http, $state, $ionicPopup) {
   var username = '';
+  var userId = '';
   var isAuthenticated = false;
 
   var url;
@@ -24,7 +25,9 @@ function loginFactory($q, $http, $state, $ionicPopup) {
       }
     })
     .then(function(success) {
-      username = name;
+      console.log('success.data', success.data);
+      username = success.data.username;
+      userId = success.data.userId;
       console.log(name)
       console.log(success.data['makertrails-token'])
       setTokenAndHttpHeaders(success.data['makertrails-token']);
@@ -74,6 +77,7 @@ function loginFactory($q, $http, $state, $ionicPopup) {
     logout: logout,
     signup: signup,
     username: function() {return username;},
+    userId: function() {return userId;},
     isAuthenticated: function() {return isAuthenticated;}
   };
 }

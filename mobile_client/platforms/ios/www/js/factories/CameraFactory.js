@@ -1,4 +1,4 @@
-angular.module('app.photoFactory', [])
+angular.module('app.PhotoFactory', [])
   .factory('Photo', photo);
 
 function photo($http, $q, $ionicPopup) {

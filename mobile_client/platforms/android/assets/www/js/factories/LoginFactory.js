@@ -11,8 +11,7 @@ function loginFactory($q, $http, $state, $ionicPopup) {
   // url = 'http://makertrails.herokuapp.com'
   function setTokenAndHttpHeaders(token) {
     isAuthenticated = true;
-    // window.localStorage.setItem('makertrailsToken', token); //store token locally
-    $http.defaults.headers.common['makertrails-token'] = token; //send token in header with every http request
+    $http.defaults.headers.common['makertrails-token'] = token;
   }
 
   var login = function(name, pass) {
@@ -37,7 +36,31 @@ function loginFactory($q, $http, $state, $ionicPopup) {
       });
     });
   };
-
+  var signup = function(username, password, email){
+      return $http ({
+        method: 'POST',
+        url: url + '/signup',
+        data: {
+          username: username,
+          password: password,
+          email: email
+        }
+      })
+      .then(function(success){
+        console.log("+++ 51 LoginFactory.js success: ", success)
+        if (success) {
+          setTokenAndHttpHeaders(success.data['makertrails-token']);
+          $state.go('home')
+        }else{
+          var popup = $ionicPopup.alert({
+            title: 'Sign up failed!',
+            template: 'Please enter unique username or email'
+          });
+        }
+      }, function(err){
+        console.log(err);
+      })
+    };
   var logout = function() {
     username = '';
     isAuthenticated = false;
@@ -49,6 +72,7 @@ function loginFactory($q, $http, $state, $ionicPopup) {
   return {
     login: login,
     logout: logout,
+    signup: signup,
     username: function() {return username;},
     isAuthenticated: function() {return isAuthenticated;}
   };

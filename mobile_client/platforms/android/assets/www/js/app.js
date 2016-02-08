@@ -11,10 +11,13 @@ angular.module('app', [
   'app.SignupController',
   'app.HomeController',
   'app.SelectMapController',
-  'app.photoFactory',
+  'app.PhotoFactory',
+  'app.ReviewFactory',
   'app.SelectMapFactory',
   'app.SelectMapController',
-  'app.TestLocationController'
+  'app.TestLocationController',
+  'app.LocationInfoController',
+  'app.LocationInfoFactory'
 ])
 
 .run(function($ionicPlatform) {
