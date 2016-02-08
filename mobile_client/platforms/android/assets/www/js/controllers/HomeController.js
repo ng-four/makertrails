@@ -24,7 +24,7 @@ function homeController($scope, $state, $cordovaCamera, Photo, Reviews, LoginFac
 
     $cordovaCamera.getPicture(options).then(function(imageData) {
       $scope.imgURI = "data:image/jpeg;base64," + imageData;
-      Photo.storeImage(1, 1, $scope.imgURI) //1s are hard coded for locationId and userId
+      Photo.storeImage(109, 1, $scope.imgURI) //1s are hard coded for locationId and userId
     }, function(err) {
         // An error occured. Show a message to the user
     });
