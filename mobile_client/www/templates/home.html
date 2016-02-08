@@ -21,8 +21,14 @@
     <button class="button button-block button-balanced" ng-click="retrievePhotos()">
       RETRIEVE PICTURE
     </button>
-    <div ng-repeat='photo in locationPhotos'>
+    <div ng-repeat="photo in locationPhotos">
        <img ng-src="{{photo.link}}"/>
+    </div>
+     <button class="button button-block button-balanced" ng-click="retrieveReviews()">
+      RETRIEVE REVIEWS
+    </button>
+    <div ng=repeat="review in reviews">
+     {{review}}
     </div>
   </ion-content>
 </ion-view>

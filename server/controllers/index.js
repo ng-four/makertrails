@@ -66,6 +66,8 @@ module.exports = controllers = {
     get: function(request, response){
       var locationId = request.query.locationId;
       var mapId = request.query.mapId;
+      console.log("+++ 69 index.js locationId: ", locationId)
+      console.log("+++ 70 index.js mapId: ", mapId)
       models.review.get(locationId, mapId, function(data){
         response.json({data})
       });
