@@ -1,4 +1,4 @@
-angular.module("App.createMap", []) //Placeholder name
+angular.module("App.createMap", ['ngMessages']) //Placeholder name
 .controller("MapController", MapController)
 
 function MapController($scope, MapFactory){
