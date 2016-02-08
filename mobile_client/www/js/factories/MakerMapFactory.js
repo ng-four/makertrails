@@ -72,7 +72,7 @@ function makerMapFactory($http, $state, $ionicLoading, $ionicPopup, $stateParams
         var myLocation = null;
 
         //sets interval to track changes in user position
-        navigator.geolocation.watchPosition(userLocationChange, userLocationError);
+        var watchPositionTracker = navigator.geolocation.watchPosition(userLocationChange, userLocationError);
 
         //success callback for navigator.geolocation.watchPosition()
         function userLocationChange(pos) {
@@ -112,6 +112,7 @@ function makerMapFactory($http, $state, $ionicLoading, $ionicPopup, $stateParams
               });
               alertPopup.then(function(res) {
                console.log('Tapped!', res);
+               window.navigator.geolocation.clearWatch(watchPositionTracker); //stop watchPosition
                $state.go('locationInfo', {
                  currentMap: $stateParams.mapID.id,
                  currentLocation: scope.collision.locationID
