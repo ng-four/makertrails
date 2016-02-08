@@ -2,7 +2,7 @@ angular.module('app.HomeController', [])
 
 .controller('HomeController', homeController);
 
-function homeController($scope, $state, $cordovaCamera, Photo, LoginFactory) {
+function homeController($scope, $state, $cordovaCamera, Photo, Reviews, LoginFactory) {
   $scope.username = LoginFactory.username();
 
   $scope.goToMapList = function() {
@@ -36,5 +36,13 @@ function homeController($scope, $state, $cordovaCamera, Photo, LoginFactory) {
       $scope.locationPhotos = locationPhotos.data
 
     })
+  }
+
+  $scope.retrieveReviews = function () {
+    Reviews.retrieveReviews(1, 1) // the "1" needs to become the locationId
+    .then(function (locationReviews) {
+      $scope.locationReviews = locationReviews.data
+    })
+
   }
 }
