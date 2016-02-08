@@ -112,7 +112,7 @@ function makerMapFactory($http, $state, $ionicLoading, $ionicPopup, $stateParams
               });
               alertPopup.then(function(res) {
                console.log('Tapped!', res);
-               $state.go('testLocation', {
+               $state.go('locationInfo', {
                  currentMap: $stateParams.mapID.id,
                  currentLocation: scope.collision.locationID
                }, {reload: true});

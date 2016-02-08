@@ -11,8 +11,7 @@ function loginFactory($q, $http, $state, $ionicPopup) {
   // url = 'http://makertrails.herokuapp.com'
   function setTokenAndHttpHeaders(token) {
     isAuthenticated = true;
-    // window.localStorage.setItem('makertrailsToken', token); //store token locally
-    $http.defaults.headers.common['makertrails-token'] = token; //send token in header with every http request
+    $http.defaults.headers.common['makertrails-token'] = token;
   }
 
   var login = function(name, pass) {
