@@ -17,5 +17,6 @@ function locationInfoFactory($http, $q){
     return q.promise;
   };
   return {
+    locationInfo: locationInfo
   }
 }
