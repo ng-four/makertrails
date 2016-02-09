@@ -5,16 +5,6 @@
         {{mapData.mapInfo.description}}
       </div>
     </div>
-    <textarea id="review" name="submitReview" ng-model="submitNewReview.text" rows=4>
-    </textarea>
-    <!-- reviews -->
-    <button class="button button-block button-balanced" ng-click="submitReview()">
-      SUBMIT REVIEW
-    </button>
-    <div ng-repeat="review in locationReviews">
-      {{review.body}}<br>
-      {{review.createdAt}}
-    </div>
     <!-- photos section -->
     <button class="button button-block button-balanced" ng-click="takePicture()">
       TAKE PICTURE
@@ -24,6 +14,17 @@
     </div>
     <div ng-repeat="photo in locationPhotos">
       <img ng-src="{{photo.link}}" />
+    </div>
+
+    <textarea id="review" name="submitReview" ng-model="submitNewReview.text" rows=4>
+    </textarea>
+    <!-- reviews -->
+    <button class="button button-block button-balanced" ng-click="submitReview()">
+      SUBMIT REVIEW
+    </button>
+    <div ng-repeat="review in locationReviews">
+      {{review.body}}<br>
+      {{review.createdAt}}
     </div>
 
   </ion-content>
