@@ -125,44 +125,55 @@ module.exports = {
   },
 
   review: {
-    get: function(locationId, mapId, callback){
-      db.Location.find(
-        {attributes: ["map_id"],
-        where: {id: locationId}
+    // get: function(locationId, mapId, callback){
+    //   db.Location.find(
+    //     {attributes: ["map_id"],
+    //     where: {id: locationId}
+    //   })
+    //   .then(function(mapId){
+    //     db.Map.findById(mapId.map_id)
+    //     .then(function(mapInfo){
+    //       db.Review.findAll({
+    //         where: {
+    //           location_id: locationId
+    //         }
+    //       }).then(function(reviews){
+    //         var queries = [];
+    //         _.each(reviews, function(review){
+    //           queries.push(db.User.findById(review.user_id).then(function(user){
+    //             review.dataValues.author = user.name;
+    //           }));
+    //         })
+    //         Promise.all(queries)
+    //         .then(function(){
+    //           callback({"mapInfo": mapInfo, "reviews": reviews});
+    //         })
+    //       })
+    //     })
+    //   })
+    // },
+    get: function (locationId, callback) {
+      db.Review.findAll({
+        where: {
+          location_id: locationId
+        }
       })
-      .then(function(mapId){
-        db.Map.findById(mapId.map_id)
-        .then(function(mapInfo){
-          db.Review.findAll({
-            where: {
-              location_id: locationId
-            }
-          }).then(function(reviews){
-            var queries = [];
-            _.each(reviews, function(review){
-              queries.push(db.User.findById(review.user_id).then(function(user){
-                review.dataValues.author = user.name;
-              }));
-            })
-            Promise.all(queries)
-            .then(function(){
-              callback({"mapInfo": mapInfo, "reviews": reviews});
-            })
-          })
-        })
+      .then(function (locationReviews) {
+        callback(locationReviews)
+      },
+      function (err) {
+        console.log("+++ 165 index.js err: ", err)
       })
     },
-    post: function(review, callback){
-      console.log("+++line 122 what is the review", review)
+    post: function(review, locationId, userId, callback){
       db.Review.create({
-        location_id: review.location_id,
-        user_id: review.user_id,
-        body: review.body,
-        rating: review.rating
+        location_id: locationId,
+        body: review,
+        user_id: userId
       }).then(function(postedReview){
         callback(postedReview);
       }).catch(function(error){
-        console.log("+++line 131 models posting review failed")
+        console.log("+++ 178 index.js Review failed to post to db")
         console.log(error)
       })
     }
@@ -222,7 +233,8 @@ module.exports = {
         where: {
           location_id: locationId
         }
-      }).then(function (locationPhotos) {
+      })
+      .then(function (locationPhotos) {
         callback(locationPhotos)
       })
     }
