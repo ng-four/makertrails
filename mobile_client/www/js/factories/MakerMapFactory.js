@@ -68,19 +68,6 @@ function makerMapFactory($http, $q, $state, $ionicLoading, $ionicPopup, $statePa
       });
     return q.promise;
   }
-  // renderMap(scope); //returns map
-  // // console.log("+++33 what's in the data", data)
-  // scope.locations = data.data; //save locations array
-  // var locations = scope.locations;
-  // var map = scope.map;
-  // var markers = scope.markers;
-  // console.log("+++36 MakerMapFactory our locations:",scope.locations)
-  // //iterate through locations array, create marker for each location and place on map
-  // setMarkers(scope.locations, map, markers)
-  // console.log("+++64 MakerMap markers", markers)
-
-
-
 
   var theRestOfIt = function(scope, locations, map){
         var myLocation = null;
@@ -170,6 +157,7 @@ function makerMapFactory($http, $q, $state, $ionicLoading, $ionicPopup, $statePa
     renderMap: renderMap,
     setMarkers: setMarkers,
     getMapLocations: getMapLocations,
-    theRestOfIt: theRestOfIt
+    userLocationError: userLocationError
+    // theRestOfIt: theRestOfIt
   };
 }
