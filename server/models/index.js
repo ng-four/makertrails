@@ -170,7 +170,8 @@ module.exports = {
               // callback(locationReviews)
               console.log("+++ 171 index.js queries: ", queries)
               console.log("+++ 172 index.js review: ", review)
-              callback("reviews": reviews);
+              console.log("+++ 173 index.js locationReviews: ", locationReviews)
+              callback("reviews": locationReviews);
             })
       },
       function (err) {
