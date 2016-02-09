@@ -20,10 +20,18 @@ function trailMap(MapFactory) {
       if ($scope.selectedLocations.length < 6) {
         // lat/lng added on click, sent to array
         $scope.selectedLocations.push(newLocation)
+        var marker = MapFactory.newMarker(newLocation, $map);
+        console.log("+++24 directive new marker:", marker);
+        $scope.markers.push(marker);
+        console.log("+++24 scope markers", $scope.markers);
         $scope.$apply();
-        MapFactory.newMarker(newLocation, $scope.map);
       }
     });
+
+    GMaps.on('radius_changed', $map.map, function(event){
+      $scope.selectedLocations
+      $scope.apply();
+    })
 
   };
   return {

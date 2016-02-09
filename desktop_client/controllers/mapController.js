@@ -3,6 +3,7 @@ angular.module("App.createMap", ['ngMessages']) //Placeholder name
 
 function MapController($scope, MapFactory){
   angular.extend($scope, MapFactory);
+  $scope.markers = [];
   $scope.selectedLocations = [];
   $scope.mapInfo = {
     "user": 1 //Hardcoded until backend is fixed
@@ -37,13 +38,14 @@ function MapController($scope, MapFactory){
       MapFactory.createMap($scope.mapInfo, $scope.selectedLocations)
       .then(function (success) {
         $scope.selectedLocations = [];
+        //Need to fix
         MapFactory.refreshMap($scope.selectedLocations, null, $scope.map)
       })
     }
   };
-  $scope.renameLocation = function (selectedLocations, index, newName) {
-    MapFactory.renameLocation(selectedLocations, index, newName)
-    MapFactory.refreshMap(selectedLocations, null, $scope.map)
+  $scope.renameLocation = function (selectedLocations, markers, index, newName) {
+    MapFactory.renameLocation(selectedLocations, markers, index, newName)
+    // MapFactory.refreshMap(selectedLocations, null, $scope.map)
   };
 
 }
