@@ -65,7 +65,9 @@ angular.module('app.LocationInfoController', [])
       // console.log("+++ 63 LocationInfoController.js locationReviews.data: ", locationReviews.data)
       $scope.locationReviews = locationReviews.data.map(function(item){
         item.createdAt = moment(item.createdAt).format('MM/DD/YYYY');
+        return item;
       })
+      console.log($scope.locationReviews, "location review data")
     })
   }
 
