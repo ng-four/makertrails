@@ -127,13 +127,15 @@ MAP SECTION
 }
 
 #map{
-  width: 100%;
+  margin: auto auto;
+  width: 75%;
   height: 450px;
 }
 
 #trailsForm{
   margin-top: 15px;
-  margin-left: 150px;
+  margin-left: 12.5%;
+  width: 75%;
 }
 
 .redButton{
