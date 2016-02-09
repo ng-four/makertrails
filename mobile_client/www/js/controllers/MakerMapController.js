@@ -11,14 +11,19 @@ function makerMapController($scope, $http, $state, $stateParams, $ionicLoading, 
   $scope.markers = [];
 
   $scope.setCollision = function(locationID){
+    if ($scope.collision.contact === false){
+      var alertPopup = $ionicPopup.alert({
+        template: 'You\'ve arrived at ' + currentLocation.progress_id
+      });
+    }
     $scope.collision.contact = true;
     $scope.collision.locationID = locationID;
   }
 
   $scope.learnMore = function() {
     $state.go('testLocation', {
-      currentMap: $stateParams.mapId.id,
-      currentLocation: $scope.collision
+      currentMap: $scope.mapID,
+      currentLocation: $scope.collision.locationID
     }, {reload: true});
     return;
   }
@@ -50,17 +55,6 @@ function makerMapController($scope, $http, $state, $stateParams, $ionicLoading, 
         }
         collided = true;
         $scope.setCollision(currentLocation.id);
-        var alertPopup = $ionicPopup.alert({
-          template: 'Collision!! at ' + currentLocation.progress_id
-        });
-        debugger;
-        // alertPopup.then(function(res) {
-        //   $state.go('testLocation', {
-        //    currentMap: $stateParams.mapID.id,
-        //    currentLocation: $scope.collision.locationID
-        //   }, {reload: true});
-        //   return;
-        // });
       }
     }
     if (collided===false){
