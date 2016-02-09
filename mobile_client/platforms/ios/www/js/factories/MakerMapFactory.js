@@ -112,7 +112,13 @@ function makerMapFactory($http, $state, $ionicLoading, $ionicPopup, $stateParams
               });
               alertPopup.then(function(res) {
                console.log('Tapped!', res);
+<<<<<<< HEAD
+<<<<<<< 87ee7b00c180eb99940d6792c85e9f56140b404b
                window.navigator.geolocation.clearWatch(watchPositionTracker); //stop watchPosition
+=======
+>>>>>>> [deploy] test deploy to heroku
+=======
+>>>>>>> 556f84421a49b3de5d5fe2c8fa60db3ac61428bf
                $state.go('locationInfo', {
                  currentMap: $stateParams.mapID.id,
                  currentLocation: scope.collision.locationID

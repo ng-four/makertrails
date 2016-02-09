@@ -87,12 +87,14 @@ module.exports = controllers = {
       var username = request.body.username; //stringify because chris
       var password = request.body.password;// need to bcrypt
       models.login.post(username, password, function (isUser) {
-        // response.redirect('/app') // PROBABLY GOOD IDEA TO REDIRECT TO ROUTE APP (HOW?)
+        console.log("+++ 90 index.js isUser: ", isUser)
         if (isUser) {
           utils.createToken(request, response, isUser, function (token, name) {
            response.status(200).send( {
              'username': name,
-             'makertrails-token': token
+             'makertrails-token': token,
+             'userId': isUser.dataValues.id
+
            });
           })
         }else{
@@ -112,7 +114,8 @@ module.exports = controllers = {
           utils.createToken(request, response, isUser, function (token, name) {
            response.status(200).json( {
              "username": name,
-             'makertrails-token': token
+             'makertrails-token': token,
+             'userId': isUser.dataValues.id
             } );
           })
         }else{
