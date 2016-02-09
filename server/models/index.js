@@ -159,7 +159,18 @@ module.exports = {
         }
       })
       .then(function (locationReviews) {
-        callback(locationReviews)
+         var queries = [];
+            _.each(locationReviews, function(review){
+              queries.push(db.User.findById(review.user_id).then(function(user){
+                review.dataValues.author = user.name;
+              }));
+            })
+            Promise.all(queries)
+            .then(function(){
+              // callback(locationReviews)
+              console.log("+++ 171 index.js queries: ", queries)
+              callback({"mapInfo": mapInfo, "reviews": reviews});
+            })
       },
       function (err) {
         console.log("+++ 165 index.js err: ", err)
