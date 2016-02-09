@@ -20,15 +20,15 @@ function MapFactory($http, $q){
     // });
   };
 
-  mapFactory.refreshMap = function(selectedLocations, index, map) {
-    if(index === undefined){
-      selectedLocations[index].editing = false;
-    }
-    map.removeMarkers();
-    _.each(selectedLocations, function(location){
-      mapFactory.newMarker(location, map);
-    });
-  };
+  // mapFactory.refreshMap = function(selectedLocations, index, map) {
+  //   if(index === undefined){
+  //     selectedLocations[index].editing = false;
+  //   }
+  //   map.removeMarkers();
+  //   _.each(selectedLocations, function(location){
+  //     mapFactory.newMarker(location, map);
+  //   });
+  // };
 
   // mapFactory.newMarker = function(location, map){
   //   map.addMarker({
@@ -60,9 +60,11 @@ function MapFactory($http, $q){
   // }
 
   mapFactory.newMarker = function(location, map){
+    console.log("++63 mapfac what is map now?", map)
     var marker = new google.maps.Marker({
-      pos: {lat: location.lat, lng: location.lng},
+      position: {lat: location.lat, lng: location.lng},
       title: location.name,
+      map: map,
       icon: {
         path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
         fillColor: "red",
@@ -70,7 +72,6 @@ function MapFactory($http, $q){
         strokeWeight: 2,
         scale: 5
       },
-      map: map,
       infoWindow: {
         content : location.name
       }
@@ -86,7 +87,9 @@ function MapFactory($http, $q){
       editable: true,
       map: map
     });
-    return [marker, circle];
+    console.log("+++90 mapfac is the problem before here??")
+    return marker;
+    // return [marker, circle];
   }
 
   mapFactory.renameLocation = function (selectedLocations, markers, index, newName) {

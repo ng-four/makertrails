@@ -5,10 +5,13 @@ function trailMap(MapFactory) {
   var link = function($scope, $el){
     //el is an array of the element (plus its children) where this directive is used
     var $map = $scope.map
-
-    GMaps.on('click', $map.map, function(event) {
+    console.log("+++8 directive what is map?", $map)
+    // GMaps.on('click', $map.map, function(event) {
+    google.maps.event.addListener($map, 'click', function(event) {
+      console.log("+++11 directive latlng", event.latLng);
       var lat = event.latLng.lat();
       var lng = event.latLng.lng();
+      console.log("+++14 directive make it here?")
 
       var newLocation = {
         lat: lat,
@@ -28,10 +31,10 @@ function trailMap(MapFactory) {
       }
     });
 
-    GMaps.on('radius_changed', $map.map, function(event){
-      $scope.selectedLocations
-      $scope.apply();
-    })
+    // google.maps.event.addListener('radius_changed', $map.map, function(event){
+    //   $scope.selectedLocations
+    //   $scope.apply();
+    // })
 
   };
   return {
