@@ -62,6 +62,7 @@ angular.module('app.LocationInfoController', [])
     .then(function (locationReviews) {
       console.log("+++ 63 LocationInfoController.js locationReviews.data: ", locationReviews.data)
       $scope.locationReviews = locationReviews.data
+      console.log("+++ 65 LocationInfoController.js locationReviews.data: ", locationReviews.data)
     })
   }
 
