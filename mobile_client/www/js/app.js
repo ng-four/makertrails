@@ -1,6 +1,7 @@
 //ROOT APP
 angular.module('app', [
   'ionic',
+  'ngCordova',
   'app.routes',
   'app.CollisionFactory',
   'app.MakerMapController',
@@ -9,8 +10,15 @@ angular.module('app', [
   'app.LoginFactory',
   'app.SignupController',
   'app.HomeController',
+  'app.SelectMapController',
+  'app.PhotoFactory',
+  'app.ReviewFactory',
   'app.SelectMapFactory',
-  'app.SelectMapController'
+  'app.SelectMapController',
+  'app.TestLocationController',
+  'app.LocationInfoController',
+  'app.LocationInfoFactory',
+  'app.ReviewFactory'
 ])
 
 .run(function($ionicPlatform) {
@@ -21,7 +29,7 @@ angular.module('app', [
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
       cordova.plugins.Keyboard.disableScroll(true);
     }
-    if(window.StatusBar) {
+    if(window.StatussBar) {
       // org.apache.cordova.statusbar required
       StatusBar.styleDefault();
     }
@@ -30,7 +38,7 @@ angular.module('app', [
 .run(function($rootScope, $state, LoginFactory, $window){
 
   $rootScope.$on('$stateChangeStart' , function(event, toState) {
-    if(!toState.authenticate || LoginFactory.authenticateFunction()){
+    if(!toState.authenticate || LoginFactory.isAuthenticated()){
       return;
     }
     event.preventDefault();
@@ -39,4 +47,4 @@ angular.module('app', [
       return
     }
   });
-});
+})

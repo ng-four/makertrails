@@ -2,4 +2,12 @@
   <ion-content>
     <div id="map" data-tap-disabled="true"></div>
   </ion-content>
+  <ion-footer-bar align-title="left" class="bar-assertive">
+    <h1 class="title">Title!</h1>
+    <button class="button button-block button-stable"
+      ng-if="collision.contact"
+      ng-click="learnMore()">
+        CLICK TO SEE MORE!
+    </button>
+  </ion-footer-bar>
 </ion-view>

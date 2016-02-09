@@ -2,9 +2,13 @@ angular.module('app.MakerMapFactory', [])
 
 .factory('MakerMapFactory', makerMapFactory);
 
-function makerMapFactory($http, $ionicLoading, $ionicPopup, CollisionFactory, SelectMapFactory) {
-  // var mapSelected = SelectMapFactory.selectMap();
-  // console.log("this is map selected", mapSelected)
+function makerMapFactory($http, $q, $state, $ionicLoading, $ionicPopup, $stateParams, CollisionFactory, SelectMapFactory) {
+
+  var url;
+  // url = 'http://localhost:8000';
+  url = 'http://still-sands-90078.herokuapp.com'
+  // url = 'http://makertrails.herokuapp.com'
+
   var renderMap = function() {
     //displays loading animation
     $ionicLoading.show({
@@ -24,77 +28,55 @@ function makerMapFactory($http, $ionicLoading, $ionicPopup, CollisionFactory, Se
     };
 
     //creates default map with above options
-    var map = new google.maps.Map(document.getElementById("map"), mapOptions);
-    return map;
+    return new google.maps.Map(document.getElementById("map"), mapOptions);
   };
 
-  var getMapLocations = function(http) {
-    $http.get('http://makertrails.herokuapp.com/location?mapId=8')
+  var deleteMarkers = function(markers){
+    for(i=0; i<markers.length; i++){
+        markers[i].setMap(null);
+    }
+    markers = [];
+  }
+
+  var setMarkers = function(locations, map) {
+    var markers = []
+    for (var i = 0; i < locations.length; i++) {
+      var marker = new google.maps.Marker({
+        position: new google.maps.LatLng(locations[i].lat, locations[i].lon),
+        icon: {
+          path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
+          fillColor: locations[i].visited ? "green" : "red",
+          fillOpacity: 1,
+          strokeWeight: 2,
+          scale: 5
+        },
+        map: map
+      })
+      markers.push(marker);
+    }
+    return markers;
+  }
+
+  var getMapLocations = function(mapID) {
+    var q = $q.defer();
+    $http.get(url + '/progress?mapId='+mapID)
       .then(function(data) {
-        var map = renderMap(); //returns map
-        var locations = data.data.locations; //save locations array
-        console.log("locations data", data);
-
-        //iterate through locations array, create marker for each location and place on map
-        for (var i = 0; i < locations.length; i++) {
-          var marker = new google.maps.Marker({
-            position: new google.maps.LatLng(locations[i].lat, locations[i].lon),
-            map: map
-          })
-        }
-
-        var myLocation = null;
-
-        //sets interval to track changes in user position
-        navigator.geolocation.watchPosition(userLocationChange, userLocationError);
-
-        //success callback for navigator.geolocation.watchPosition()
-        function userLocationChange(pos) {
-          var lat = pos.coords.latitude;
-          var lon = pos.coords.longitude;
-          var currentLatLng = new google.maps.LatLng(lat, lon);
-
-          for (var i = 0; i < locations.length; i++) {
-            if (CollisionFactory.withinRange(lat, lon, locations[i].lat, locations[i].lon, 10)) {
-              var alertPopup = $ionicPopup.alert({
-                template: 'Collision!!' + locations[i].progress_id
-              });
-
-              $http.put('http://makertrails.herokuapp.com/progress', {
-                  'progressId': locations[i].progress_id
-                }, {
-                  'currentMap': locations[i].id,
-                  'Content-Type': 'applicaiton/json'
-                })
-                .then(function(data) {
-                  console.log("success", data)
-                }, function(err) {
-                  console.log(err);
-                })
-            }
-          }
-
-          map.setCenter(currentLatLng);
-          if (myLocation !== null) {
-            myLocation.setPosition(currentLatLng);
-          } else {
-            myLocation = new google.maps.Marker({
-              position: currentLatLng,
-              animation: google.maps.Animation.DROP,
-              map: map
-            });
-          }
-          $ionicLoading.hide();
-        }
-
-        //error callback for navigator.geolocation.watchPosition()
-        function userLocationError(err) {
-          console.log("user location failed", err);
-        }
+        q.resolve(data);
+      },function(err) {
+        q.reject(err);
       });
+    return q.promise;
+  }
+
+  var userLocationError = function(err) {
+    console.log("user location failed", err);
   }
 
   return {
-    getMapLocations: getMapLocations
+    url: url,
+    renderMap: renderMap,
+    setMarkers: setMarkers,
+    getMapLocations: getMapLocations,
+    userLocationError: userLocationError
   };
 }

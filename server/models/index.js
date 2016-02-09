@@ -40,6 +40,32 @@ module.exports = {
     }
   },
 
+  userMaps: {
+    get: function (userId, callback) {
+      var userMaps = [];
+      db.Progress.findAll({
+          where: {
+            user_id: userId
+          }
+      })
+      .then(function (userMaps) {
+        var uniqueMapIds = [];
+        var mapInfo = [];
+        _.each(userMaps, function (eachMap) {
+          uniqueMapIds.push(eachMap.dataValues.map_id)
+        })
+        uniqueMapIds = _.uniq(uniqueMapIds);
+        _.each(uniqueMapIds, function (uniqueMapId) {
+          mapInfo.push(db.Map.findById(uniqueMapId))
+        })
+        Promise.all(mapInfo)
+        .then(function () {
+          callback(mapInfo)
+        })
+      })
+    }
+  },
+
   location: {
     get: function (mapId, callback) {
       db.Location.findAll({
@@ -54,7 +80,6 @@ module.exports = {
   },
 
   progress: {
-    post: function (mapId, locations, userId, callback) {},
     get: function (mapId, locations, userId, callback) {
       db.Progress.findAll({
         where: {
@@ -100,35 +125,67 @@ module.exports = {
   },
 
   review: {
-    get: function(locationId, callback){
+    // get: function(locationId, mapId, callback){
+    //   db.Location.find(
+    //     {attributes: ["map_id"],
+    //     where: {id: locationId}
+    //   })
+    //   .then(function(mapId){
+    //     db.Map.findById(mapId.map_id)
+    //     .then(function(mapInfo){
+    //       db.Review.findAll({
+    //         where: {
+    //           location_id: locationId
+    //         }
+    //       }).then(function(reviews){
+    //         var queries = [];
+    //         _.each(reviews, function(review){
+    //           queries.push(db.User.findById(review.user_id).then(function(user){
+    //             review.dataValues.author = user.name;
+    //           }));
+    //         })
+    //         Promise.all(queries)
+    //         .then(function(){
+    //           callback({"mapInfo": mapInfo, "reviews": reviews});
+    //         })
+    //       })
+    //     })
+    //   })
+    // },
+    get: function (locationId, callback) {
       db.Review.findAll({
         where: {
           location_id: locationId
         }
-      }).then(function(reviews){
-        var queries = [];
-        _.each(reviews, function(review){
-          queries.push(db.User.findById(review.user_id).then(function(user){
-            review.dataValues.author = user.name;
-          }));
-        })
-        Promise.all(queries)
-        .then(function(){
-          callback(reviews);
-        })
+      })
+      .then(function (locationReviews) {
+         var queries = [];
+            _.each(locationReviews, function(review){
+              queries.push(db.User.findById(review.user_id).then(function(user){
+                review.dataValues.author = user.name;
+              }));
+            })
+            Promise.all(queries)
+            .then(function(){
+              // callback(locationReviews)
+              console.log("+++ 171 index.js queries: ", queries)
+              console.log("+++ 173 index.js locationReviews: ", locationReviews)
+              callback(locationReviews);
+            })
+      },
+      function (err) {
+        console.log("+++ 165 index.js err: ", err)
       })
     },
-    post: function(review, callback){
-      console.log("+++line 122 what is the review", review)
+    post: function(review, locationId, userId, callback){
       db.Review.create({
-        location_id: review.location_id,
-        user_id: review.user_id,
-        body: review.body,
-        rating: review.rating
+        location_id: locationId,
+        body: review,
+        user_id: userId
       }).then(function(postedReview){
         callback(postedReview);
       }).catch(function(error){
-        console.log("+++line 131 models posting review failed")
+        console.log("+++ 178 index.js Review failed to post to db")
         console.log(error)
       })
     }
@@ -168,6 +225,29 @@ module.exports = {
         }else{
           callback(false);
         }
+      })
+    }
+  },
+
+  photos: {
+    post: function (locationId, userId, photoData, callback) {
+      db.Photo.create({
+        location_id: locationId,
+        user_id: userId,
+        link: photoData
+      })
+      .then(function (photoAdded) {
+        callback(photoAdded)
+      })
+    },
+    get: function (locationId, callback) {
+      db.Photo.findAll({
+        where: {
+          location_id: locationId
+        }
+      })
+      .then(function (locationPhotos) {
+        callback(locationPhotos)
       })
     }
   }

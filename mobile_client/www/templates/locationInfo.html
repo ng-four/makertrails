@@ -1,0 +1,32 @@
+<ion-view title='{{mapData.mapInfo.name}}'>
+  <ion-content>
+    <div class='list'>
+      <div class='item item-divider'>
+        {{mapData.mapInfo.description}}
+      </div>
+    </div>
+    <!-- photos section -->
+    <button class="button button-block button-balanced" ng-click="takePicture()">
+      TAKE PICTURE
+    </button>
+    <div>
+      <img ng-src="{{imgURI}}">
+    </div>
+    <div ng-repeat="photo in locationPhotos">
+      <img ng-src="{{photo.link}}" />
+    </div>
+
+    <textarea id="review" name="submitReview" ng-model="submitNewReview.text" rows=4>
+    </textarea>
+    <!-- reviews -->
+    <button class="button button-block button-balanced" ng-click="submitReview()">
+      SUBMIT REVIEW
+    </button>
+    <div ng-repeat="review in locationReviews">
+      {{review.author}}<br>
+      {{review.body}}<br>
+      {{review.createdAt}}
+    </div>
+
+  </ion-content>
+</ion-view>
