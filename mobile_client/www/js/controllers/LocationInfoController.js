@@ -1,5 +1,5 @@
 angular.module('app.LocationInfoController', [])
-.controller('LocationInfoController', function($scope, $stateParams, Photo, LocationInfoFactory, LoginFactory, Reviews, $cordovaCamera){
+.controller('LocationInfoController', function($scope, $stateParams, Photo, LocationInfoFactory, LoginFactory, Reviews, $cordovaCamera, $ionicModal){
 
   $scope.mapID = $stateParams.currentMap;
   $scope.currentLocation = $stateParams.currentLocation;
@@ -87,5 +87,27 @@ angular.module('app.LocationInfoController', [])
       $scope.submitNewReview.text = '';
       retrieveReviews();
     })
+  };
+
+  //gallery functions
+  function createImageGalleryModal() {
+    $ionicModal.fromTemplateUrl('templates/imageGalleryModal.html', {
+      scope: $scope,
+      animation: 'slide-in-up'
+    })
+    .then(function(modal) {
+      $scope.modal = modal;
+      $scope.modal.show();
+    })
+  }
+
+  $scope.showImageGallery = function(index) {
+    $scope.activeSlide = index;
+    createImageGalleryModal();
+  };
+
+  $scope.closeImageGallery = function() {
+    $scope.modal.hide();
+    $scope.modal.remove();
   };
 });
