@@ -23,6 +23,7 @@
       SUBMIT REVIEW
     </button>
     <div ng-repeat="review in locationReviews">
+      {{review.author}}<br>
       {{review.body}}<br>
       {{review.createdAt}}
     </div>
