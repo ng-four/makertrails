@@ -1,3 +1,10 @@
+@import url(https://fonts.googleapis.com/css?family=Lobster);
+@import url(https://fonts.googleapis.com/css?family=Arimo);
+
+body{
+
+}
+
 .scroll {
     height: 100%;
 }
@@ -7,8 +14,16 @@
     height: 100%;
 }
 
-#mainLogo{
-  display:flex;
-  justify-content:center;
-  align-items:center;
+.center{
+  margin-top: 30px;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+#name{
+  font-family: 'Lobster', cursive;
+  font-size: 50px;
 }
