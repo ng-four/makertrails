@@ -9,12 +9,12 @@
     <button class="button button-block button-balanced" ng-click="takePicture()">
       Add a photo
     </button>
-    <div>
-      <img ng-src="{{imgURI}}">
+    <div class="item item-list-detail">
+      <ion-scroll direction="x">
+        <img class="image-list-thumb" ng-repeat="photo in locationPhotos" ng-src="{{photo.link}}" ng-click="showImageGallery($index)" />
+      </ion-scroll>
     </div>
-    <div ng-repeat="photo in locationPhotos">
-      <img ng-src="{{photo.link}}" />
-    </div>
+
     <!-- reviews -->
     <div class="center">
       <p>Add your review</p>
