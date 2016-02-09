@@ -4,8 +4,8 @@ angular.module('App')
 // Switch between local and deployed server
 var url;
 // url = 'http://localhost:8000';
-url = 'https://still-sands-90078.herokuapp.com'
-// url = 'https://makertrails.herokuapp.com'
+// url = 'https://still-sands-90078.herokuapp.com'
+url = 'https://makertrails.herokuapp.com'
 
 function MapFactory($http, $q){
   var mapFactory = {}
