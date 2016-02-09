@@ -11,9 +11,16 @@
     <button class="button button-block button-balanced" ng-click="submitReview()">
       SUBMIT REVIEW
     </button>
-    <div ng-repeat="review in locationReviews">
-      {{review.body}}<br>
-      {{review.createdAt}}
+    <div class="card" ng-repeat="review in locationReviews">
+      <div class="item item-divider">
+        {{username}}
+      </div>
+      <div class="item item-text-wrap">
+        <h4>{{review.body}}</h4>
+      </div>
+      <div class="item item-divider">
+        {{review.createdAt}}
+      </div>
     </div>
     <!-- photos section -->
     <button class="button button-block button-balanced" ng-click="takePicture()">
