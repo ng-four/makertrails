@@ -18,7 +18,13 @@ function MapController($scope, MapFactory){
     $scope.map.addMarker({
       lat: position.coords.latitude,
       lng: position.coords.longitude,
-      icon: 
+      icon: {
+        path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
+        fillColor: "blue",
+        fillOpacity: 1,
+        strokeWeight: 0,
+        scale: 5
+      },
       title: "You are here!",
       infoWindow: {
         content : "You are here!"
