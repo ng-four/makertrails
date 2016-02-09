@@ -8,11 +8,11 @@
     <form name="mapForm">
       <label for="map-name">Give it a Name:</label><br>
       <input type="text" id="map-name" name="trailname" ng-model="mapInfo.name" autocomplete="off" required><br>
-      <div ng-messages = "mapForm.trailname.$error" ng-if="mapForm.trailname.$dirty">
+      <div ng-messages = "mapForm.trailname.$error">
         <label for="map-description">Give it a Description:</label><br>
         <textarea id="map-description" name="traildesc" ng-model="mapInfo.description" rows=4 required></textarea><br>
       </div>
-      <div ng-messages = "mapForm.traildesc.$error" ng-if="mapForm.traildesc.$dirty">
+      <div ng-messages = "mapForm.traildesc.$error">
         <div name="traillocs">
           Select some Locations:
           <ul>
@@ -30,6 +30,9 @@
               </div>
             </li>
           </ul>
+        </div>
+        <div ng-if="selectedLocations.length === 6">
+          6 Locations maximum!
         </div>
         <div class="section">
           <button class="button" ng-click="createMap()" ng-disabled="mapForm.$invalid">Create Map</button>
