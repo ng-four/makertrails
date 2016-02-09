@@ -49,6 +49,7 @@ angular.module('app.LocationInfoController', [])
   }
 
   function retrievePhotos() {
+    console.log($scope.currentLocation, "$scope.currentLocation")
     console.log($scope.userID, "user Id")
     Photo.retrievePhotos($scope.currentLocation) // the "1" needs to become the locationId
     .then(function (locationPhotos) {
@@ -60,9 +61,13 @@ angular.module('app.LocationInfoController', [])
     console.log("+++ 57 LocationInfoController.js Here")
     Reviews.retrieveReviews($scope.currentLocation, $scope.userID) // the "1" needs to become the locationId
     .then(function (locationReviews) {
-      console.log("+++ 63 LocationInfoController.js locationReviews.data: ", locationReviews.data)
-      $scope.locationReviews = locationReviews.data
-      console.log("+++ 65 LocationInfoController.js locationReviews.data: ", locationReviews.data)
+      console.log(locationReviews, "locationReviews")
+      // console.log("+++ 63 LocationInfoController.js locationReviews.data: ", locationReviews.data)
+      $scope.locationReviews = locationReviews.data.map(function(item){
+        item.createdAt = moment(item.createdAt).format('MM/DD/YYYY');
+        return item;
+      })
+      console.log($scope.locationReviews, "location review data")
     })
   }
 
