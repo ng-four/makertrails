@@ -9,9 +9,9 @@ function mapFooter() {
       template = '<ion-footer-bar align-title="left" class="bar-assertive">' +
         '<h1 class="title">Title!</h1>' +
         '<button class="button button-block button-stable"
-        ng-click="learnMore()">
-          CLICK HERE!!!!
-        </button>' +
+        ng-click="learnMore()">'+
+          'CLICK HERE!!!!' +
+        '</button>' +
       '</ion-footer-bar>'
     }
   }
