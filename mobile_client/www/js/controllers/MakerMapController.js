@@ -21,7 +21,7 @@ function makerMapController($scope, $http, $state, $stateParams, $ionicLoading, 
   }
 
   $scope.learnMore = function() {
-    $state.go('testLocation', {
+    $state.go('locationInfo', {
       currentMap: $scope.mapID,
       currentLocation: $scope.collision.locationID
     }, {reload: true});
@@ -35,7 +35,7 @@ function makerMapController($scope, $http, $state, $stateParams, $ionicLoading, 
     var collided = false;
     for (var i = 0; i < $scope.locations.length; i++) {
       var currentLocation = $scope.locations[i];
-      if (CollisionFactory.withinRange(lat, lon, currentLocation.lat, currentLocation.lon, 50)) {
+      if (CollisionFactory.withinRange(lat, lon, currentLocation.lat, currentLocation.lon, 100)) {
         if (!currentLocation.visited){
           $http.put(MakerMapFactory.url + '/progress', {
             'progressId': currentLocation.progress_id
