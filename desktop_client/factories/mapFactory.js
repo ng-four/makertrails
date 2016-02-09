@@ -11,9 +11,10 @@ function MapFactory($http, $q){
   var mapFactory = {}
 
   mapFactory.removeLocation = function(selectedLocations, markers, index, map){
-    selectedLocations[index][0].setMap(null);
-    selectedLocations[index][1].setMap(null);
+    markers[index][0].setMap(null);
+    markers[index][1].setMap(null);
     selectedLocations.splice(index,1);
+    markers.splice(index, 1);
     // map.removeMarkers();
     // _.each(selectedLocations, function(location){
     //   mapFactory.newMarker(location, map);
@@ -60,7 +61,6 @@ function MapFactory($http, $q){
   // }
 
   mapFactory.newMarker = function(location, map){
-    console.log("++63 mapfac what is map now?", map)
     var marker = new google.maps.Marker({
       position: {lat: location.lat, lng: location.lng},
       title: location.name,
@@ -87,9 +87,8 @@ function MapFactory($http, $q){
       editable: true,
       map: map
     });
-    console.log("+++90 mapfac is the problem before here??")
-    return marker;
-    // return [marker, circle];
+    // return marker;
+    return [marker, circle];
   }
 
   mapFactory.renameLocation = function (selectedLocations, markers, index, newName) {

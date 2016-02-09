@@ -6,15 +6,7 @@ function MapController($scope, $document, MapFactory){
   $scope.markers = [];
   $scope.selectedLocations = [];
   $scope.mapInfo = {}
-  // $scope.mapInfo = {
-  //   "user": 1 //Hardcoded until backend is fixed
-  // };
-  // $scope.map = new GMaps({
-  //   div: '#map',
-  //   lat: 34.0192316,
-  //   lng: -118.4943091,
-  //   zoom: 15
-  // });
+
   var mapOptions = {
     center: new google.maps.LatLng(34.0192118, -118.4942816),
     zoom: 15,
