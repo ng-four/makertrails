@@ -169,9 +169,8 @@ module.exports = {
             .then(function(){
               // callback(locationReviews)
               console.log("+++ 171 index.js queries: ", queries)
-              console.log("+++ 172 index.js review: ", review)
               console.log("+++ 173 index.js locationReviews: ", locationReviews)
-              callback("reviews": locationReviews);
+              callback(locationReviews);
             })
       },
       function (err) {
