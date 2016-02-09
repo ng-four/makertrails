@@ -154,6 +154,7 @@ function makerMapFactory($http, $q, $state, $ionicLoading, $ionicPopup, $statePa
   }
 
   return {
+    url: url,
     renderMap: renderMap,
     setMarkers: setMarkers,
     getMapLocations: getMapLocations,
