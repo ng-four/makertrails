@@ -13,7 +13,7 @@ function makerMapController($scope, $http, $state, $stateParams, $ionicLoading, 
   $scope.setCollision = function(locationID){
     if ($scope.collision.contact === false){
       var alertPopup = $ionicPopup.alert({
-        template: 'You\'ve arrived at ' + currentLocation.progress_id
+        template: 'You\'ve arrived at ' + locationID
       });
     }
     $scope.collision.contact = true;
