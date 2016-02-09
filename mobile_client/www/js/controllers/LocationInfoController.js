@@ -64,10 +64,18 @@ angular.module('app.LocationInfoController', [])
       console.log(locationReviews, "locationReviews")
       // console.log("+++ 63 LocationInfoController.js locationReviews.data: ", locationReviews.data)
       $scope.locationReviews = locationReviews.data.map(function(item){
-        item.createdAt = moment(item.createdAt).format('MM/DD/YYYY');
+        item.createdAt = moment(item.createdAt).format('MMMM Do YYYY, h:mm a');
         return item;
       })
-      console.log($scope.locationReviews, "location review data")
+      $scope.locationReviews.sort(function(a, b){
+        if(a.updatedAt < b.updatedAt){
+          return 1;
+        }
+        if(a.updatedAt > b.updatedAt){
+          return -1
+        }
+        return 0;
+      });
     })
   }
 
