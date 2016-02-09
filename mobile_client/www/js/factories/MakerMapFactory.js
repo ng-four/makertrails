@@ -83,7 +83,7 @@ function makerMapFactory($http, $state, $ionicLoading, $ionicPopup, $stateParams
 
           for (var i = 0; i < locations.length; i++) {
             var currentLocation = locations[i];
-            if (CollisionFactory.withinRange(lat, lon, locations[i].lat, locations[i].lon, 10)) {
+            if (CollisionFactory.withinRange(lat, lon, locations[i].lat, locations[i].lon, 100)) {
               if (!currentLocation.visited){
                 //Alert for first time ever
                 // var alertPopup = $ionicPopup.alert({
