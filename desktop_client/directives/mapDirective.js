@@ -14,20 +14,14 @@ function trailMap(MapFactory) {
         lat: lat,
         lng: lng,
         name: "Location " + ($scope.selectedLocations.length + 1),
-        editing: false
+        editing: false,
+        radius: 10
       }
       if ($scope.selectedLocations.length < 6) {
         // lat/lng added on click, sent to array
         $scope.selectedLocations.push(newLocation)
         $scope.$apply();
-        $map.addMarker({
-          lat: newLocation.lat,
-          lng: newLocation.lng,
-          title: newLocation.name,
-          infoWindow: {
-            content : newLocation.name
-          }
-        });
+        MapFactory.newMarker(newLocation, $scope.map);
       }
     });
 

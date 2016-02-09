@@ -14,14 +14,7 @@ function MapFactory($http, $q){
     selectedLocations.splice(index,1);
     map.removeMarkers();
     _.each(selectedLocations, function(location){
-      map.addMarker({
-        lat: location.lat,
-        lng: location.lng,
-        title: location.name, //Here's where the marker gets its name. We should make this editable so users can name the location whatever they want (to fill POST Body: "name")
-        infoWindow: {
-          content : location.name
-        }
-      });
+      mapFactory.newMarker(location, map);
     });
   };
 
@@ -31,16 +24,31 @@ function MapFactory($http, $q){
     }
     map.removeMarkers();
     _.each(selectedLocations, function(location){
-      map.addMarker({
-        lat: location.lat,
-        lng: location.lng,
-        title: location.name, //Here's where the marker gets its name. We should make this editable so users can name the location whatever they want (to fill POST Body: "name")
-        infoWindow: {
-          content : location.name
-        }
-      });
+      mapFactory.newMarker(location, map);
     });
   };
+
+  mapFactory.newMarker = function(location, map){
+    map.addMarker({
+      lat: location.lat,
+      lng: location.lng,
+      title: location.name,
+      infoWindow: {
+        content : location.name
+      }
+    });
+    map.drawCircle({
+      lat: location.lat,
+      lng: location.lng,
+      radius: location.radius,
+      strokeColor: '#BBD8E9',
+      strokeOpacity: 1,
+      strokeWeight: 2,
+      fillColor: '#BBD8E9',
+      fillOpacity: 0.6,
+      editable: true
+    })
+  }
 
   mapFactory.renameLocation = function (selectedLocations, index, newName) {
     selectedLocations[index].name = newName;

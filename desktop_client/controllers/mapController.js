@@ -28,7 +28,8 @@ function MapController($scope, MapFactory){
       title: "You are here!",
       infoWindow: {
         content : "You are here!"
-      }
+      },
+      zIndex: 999
     });
   });
   $scope.createMap = function(){
@@ -37,14 +38,12 @@ function MapController($scope, MapFactory){
       .then(function (success) {
         $scope.selectedLocations = [];
         MapFactory.refreshMap($scope.selectedLocations, null, $scope.map)
-        // $scope.mapInfo = {
-        //   "user": 1 //Hardcoded until backend is fixed
-        // };
       })
     }
-  }
+  };
   $scope.renameLocation = function (selectedLocations, index, newName) {
     MapFactory.renameLocation(selectedLocations, index, newName)
     MapFactory.refreshMap(selectedLocations, null, $scope.map)
-  }
+  };
+
 }
