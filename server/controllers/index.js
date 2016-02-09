@@ -65,17 +65,16 @@ module.exports = controllers = {
   review: {
     get: function(request, response){
       var locationId = request.query.locationId;
-      var mapId = request.query.mapId;
-      console.log("+++ 69 index.js locationId: ", locationId)
-      console.log("+++ 70 index.js mapId: ", mapId)
-      models.review.get(locationId, mapId, function(data){
-        response.json({data})
+      models.review.get(locationId, function(data){
+        response.json(data)
       });
     },
     post: function(request, response) {
-      var review = request.body;
+      var review = request.body.review;
+      var locationId = request.body.locationId;
+      var userId = request.body.userId;
       review.user_id = utils.decodeToken(request).userId;
-      models.review.post(review, function(postedReview){
+      models.review.post(review, locationId, userId, function(postedReview){
         response.status(200).send(postedReview);
       })
     }
@@ -87,7 +86,6 @@ module.exports = controllers = {
       var username = request.body.username; //stringify because chris
       var password = request.body.password;// need to bcrypt
       models.login.post(username, password, function (isUser) {
-        console.log("+++ 90 index.js isUser: ", isUser)
         if (isUser) {
           utils.createToken(request, response, isUser, function (token, name) {
            response.status(200).send( {

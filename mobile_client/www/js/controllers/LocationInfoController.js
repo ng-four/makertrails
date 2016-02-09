@@ -1,14 +1,16 @@
 angular.module('app.LocationInfoController', [])
-.controller('LocationInfoController', function($scope, $stateParams, LocationInfoFactory, Photo, LoginFactory){
+.controller('LocationInfoController', function($scope, $stateParams, Photo, LocationInfoFactory, LoginFactory, Reviews){
 
   $scope.mapID = $stateParams.currentMap;
   $scope.currentLocation = $stateParams.currentLocation;
   $scope.userID = LoginFactory.userId();
+  $scope.submitNewReview = {};
 
   $scope.$on('$ionicView.enter', function($scope){
     console.log('inside event callback')
     console.log('$stateParams.currentLocation', $stateParams.currentLocation)
     retrievePhotos();
+    retrieveReviews();
     locationInfo();
   });
 
@@ -38,7 +40,8 @@ angular.module('app.LocationInfoController', [])
       saveToPhotoAlbum: true
     };
 
-    $cordovaCamera.getPicture(options).then(function(imageData) {
+    $cordovaCamera.getPicture(options)
+    .then(function(imageData) {
       $scope.imgURI = "data:image/jpeg;base64," + imageData;
       Photo.storeImage($scope.currentLocation, $scope.userID, $scope.imgURI) //1s are hard coded for locationId and userId
     }, function(err) {
@@ -53,11 +56,24 @@ angular.module('app.LocationInfoController', [])
     })
   }
 
-  $scope.retrieveReviews = function () {
-    Reviews.retrieveReviews(1, 1) // the "1" needs to become the locationId
+
+  function retrieveReviews () {
+    console.log("+++ 57 LocationInfoController.js Here")
+    Reviews.retrieveReviews($scope.currentLocation, $scope.userID) // the "1" needs to become the locationId
     .then(function (locationReviews) {
+      console.log("+++ 63 LocationInfoController.js locationReviews.data: ", locationReviews.data)
       $scope.locationReviews = locationReviews.data
     })
 
   }
+
+  $scope.submitReview = function(){
+    $scope.currentLocation = $stateParams.currentLocation;
+    console.log("+++ 70 LocationInfoController.js $scope.currentLocation: ", $scope.currentLocation)
+    Reviews.submitReview($scope.submitNewReview.text, $scope.currentLocation, $scope.userID)
+    .then(function () {
+      $scope.submitNewReview.text = '';
+      retrieveReviews();
+    })
+  };
 });

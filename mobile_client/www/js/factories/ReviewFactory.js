@@ -1,18 +1,32 @@
 angular.module('app.ReviewFactory', [])
-  .factory('Reviews', Reviews);
+  .factory('Reviews', reviews);
 
-function Reviews($http, $ionicPopup) {
+function reviews($http, $ionicPopup) {
 
   var url;
   url = 'http://localhost:8000';
   // url = 'http://still-sands-90078.herokuapp.com'
   // url = 'http://makertrails.herokuapp.com'
 
+  var submitReview = function (review, locationId, userId) {
+    return $http({
+      method: 'POST',
+      url: url + '/review',
+      data: {
+        review: review,
+        locationId: locationId,
+        userId: userId
+      }
+    })
+    .then(function (success) {
+      console.log("+++ 20 ReviewFactory.js rejoice")
+    })
+  }
 
   var retrieveReviews = function (locationId, mapId) {
     return $http({
       method: 'GET',
-      url: url + '/review?locationId=' + locationId + '&mapId=' + mapId
+      url: url + '/review?locationId=' + locationId
     })
     .then(function (locationReviews) {
     return locationReviews
@@ -27,6 +41,7 @@ function Reviews($http, $ionicPopup) {
   };
 
   return {
+    submitReview: submitReview,
     retrieveReviews: retrieveReviews
   }
 }
