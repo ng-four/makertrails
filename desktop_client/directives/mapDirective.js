@@ -3,10 +3,9 @@ angular.module("App") //placeholder name
 
 function trailMap(MapFactory) {
   var link = function($scope, $el){
-    //el is an array of the element (plus its children) where this directive is used
-    var $map = $scope.map
+    var $map = $scope.map;
 
-    GMaps.on('click', $map.map, function(event) {
+    google.maps.event.addListener($map, 'click', function(event) {
       var lat = event.latLng.lat();
       var lng = event.latLng.lng();
 
@@ -14,20 +13,21 @@ function trailMap(MapFactory) {
         lat: lat,
         lng: lng,
         name: "Location " + ($scope.selectedLocations.length + 1),
-        editing: false
+        editing: false,
+        radius: 10
       }
       if ($scope.selectedLocations.length < 6) {
         // lat/lng added on click, sent to array
         $scope.selectedLocations.push(newLocation)
+        var marker = MapFactory.newMarker(newLocation, $map);
+        console.log("+++27 what is the marker?", marker);
+        marker.circle.addListener('radius_changed', function(event){
+          var index = $scope.markers.indexOf(this);
+          $scope.selectedLocations[index].radius = this.circle.radius;
+          $scope.$apply();
+        }.bind(marker))
+        $scope.markers.push(marker);
         $scope.$apply();
-        $map.addMarker({
-          lat: newLocation.lat,
-          lng: newLocation.lng,
-          title: newLocation.name,
-          infoWindow: {
-            content : newLocation.name
-          }
-        });
       }
     });
 
@@ -37,7 +37,7 @@ function trailMap(MapFactory) {
     scope: true,
     replace: true, //stolen from brewski && tutorial fiddle
     link: link,
-    controllerAs: "vm",
+    // controllerAs: "vm",
     template: [
       "<div>",
       "<div id='map'>",

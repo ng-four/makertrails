@@ -3,47 +3,61 @@ angular.module('App')
 
 // Switch between local and deployed server
 var url;
-// url = 'http://localhost:8000';
-url = 'https://still-sands-90078.herokuapp.com'
+url = 'http://localhost:8000';
+// url = 'https://still-sands-90078.herokuapp.com'
 // url = 'https://makertrails.herokuapp.com'
 
 function MapFactory($http, $q){
   var mapFactory = {}
 
-  mapFactory.removeLocation = function(selectedLocations, index, map){
+  mapFactory.removeLocation = function(selectedLocations, markers, index, map){
+    markers[index].circle.setMap(null);
+    markers[index].setMap(null);
     selectedLocations.splice(index,1);
-    map.removeMarkers();
-    _.each(selectedLocations, function(location){
-      map.addMarker({
-        lat: location.lat,
-        lng: location.lng,
-        title: location.name, //Here's where the marker gets its name. We should make this editable so users can name the location whatever they want (to fill POST Body: "name")
-        infoWindow: {
-          content : location.name
-        }
-      });
-    });
+    markers.splice(index, 1);
   };
 
-  mapFactory.refreshMap = function(selectedLocations, index, map) {
-    if(index === undefined){
-      selectedLocations[index].editing = false;
-    }
-    map.removeMarkers();
-    _.each(selectedLocations, function(location){
-      map.addMarker({
-        lat: location.lat,
-        lng: location.lng,
-        title: location.name, //Here's where the marker gets its name. We should make this editable so users can name the location whatever they want (to fill POST Body: "name")
-        infoWindow: {
-          content : location.name
-        }
-      });
+  mapFactory.newMarker = function(location, map){
+    var marker = new google.maps.Marker({
+      position: {lat: location.lat, lng: location.lng},
+      title: location.name,
+      map: map,
+      icon: {
+        path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
+        fillColor: "red",
+        fillOpacity: 1,
+        strokeWeight: 2,
+        scale: 5
+      },
+      animation: google.maps.Animation.DROP
     });
-  };
+    var circle = new google.maps.Circle({
+      center: {lat: location.lat, lng: location.lng},
+      radius: location.radius,
+      strokeColor: 'red',
+      strokeOpacity: 1,
+      strokeWeight: 2,
+      fillColor: 'red',
+      fillOpacity: 0.6,
+      editable: true,
+      map: map
+    });
+    var markerWindow = new google.maps.InfoWindow({
+      content : location.name
+    })
+    marker.addListener('click', function() {
+      markerWindow.open(map, marker)
+    })
+    marker.circle = circle;
+    marker.markerWindow = markerWindow;
+    // console.log("+++95 mapFac add a circle to the marker", marker);
+    return marker;
+  }
 
-  mapFactory.renameLocation = function (selectedLocations, index, newName) {
+  mapFactory.renameLocation = function (selectedLocations, markers, index, newName) {
     selectedLocations[index].name = newName;
+    markers[index].title = newName;
+    markers[index].markerWindow.setContent(newName);
     selectedLocations[index].editing = false;
   }
 
