@@ -20,7 +20,6 @@ function trailMap(MapFactory) {
         // lat/lng added on click, sent to array
         $scope.selectedLocations.push(newLocation)
         var marker = MapFactory.newMarker(newLocation, $map);
-        console.log("+++27 what is the marker?", marker);
         marker.circle.addListener('radius_changed', function(event){
           var index = $scope.markers.indexOf(this);
           $scope.selectedLocations[index].radius = this.circle.radius;
@@ -35,9 +34,8 @@ function trailMap(MapFactory) {
   return {
     restrict: "E",
     scope: true,
-    replace: true, //stolen from brewski && tutorial fiddle
+    replace: true,
     link: link,
-    // controllerAs: "vm",
     template: [
       "<div>",
       "<div id='map'>",
