@@ -43,9 +43,18 @@ function MapController($scope, $document, MapFactory){
     if($scope.selectedLocations.length !== 0){
       MapFactory.createMap($scope.mapInfo, $scope.selectedLocations)
       .then(function (success) {
+        console.log("Map posted successfully!")
+        for (var i=0; i< $scope.selectedLocations.length; i++){
+          $scope.markers[i].circle.setMap(null);
+          $scope.markers[i].setMap(null);
+        }
+        $scope.markers = [];
         $scope.selectedLocations = [];
-        //Need to fix
-        // MapFactory.refreshMap($scope.selectedLocations, null, $scope.map)
+        $scope.mapInfo.name = "";
+        $scope.mapInfo.description = "";
+      }, function(err){
+        console.log("Map failed to post");
+        consoel.log(err);
       })
     }
   };

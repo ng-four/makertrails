@@ -11,54 +11,11 @@ function MapFactory($http, $q){
   var mapFactory = {}
 
   mapFactory.removeLocation = function(selectedLocations, markers, index, map){
-    markers[index][0].setMap(null);
-    markers[index][1].setMap(null);
+    markers[index].circle.setMap(null);
+    markers[index].setMap(null);
     selectedLocations.splice(index,1);
     markers.splice(index, 1);
-    // map.removeMarkers();
-    // _.each(selectedLocations, function(location){
-    //   mapFactory.newMarker(location, map);
-    // });
   };
-
-  // mapFactory.refreshMap = function(selectedLocations, index, map) {
-  //   if(index === undefined){
-  //     selectedLocations[index].editing = false;
-  //   }
-  //   map.removeMarkers();
-  //   _.each(selectedLocations, function(location){
-  //     mapFactory.newMarker(location, map);
-  //   });
-  // };
-
-  // mapFactory.newMarker = function(location, map){
-  //   map.addMarker({
-  //     lat: location.lat,
-  //     lng: location.lng,
-  //     title: location.name,
-  //     icon: {
-  //       path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
-  //       fillColor: "red",
-  //       fillOpacity: 1,
-  //       strokeWeight: 2,
-  //       scale: 5
-  //     },
-  //     infoWindow: {
-  //       content : location.name
-  //     }
-  //   });
-  //   map.drawCircle({
-  //     lat: location.lat,
-  //     lng: location.lng,
-  //     radius: location.radius,
-  //     strokeColor: '#BBD8E9',
-  //     strokeOpacity: 1,
-  //     strokeWeight: 2,
-  //     fillColor: '#BBD8E9',
-  //     fillOpacity: 0.6,
-  //     editable: true
-  //   })
-  // }
 
   mapFactory.newMarker = function(location, map){
     var marker = new google.maps.Marker({
@@ -86,23 +43,25 @@ function MapFactory($http, $q){
       map: map
     });
     var markerWindow = new google.maps.InfoWindow({
-      content : "You are at " + location.name
+      content : location.name
     })
     marker.addListener('click', function() {
       markerWindow.open(map, marker)
     })
-    return [marker, circle, markerWindow];
+    marker.circle = circle;
+    marker.markerWindow = markerWindow;
+    // console.log("+++95 mapFac add a circle to the marker", marker);
+    return marker;
   }
 
   mapFactory.renameLocation = function (selectedLocations, markers, index, newName) {
     selectedLocations[index].name = newName;
-    markers[index][0].title = newName;
-    markers[index][2].setContent("You are at " + newName);
+    markers[index].title = newName;
+    markers[index].markerWindow.setContent(newName);
     selectedLocations[index].editing = false;
   }
 
   mapFactory.createMap = function (mapInfo, selectedLocations) {
-    //Don't send all of selectedLocations!
     var dfr = $q.defer()
       $http ({
         method: 'POST',

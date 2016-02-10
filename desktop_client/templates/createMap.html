@@ -3,7 +3,6 @@
       <button class="redButton" id="logout" ng-controller="LogoutController" ng-click="logout()">Logout</button>
 </div>
 <div id="mapContainer">
-  <!-- <div id="map"></div> -->
   <trail-map ng-model="selectedLocations"></trail-map>
   <div id="trailsForm">
     <form name="mapForm">
@@ -23,6 +22,9 @@
                     <input type="text" ng-model="location.name">
                     <button class="button" ng-click="renameLocation(selectedLocations, markers, $index, location.name)">Save</button>
                     <button class="redButton" ng-click="removeLocation(selectedLocations, markers, $index, map)">X</button><br>
+                    <span>Radius Size: </span>
+                    <input type="number" ng-model="location.radius">
+                    <span> m.</span> <br>
                 </div>
                 <div ng-switch-when="false"
                     ng-click="location.editing = true">
