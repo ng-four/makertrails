@@ -1,10 +1,13 @@
-angular.module('app.LocationInfoController', [])
+angular.module('app.LocationInfoController', ['ionic.rating'])
 .controller('LocationInfoController', function($scope, $stateParams, Photo, LocationInfoFactory, LoginFactory, Reviews, $cordovaCamera){
 
   $scope.mapID = $stateParams.currentMap;
   $scope.currentLocation = $stateParams.currentLocation;
   $scope.userID = LoginFactory.userId();
   $scope.submitNewReview = {};
+  $scope.rating = {};
+  $scope.rating.rate = 3;
+  $scope.rating.max = 5;
 
   $scope.$on('$ionicView.enter', function($scope){
     console.log('inside event callback')
@@ -82,9 +85,11 @@ angular.module('app.LocationInfoController', [])
   $scope.submitReview = function(){
     $scope.currentLocation = $stateParams.currentLocation;
     console.log("+++ 70 LocationInfoController.js $scope.currentLocation: ", $scope.currentLocation)
-    Reviews.submitReview($scope.submitNewReview.text, $scope.currentLocation, $scope.userID)
+    Reviews.submitReview($scope.submitNewReview.text, $scope.currentLocation, $scope.userID, $scope.rating.rate)
     .then(function () {
+      console.log($scope.rating.rate, '$scope.rating.rate')
       $scope.submitNewReview.text = '';
+      $scope.rating.rate = 3;
       retrieveReviews();
     })
   };

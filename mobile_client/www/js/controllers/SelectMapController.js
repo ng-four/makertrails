@@ -1,8 +1,8 @@
 angular.module('app.SelectMapController', [])
 
-.controller('SelectMapController', function($scope, $state, SelectMapFactory){
+.controller('SelectMapController', function($scope, $state, SelectMapFactory, LoginFactory){
   $scope.data = {};
-
+  $scope.username = LoginFactory.username();
   $scope.selectMap = function(map) {
     $state.go('makerMap', {mapID: map}, {reload: true});
     return;

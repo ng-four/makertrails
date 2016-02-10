@@ -18,8 +18,9 @@
     <!-- reviews -->
     <div class="center">
       <p>Add your review</p>
+      <rating ng-model="rating.rate" max="rating.max"></rating>
     </div>
-    <textarea id="review" name="submitReview" ng-model="submitNewReview.text" rows=4>
+    <textarea id="review" placeholder="  type here..." name="submitReview" ng-model="submitNewReview.text" rows=4>
     </textarea>
     <button class="button button-block button-balanced" ng-click="submitReview()">
       Submit your review

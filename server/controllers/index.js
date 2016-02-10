@@ -73,8 +73,9 @@ module.exports = controllers = {
       var review = request.body.review;
       var locationId = request.body.locationId;
       var userId = request.body.userId;
+      var rating = request.body.rating;
       review.user_id = utils.decodeToken(request).userId;
-      models.review.post(review, locationId, userId, function(postedReview){
+      models.review.post(review, locationId, userId, rating, function(postedReview){
         response.status(200).send(postedReview);
       })
     }

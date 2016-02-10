@@ -31,7 +31,7 @@ function loginFactory($q, $http, $state, $ionicPopup) {
       console.log(name)
       console.log(success.data['makertrails-token'])
       setTokenAndHttpHeaders(success.data['makertrails-token']);
-      $state.go('home');
+      $state.go('selectMap');
     }, function(err) {
       var popup = $ionicPopup.alert({
         title: 'Login failed!',
@@ -53,7 +53,7 @@ function loginFactory($q, $http, $state, $ionicPopup) {
         console.log("+++ 51 LoginFactory.js success: ", success)
         if (success) {
           setTokenAndHttpHeaders(success.data['makertrails-token']);
-          $state.go('home')
+          $state.go('selectMap')
         }else{
           var popup = $ionicPopup.alert({
             title: 'Sign up failed!',
