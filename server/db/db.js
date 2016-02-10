@@ -5,7 +5,7 @@ var sequelize;
 // Use local DB
 // sequelize = new Sequelize("trails", "root", "");
 
-Use real life DB
+// Use real life DB
 sequelize = new Sequelize(
   "cuatro_tacos",
   "cuatrotacos",
