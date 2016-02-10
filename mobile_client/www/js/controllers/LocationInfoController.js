@@ -1,4 +1,4 @@
-angular.module('app.LocationInfoController', [])
+angular.module('app.LocationInfoController', ['ionic.rating'])
 .controller('LocationInfoController', function($scope, $stateParams, Photo, LocationInfoFactory, LoginFactory, Reviews, $cordovaCamera, $ionicModal){
 
   $scope.mapID = $stateParams.currentMap;
