@@ -6,7 +6,7 @@ angular.module('app.LocationInfoController', ['ionic.rating'])
   $scope.userID = LoginFactory.userId();
   $scope.submitNewReview = {};
   $scope.rating = {};
-  $scope.rating.rate = 3;
+  // $scope.rating.rate;
   $scope.rating.max = 5;
 
   $scope.$on('$ionicView.enter', function($scope){
@@ -62,16 +62,30 @@ angular.module('app.LocationInfoController', ['ionic.rating'])
     })
   }
 
+  function getAverage(array){
+    var average = 0;
+    for(var i = 0; i < array.length; i++){
+      average += array[i].rating
+    }
+    average = average / array.length;
+    return average;
+  } 
+
   function retrieveReviews () {
     console.log("+++ 57 LocationInfoController.js Here")
     Reviews.retrieveReviews($scope.currentLocation, $scope.userID) // the "1" needs to become the locationId
     .then(function (locationReviews) {
       console.log(locationReviews, "locationReviews")
       // console.log("+++ 63 LocationInfoController.js locationReviews.data: ", locationReviews.data)
+      // console.log('rating', locationReviews.data)
       $scope.locationReviews = locationReviews.data.map(function(item){
         item.createdAt = moment(item.createdAt).format('MMMM Do YYYY, h:mm a');
         return item;
       })
+
+      $scope.rating.rate = getAverage(locationReviews.data);
+
+      console.log($scope.rating.rate, "$scope.average")
       $scope.locationReviews.sort(function(a, b){
         if(a.updatedAt < b.updatedAt){
           return 1;
@@ -86,12 +100,12 @@ angular.module('app.LocationInfoController', ['ionic.rating'])
 
   $scope.submitReview = function(){
     $scope.currentLocation = $stateParams.currentLocation;
-    console.log("+++ 70 LocationInfoController.js $scope.currentLocation: ", $scope.currentLocation)
+    // console.log("+++ 70 LocationInfoController.js $scope.currentLocation: ", $scope.currentLocation)
     Reviews.submitReview($scope.submitNewReview.text, $scope.currentLocation, $scope.userID, $scope.rating.rate)
     .then(function () {
       console.log($scope.rating.rate, '$scope.rating.rate')
       $scope.submitNewReview.text = '';
-      $scope.rating.rate = 3;
+      // $scope.rating.rate = average;
       retrieveReviews();
     })
   };
