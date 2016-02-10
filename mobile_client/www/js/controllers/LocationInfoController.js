@@ -6,7 +6,7 @@ angular.module('app.LocationInfoController', ['ionic.rating'])
   $scope.userID = LoginFactory.userId();
   $scope.submitNewReview = {};
   $scope.rating = {};
-  // $scope.rating.rate;
+  // $scope.rating.rate = 2.75;
   $scope.rating.max = 5;
 
   $scope.$on('$ionicView.enter', function($scope){
@@ -68,8 +68,18 @@ angular.module('app.LocationInfoController', ['ionic.rating'])
       average += array[i].rating
     }
     average = average / array.length;
-    return average;
-  } 
+    console.log('average', average);
+    return Math.floor(average);
+  }
+
+  function hasUserReviewed(arr) {
+    for (var i = 0; i < arr.length; i++) {
+      if (arr[i].user_id === $scope.userID) {
+        return true;
+      }
+    }
+    return false;
+  }
 
   function retrieveReviews () {
     console.log("+++ 57 LocationInfoController.js Here")
@@ -81,7 +91,10 @@ angular.module('app.LocationInfoController', ['ionic.rating'])
       $scope.locationReviews = locationReviews.data.map(function(item){
         item.createdAt = moment(item.createdAt).format('MMMM Do YYYY, h:mm a');
         return item;
-      })
+      });
+
+      $scope.userHasReviewed = hasUserReviewed($scope.locationReviews);
+
 
       $scope.rating.rate = getAverage(locationReviews.data);
 
@@ -95,10 +108,12 @@ angular.module('app.LocationInfoController', ['ionic.rating'])
         }
         return 0;
       });
+
     })
   }
 
   $scope.submitReview = function(){
+    console.log('inside $scope.submitReview');
     $scope.currentLocation = $stateParams.currentLocation;
     // console.log("+++ 70 LocationInfoController.js $scope.currentLocation: ", $scope.currentLocation)
     Reviews.submitReview($scope.submitNewReview.text, $scope.currentLocation, $scope.userID, $scope.rating.rate)
