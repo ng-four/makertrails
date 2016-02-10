@@ -29,7 +29,8 @@ module.exports = {
             map_id: newMap.id,
             lat: newLocation.lat,
             lon: newLocation.lng,
-            name: newLocation.name
+            name: newLocation.name,
+            radius: newLocation.radius
           })
         })
         Promise.all(newLocationsCreated)

@@ -6,8 +6,8 @@ function makerMapFactory($http, $q, $state, $ionicLoading, $ionicPopup, $statePa
 
   var url;
   // url = 'http://localhost:8000';
-  url = 'http://still-sands-90078.herokuapp.com'
-  // url = 'http://makertrails.herokuapp.com'
+  // url = 'http://still-sands-90078.herokuapp.com'
+  url = 'http://makertrails.herokuapp.com'
 
   var renderMap = function() {
     //displays loading animation
@@ -34,6 +34,7 @@ function makerMapFactory($http, $q, $state, $ionicLoading, $ionicPopup, $statePa
   var deleteMarkers = function(markers){
     for(i=0; i<markers.length; i++){
         markers[i].setMap(null);
+        markers[i].circle.setMap(null);
     }
     markers = [];
   }
@@ -52,6 +53,16 @@ function makerMapFactory($http, $q, $state, $ionicLoading, $ionicPopup, $statePa
         },
         map: map
       })
+      var circle = new google.maps.Circle({
+        center: new google.maps.LatLng(locations[i].lat, locations[i].lon),
+        radius: locations[i].radius,
+        strokeOpacity: 1,
+        strokeWeight: 2,
+        fillColor: locations[i].visited ? "green" : "red",
+        fillOpacity: 0.6,
+        map: map
+      });
+      marker.circle = circle
       markers.push(marker);
     }
     return markers;
