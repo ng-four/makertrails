@@ -54,7 +54,7 @@ function makerMapFactory($http, $q, $state, $ionicLoading, $ionicPopup, $statePa
         map: map
       })
       var circle = new google.maps.Circle({
-        center: {lat: locations[i].lat, lng: locations[i].lng},
+        center: new google.maps.LatLng(locations[i].lat, locations[i].lon),
         radius: locations[i].radius,
         strokeOpacity: 1,
         strokeWeight: 2,
