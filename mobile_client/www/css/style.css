@@ -73,7 +73,7 @@ LOCATION SECTION
 #review{
   outline: 1px solid #2C2E2F;
   width: 100%;
-  font-family: 'Lobster', sans-serif;
+  font-family: 'Arimo', sans-serif;
   margin: 0;
 }
 
@@ -118,4 +118,15 @@ ul.rating li {
 }
 ul.rating li i {
   font-size: 30px;
+  color: #FC0;
+}
+
+.review-stars {
+  display: inline-block;
+  float: right;
+  color: #FC0;
+}
+
+.review-author {
+  font-size: 16px;
 }

@@ -9,6 +9,7 @@ function reviews($http, $ionicPopup) {
   // url = 'http://makertrails.herokuapp.com'
 
   var submitReview = function (review, locationId, userId, rating) {
+    console.log('inside Reviews.submitReview');
     return $http({
       method: 'POST',
       url: url + '/review',
