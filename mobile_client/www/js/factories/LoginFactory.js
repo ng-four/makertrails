@@ -8,8 +8,8 @@ function loginFactory($q, $http, $state, $ionicPopup) {
 
   var url;
   // url = 'http://localhost:8000';
-  url = 'http://still-sands-90078.herokuapp.com'
-  // url = 'http://makertrails.herokuapp.com'
+  // url = 'http://still-sands-90078.herokuapp.com'
+  url = 'http://makertrails.herokuapp.com'
   function setTokenAndHttpHeaders(token) {
     isAuthenticated = true;
     $http.defaults.headers.common['makertrails-token'] = token;
