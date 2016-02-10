@@ -49,8 +49,6 @@ function makerMapController($scope, $http, $state, $stateParams, $ionicLoading, 
             console.log("COLLISION!", data)
             currentLocation.visited = true;
             //Change color of collided marker from red to green. Resetting them will reflect new 'visited' status.
-            // $scope.markers[i].fillColor = "green";
-            // $scope.markers[i].circle.fillColor = "green";
             for(i=0; i<$scope.markers.length; i++){
                 $scope.markers[i].setMap(null);
                 $scope.markers[i].circle.setMap(null);
