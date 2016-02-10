@@ -72,9 +72,7 @@ function MapFactory($http, $q){
         strokeWeight: 2,
         scale: 5
       },
-      infoWindow: {
-        content : location.name
-      }
+      animation: google.maps.Animation.DROP
     });
     var circle = new google.maps.Circle({
       center: {lat: location.lat, lng: location.lng},
@@ -87,14 +85,19 @@ function MapFactory($http, $q){
       editable: true,
       map: map
     });
-    // return marker;
-    return [marker, circle];
+    var markerWindow = new google.maps.InfoWindow({
+      content : "You are at " + location.name
+    })
+    marker.addListener('click', function() {
+      markerWindow.open(map, marker)
+    })
+    return [marker, circle, markerWindow];
   }
 
   mapFactory.renameLocation = function (selectedLocations, markers, index, newName) {
     selectedLocations[index].name = newName;
-    markers[index][1].title = newName;
-    markers[index][1].infoWindow.content = location.name;
+    markers[index][0].title = newName;
+    markers[index][2].setContent("You are at " + newName);
     selectedLocations[index].editing = false;
   }
 

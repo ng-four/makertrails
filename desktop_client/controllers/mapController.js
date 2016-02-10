@@ -17,7 +17,7 @@ function MapController($scope, $document, MapFactory){
     var currentLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
     $scope.map.panTo(currentLocation);
     // $scope.map.setCenter(position.coords.latitude, position.coords.longitude);
-    var yourMarker = new google.maps.Marker({
+    var homeMarker = new google.maps.Marker({
       position: currentLocation,
       icon: {
         path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
@@ -26,13 +26,17 @@ function MapController($scope, $document, MapFactory){
         strokeWeight: 0,
         scale: 5
       },
+      animation: google.maps.Animation.DROP,
       title: "You are here!",
-      infoWindow: {
-        content : "You are here!"
-      },
       zIndex: 999,
       map: $scope.map
     });
+    var homeWindow = new google.maps.InfoWindow({
+      content : "You are here!"
+    })
+    homeMarker.addListener('click', function() {
+      homeWindow.open($scope.map, homeMarker)
+    })
   });
 
   $scope.createMap = function(){
