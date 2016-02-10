@@ -34,6 +34,7 @@ function makerMapFactory($http, $q, $state, $ionicLoading, $ionicPopup, $statePa
   var deleteMarkers = function(markers){
     for(i=0; i<markers.length; i++){
         markers[i].setMap(null);
+        markers[i].circle.setMap(null);
     }
     markers = [];
   }
@@ -52,6 +53,16 @@ function makerMapFactory($http, $q, $state, $ionicLoading, $ionicPopup, $statePa
         },
         map: map
       })
+      var circle = new google.maps.Circle({
+        center: {lat: locations[i].lat, lng: locations[i].lng},
+        radius: locations[i].radius,
+        strokeOpacity: 1,
+        strokeWeight: 2,
+        fillColor: locations[i].visited ? "green" : "red",
+        fillOpacity: 0.6,
+        map: map
+      });
+      marker.circle = circle
       markers.push(marker);
     }
     return markers;

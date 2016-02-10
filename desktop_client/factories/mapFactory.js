@@ -50,7 +50,6 @@ function MapFactory($http, $q){
     })
     marker.circle = circle;
     marker.markerWindow = markerWindow;
-    // console.log("+++95 mapFac add a circle to the marker", marker);
     return marker;
   }
 

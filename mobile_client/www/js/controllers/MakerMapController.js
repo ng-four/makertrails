@@ -47,6 +47,7 @@ function makerMapController($scope, $http, $state, $stateParams, $ionicLoading, 
             currentLocation.visited = true;
             for(i=0; i<$scope.markers.length; i++){
                 $scope.markers[i].setMap(null);
+                $scope.markers[i].circle.setMap(null);
             }
             $scope.markers = MakerMapFactory.setMarkers($scope.locations, map);
           }, function(err) {
@@ -86,7 +87,6 @@ function makerMapController($scope, $http, $state, $stateParams, $ionicLoading, 
       $scope.map = MakerMapFactory.renderMap();
       $scope.locations = data.data;
       $scope.markers = MakerMapFactory.setMarkers($scope.locations, $scope.map)
-      // MakerMapFactory.theRestOfIt($scope, $scope.locations, $scope.map);
       $scope.myLocation = null;
       navigator.geolocation.watchPosition($scope.userLocationChange, MakerMapFactory.userLocationError);
     })
