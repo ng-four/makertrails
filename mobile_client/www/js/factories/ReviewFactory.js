@@ -8,14 +8,15 @@ function reviews($http, $ionicPopup) {
   url = 'http://still-sands-90078.herokuapp.com'
   // url = 'http://makertrails.herokuapp.com'
 
-  var submitReview = function (review, locationId, userId) {
+  var submitReview = function (review, locationId, userId, rating) {
     return $http({
       method: 'POST',
       url: url + '/review',
       data: {
         review: review,
         locationId: locationId,
-        userId: userId
+        userId: userId,
+        rating: rating
       }
     })
     .then(function (success) {
