@@ -5,7 +5,7 @@ MakerTrails is a social exploration application that lets you discover the wonde
 We have desktop and mobile version of the application that provide two different services.
 
 After login into the mobile application you can select a map that you want to explore. It will show you your location and the places the map offers you to visit. When you reach a specific location you will be prompted to learn more about it. There you will be able to add photos and reviews about that specific location. After you have enjoyed that location, you can continue to see the rest that are on the map.
-Location markers will show you which location you have visited by changing color from red to green. Like this, you will be able to keep track of what locations you have been to in the past when attempting a map again.
+Location markers will show you which location you have visited by changing color from red to green. With this color guide, you will be able to keep track of what locations you have been to in the past when attempting a map again.
 
 On the desktop application, you can create maps that users can select on the mobile application.
 
