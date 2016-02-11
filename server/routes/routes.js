@@ -16,10 +16,6 @@ router.post('/mapInfo', utils.checkUser, function (request, response) {
   controllers.mapInfo.post(request, response)
 })
 
-router.delete('/mapInfo/:id', utils.checkUser, function (request, response) {
-  controllers.mapInfo.delete(request, response)
-})
-
 router.post('/photos', utils.checkUser, function (request, response) {
   console.log("+++ 20 routes.js photos route hit")
   controllers.photos.post(request, response)
