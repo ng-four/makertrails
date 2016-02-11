@@ -60,7 +60,6 @@ function MapController($scope, $document, MapFactory){
   };
   $scope.renameLocation = function (selectedLocations, markers, index, newName) {
     MapFactory.renameLocation(selectedLocations, markers, index, newName)
-    // MapFactory.refreshMap(selectedLocations, null, $scope.map)
   };
 
 }
