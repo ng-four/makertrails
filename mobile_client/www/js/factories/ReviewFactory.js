@@ -5,17 +5,19 @@ function reviews($http, $ionicPopup) {
 
   var url;
   // url = 'http://localhost:8000';
-  url = 'http://still-sands-90078.herokuapp.com'
-  // url = 'http://makertrails.herokuapp.com'
+  // url = 'http://still-sands-90078.herokuapp.com'
+  url = 'http://makertrails.herokuapp.com'
 
-  var submitReview = function (review, locationId, userId) {
+  var submitReview = function (review, locationId, userId, rating) {
+    console.log('inside Reviews.submitReview');
     return $http({
       method: 'POST',
       url: url + '/review',
       data: {
         review: review,
         locationId: locationId,
-        userId: userId
+        userId: userId,
+        rating: rating
       }
     })
     .then(function (success) {
@@ -45,4 +47,3 @@ function reviews($http, $ionicPopup) {
     retrieveReviews: retrieveReviews
   }
 }
-

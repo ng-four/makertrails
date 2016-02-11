@@ -22,19 +22,22 @@ exports.buildMap = function(){
               name: "library",
               map_id: map.id,
               lat: 34.0185964,
-              lon: -118.4935023
+              lon: -118.4935023,
+              radius: 20
             },
             {
               map_id: map.id,
               name: "Sweat Yoga",
               lat: 34.020135,
-              lon: -118.493522
+              lon: -118.493522,
+              radius: 20
             },
             {
               map_id: map.id,
               name: "Wendy's",
               lat: 34.019816,
-              lon: -118.492200
+              lon: -118.492200,
+              radius: 20
             }
           ];
           var queried = [];

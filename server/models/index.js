@@ -29,7 +29,8 @@ module.exports = {
             map_id: newMap.id,
             lat: newLocation.lat,
             lon: newLocation.lng,
-            name: newLocation.name
+            name: newLocation.name,
+            radius: newLocation.radius
           })
         })
         Promise.all(newLocationsCreated)
@@ -177,11 +178,12 @@ module.exports = {
         console.log("+++ 165 index.js err: ", err)
       })
     },
-    post: function(review, locationId, userId, callback){
+    post: function(review, locationId, userId, rating, callback){
       db.Review.create({
         location_id: locationId,
         body: review,
-        user_id: userId
+        user_id: userId,
+        rating: rating
       }).then(function(postedReview){
         callback(postedReview);
       }).catch(function(error){

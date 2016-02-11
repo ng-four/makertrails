@@ -29,13 +29,16 @@ function makerMapController($scope, $http, $state, $stateParams, $ionicLoading, 
   }
 
   $scope.userLocationChange = function(pos) {
+    //Function that fires when a user position changes. Called in watchPosition.
     var lat = pos.coords.latitude;
     var lon = pos.coords.longitude;
     var currentLatLng = new google.maps.LatLng(lat, lon);
     var collided = false;
     for (var i = 0; i < $scope.locations.length; i++) {
       var currentLocation = $scope.locations[i];
-      if (CollisionFactory.withinRange(lat, lon, currentLocation.lat, currentLocation.lon, 100)) {
+      //Check if user is within collision radius.
+      if (CollisionFactory.withinRange(lat, lon, currentLocation.lat, currentLocation.lon, currentLocation.radius)) {
+        //Change database if this is the first time the user has ever been to this location.
         if (!currentLocation.visited){
           $http.put(MakerMapFactory.url + '/progress', {
             'progressId': currentLocation.progress_id
@@ -45,10 +48,13 @@ function makerMapController($scope, $http, $state, $stateParams, $ionicLoading, 
           .then(function(data) {
             console.log("COLLISION!", data)
             currentLocation.visited = true;
+            //Change color of collided marker from red to green. Resetting them will reflect new 'visited' status.
             for(i=0; i<$scope.markers.length; i++){
                 $scope.markers[i].setMap(null);
+                $scope.markers[i].circle.setMap(null);
             }
-            $scope.markers = MakerMapFactory.setMarkers($scope.locations, map);
+            $scope.markers = [];
+            $scope.markers = MakerMapFactory.setMarkers($scope.locations, $scope.map);
           }, function(err) {
             console.log(err);
           })
@@ -57,8 +63,10 @@ function makerMapController($scope, $http, $state, $stateParams, $ionicLoading, 
         $scope.setCollision(currentLocation.id);
       }
     }
+    //If you currently not within range of any location, then set collision scope variable to false.
     if (collided===false){
       $scope.collision.contact = false;
+      $scope.collision.locationID = null;
     }
     $scope.map.setCenter(currentLatLng);
     if ($scope.myLocation !== null) {
@@ -86,7 +94,6 @@ function makerMapController($scope, $http, $state, $stateParams, $ionicLoading, 
       $scope.map = MakerMapFactory.renderMap();
       $scope.locations = data.data;
       $scope.markers = MakerMapFactory.setMarkers($scope.locations, $scope.map)
-      // MakerMapFactory.theRestOfIt($scope, $scope.locations, $scope.map);
       $scope.myLocation = null;
       navigator.geolocation.watchPosition($scope.userLocationChange, MakerMapFactory.userLocationError);
     })

@@ -36,7 +36,8 @@ var Location = sequelize.define("location", {
   name: Sequelize.STRING,
   lat: Sequelize.FLOAT(53),
   lon: Sequelize.FLOAT(53),
-  map_id: Sequelize.INTEGER
+  map_id: Sequelize.INTEGER,
+  radius: Sequelize.FLOAT(18)
 }, {
   timestamps: false
 });
