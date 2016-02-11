@@ -18,6 +18,11 @@ module.exports = controllers = {
           response.json({ locations });
         })
       })
+    },
+    delete: function(request, response) {
+      models.mapInfo.delete(request.params.id, function() {
+        response.sendStatus(200);
+      });
     }
   },
 

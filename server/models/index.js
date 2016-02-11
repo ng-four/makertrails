@@ -38,6 +38,13 @@ module.exports = {
           callback(newMap)
         })
       })
+    },
+    delete: function(mapId, callback) {
+      db.Map.findById(mapId)
+      .then(function(map) {
+        map.destroy();
+        callback();
+      })
     }
   },
 
