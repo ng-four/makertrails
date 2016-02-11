@@ -1,85 +1,16 @@
-<h5> How token authentication works </h5>
+<h6>Welcome to MakerTrails!</h6>
 
-<h4>You have to npm install for this to work!!!!</h4>
+MakerTrails is a social exploration application that lets you discover the wonders of the outdoors while being guided by your peers.
 
-*Login and Signup will now return an object that follow this format:*
+We have desktop and mobile version of the application that provide two different services.
 
-```javascript
-{
-  "username": name,
-  'makertrails-token': sessionID
-}
-```
+After login into the mobile application you can select a map that you want to explore. It will show you your location and the places the map offers you to visit. When you reach a specific location you will be prompted to learn more about it. There you will be able to add photos and reviews about that specific location. After you have enjoyed that location, you can continue to see the rest that are on the map.
+Location markers will show you which location you have visited by changing color from red to green. With this color guide, you will be able to keep track of what locations you have been to in the past when attempting a map again.
 
-*Here it is in real life.*
+On the desktop application, you can create maps that users can select on the mobile application.
 
-```javascript
-{
-  "username": "Pato",
-  "makertrails-token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoiUGF0byJ9.Xoe3d822jHfj5179OpVtVYvsYPjisNgbn_mrSboPn9k"
-}
-```
+Here’s how:
 
-*The token is a magically encrypted with the userId and username. So when the backend decodes the token by saying the magic words...*
+After login in, you will see a map that you can use to select locations to a map. Give the map a name and a description and start selecting locations on the map. Each location can be given a custom radius, which lets you customize how small or big you want the area to be when a user reaches it. You can also give each location a unique name, or removed them if they are not what you wanted. When you are done you can save the map and it will be available to other users to use.
 
-```javascript
-jwt.decode(token, 'magic-words')
-```
-
-*Voila! We get:*
-
-```javascript
-{ userId: 1, username: 'Pato' }
-```
-
-*But thats all taken care of in the server. All the front end needs to do is make sure that token gets passed with every http request. Do that by adding this line:*
-
-```javascript
-$http.defaults.headers.common['makertrails-token'] = success.data['makertrails-token'];
-```
-
-*This adds the token as a a header to everything. Now, you no longer need to manually include the userId for:*
-
-1. POST requests to mapInfo
-2. GET requests to progressId
-3. POST requests to review
-
-*The server will decode your 'makertrails-token' header and know which user is making the call.*
-
-*Wow, that's really cool.*
-
-*For authentication between different view on your app, you still probably want to use localstorage. Here's how the desktop does it.*
-
-```javascript
-  $http ({
-    method: 'POST',
-    url: url + '/login',
-    data: {
-      username: username,
-      password: password
-    }
-  })
-  .then(function(success){
-    window.localStorage.setItem('makertrails-token', success.data['makertrails-token']);
-    window.localStorage.setItem('makertrails-username', success.data.username);
-    $http.defaults.headers.common['makertrails-token'] = success.data['makertrails-token'];
-  }
-```
-
-*When you log out, you no longer needs to send an http request to logout. This is because we are no longer using sessions that must be destroyed by the server. To disable a token when a user wants to log out, re-assign it to "undefined." Here's how the desktop does it:*
-
-```javascript
-function logout () {
-  window.localStorage.removeItem("makertrails-token");
-  window.localStorage.removeItem('makertrails-username');
-  $http.defaults.headers.common['makertrails-token'] = "undefined";
-  $state.go('login');
-  return;
-}
-```
-
-*If you want to test on postman, you now need to include a token in every header.*
-
-![Postman example with token](./bin/postman-token.png)
-
-*That's about it. Good luck, tacos.*
+*Developer documentation can be found in the documentation folder.*
