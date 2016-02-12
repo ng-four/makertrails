@@ -8,10 +8,9 @@ var sequelize;
 // Use real life DB
 sequelize = new Sequelize(
   "cuatro_tacos",
-  "cuatrotacos",
-  "1Qaz2wsx3edc", {
-    "host": "mysqlcluster6.registeredsite.com",
-    "port": "3306"
+  "root",
+  "", {
+    "host": "localhost"
   }
 )
 

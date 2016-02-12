@@ -35,6 +35,10 @@ exports.checkUser = function(request, response, next) {
     response.status(401).send("No token detected")
   } else {
     if (isLoggedIn(token)){
+      var hash = jwt.decode(token, 'magic-words');
+      console.log("this isLoggedIn's hash line 38 in utils.js", hash);
+      request.session.user = hash.userId;
+      console.log("this is request.session.user line 41 in utils.js", request.session.user);
       next()
     } else {
       response.sendStatus(401);

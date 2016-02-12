@@ -122,6 +122,11 @@ MAP SECTION
   width: 64px;
 }
 
+#viewtrails{
+  float: right;
+  width: 64px;
+}
+
 #mapContainer{
   padding: 0px 0px 10px 0px;
 }
@@ -144,6 +149,17 @@ MAP SECTION
   min-width: 30px;
   border-radius: 25px;
   background-color: #D53030;
+  font-size: 16px;
+  font-family: 'Lobster', cursive;
+  outline: none;
+}
+
+.blueButton{
+  border: 0px;
+  height: 32px;
+  min-width: 30px;
+  border-radius: 25px;
+  background-color: blue;
   font-size: 16px;
   font-family: 'Lobster', cursive;
   outline: none;

@@ -1,7 +1,11 @@
 <div id="header">
       <img src="/assets/icon-60.png"><a>MakerTrails</a>
       <button class="redButton" id="logout" ng-controller="LogoutController" ng-click="logout()">Logout</button>
+      <a ui-sref="viewMaps"><button class="blueButton" id="viewtrails">Trails</button></a>
 </div>
+
+
+
 <div id="mapContainer">
   <trail-map ng-model="selectedLocations"></trail-map>
   <div id="trailsForm">

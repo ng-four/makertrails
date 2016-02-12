@@ -29,6 +29,7 @@ module.exports = controllers = {
   userMaps: {
     get: function (request, response) {
       var userId = request.session.user;
+      console.log("this is userId in index.js line 32", userId);
       models.userMaps.get(userId, function (userMaps) {
         response.json( userMaps )
       })
