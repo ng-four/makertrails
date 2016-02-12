@@ -3,17 +3,16 @@ var buildMap = require("../test/buildMap.js").buildMap;
 var sequelize;
 
 // Use local DB
-// sequelize = new Sequelize("trails", "root", "");
+sequelize = new Sequelize("trails", "root", "");
 
 // Use real life DB
-sequelize = new Sequelize(
-  "cuatro_tacos",
-  "root",
-  "", {
-    "host": "localhost"
-  }
-)
-
+// sequelize = new Sequelize(
+//   "cuatro_tacos",
+//   "root",
+//   "", {
+//     "host": "localhost"
+//   }
+// )
 
 var User = sequelize.define("user", {
   name: Sequelize.STRING,
