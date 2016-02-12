@@ -5,6 +5,7 @@ angular.module("App", [
   'App.logout',
   'App.createMap',
   'App.viewMaps',
+  'App.MakerMapController',
   'ngMessages'
   ])
 .config(function($stateProvider, $urlRouterProvider){
@@ -32,6 +33,15 @@ angular.module("App", [
       templateUrl: 'templates/viewMaps.html',
       controller: 'ViewMapsController',
       authenticate: true
+    })
+    .state('makerMap', {
+      url: '/makerMap',
+      templateUrl: 'templates/makerMap.html',
+      controller: 'MakerMapController',
+      authenticate: true,
+      params: {
+        'mapID': null
+      }
     })
 
   $urlRouterProvider
