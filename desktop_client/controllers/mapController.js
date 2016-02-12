@@ -54,7 +54,7 @@ function MapController($scope, $document, MapFactory){
         $scope.mapInfo.description = "";
       }, function(err){
         console.log("Map failed to post");
-        consoel.log(err);
+        console.log(err);
       })
     }
   };

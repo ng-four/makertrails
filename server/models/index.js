@@ -50,26 +50,29 @@ module.exports = {
 
   userMaps: {
     get: function (userId, callback) {
-      var userMaps = [];
-      db.Progress.findAll({
+      // var userMaps = [];
+      db.Map.findAll({
           where: {
             user_id: userId
           }
       })
       .then(function (userMaps) {
-        var uniqueMapIds = [];
-        var mapInfo = [];
-        _.each(userMaps, function (eachMap) {
-          uniqueMapIds.push(eachMap.dataValues.map_id)
-        })
-        uniqueMapIds = _.uniq(uniqueMapIds);
-        _.each(uniqueMapIds, function (uniqueMapId) {
-          mapInfo.push(db.Map.findById(uniqueMapId))
-        })
-        Promise.all(mapInfo)
-        .then(function () {
-          callback(mapInfo)
-        })
+        // console.log("this is the first userMaps in models index.js", userMaps);
+        // var uniqueMapIds = [];
+        // var mapInfo = [];
+        // _.each(userMaps, function (eachMap) {
+        //   uniqueMapIds.push(eachMap.dataValues.map_id)
+        // })
+        // uniqueMapIds = _.uniq(uniqueMapIds);
+        // _.each(uniqueMapIds, function (uniqueMapId) {
+        //   mapInfo.push(db.Map.findById(uniqueMapId))
+        // })
+        // Promise.all(mapInfo)
+        // .then(function () {
+        //   console.log("this is userMaps in models index.js", userMaps);
+        //   callback(mapInfo);
+        // })
+        callback(userMaps);
       })
     }
   },

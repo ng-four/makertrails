@@ -4,6 +4,7 @@ angular.module("App", [
   'App.signup',
   'App.logout',
   'App.createMap',
+  'App.viewMaps',
   'ngMessages'
   ])
 .config(function($stateProvider, $urlRouterProvider){
@@ -26,6 +27,13 @@ angular.module("App", [
       controller: 'MapController',
       authenticate: true
     })
+    .state('viewMaps',{
+      url:'/viewMaps',
+      templateUrl: 'templates/viewMaps.html',
+      controller: 'ViewMapsController',
+      authenticate: true
+    })
+
   $urlRouterProvider
     .otherwise('/login');
 })
@@ -37,9 +45,8 @@ angular.module("App", [
     }
     event.preventDefault();
     if (toState.authenticate) {
-      $state.go('login')
-      return
+      $state.go('login');
+      return;
     }
   });
 });
-
