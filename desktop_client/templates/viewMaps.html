@@ -1,4 +1,17 @@
-Your maps
-<div ng-repeat="map in userMapData">
-
+<nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+  <a class="navbar-brand" href="#">Your Maps</a>
+</nav>
+<div class="col-md-3" ng-repeat="map in userMapData">
+<div class="card card-block">
+  <div class="card-block">
+    <h4 class="card-title">Map: {{map.name}}</h4>
+    <h4>Description: {{map.description}}</h4>
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">Cras justo odio</li>
+    <li class="list-group-item">Dapibus ac facilisis in</li>
+    <li class="list-group-item">Vestibulum at eros</li>
+  </ul>
+  <button type="button" class="btn btn-danger" value="Remove" data-ng-click="removeMap($index, map.id)">Remove Map</button>
+</div>
 </div>

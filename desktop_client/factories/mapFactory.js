@@ -91,6 +91,17 @@ function MapFactory($http, $q){
       });
   };
 
+  mapFactory.deleteUserMaps = function(id){
+      return $http ({
+        method: 'DELETE',
+        url: '/mapInfo/' + id,
+      }).then(function(resp){
+        return resp;
+      }, function(err){
+        console.log("this is deleteUserMaps error", err);
+      });
+  };
+
   return mapFactory;
 
 
