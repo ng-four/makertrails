@@ -1,27 +1,26 @@
-<div id='authContainer'>
+<div id='authContainer' class="container">
 
-  <!-- <img src="assets/makertrailsLarge.png"> -->
-  <p>MakerTrails</p>
-  <form id='authCenter' name="loginForm" ng-submit="login()" novalidate>
-
-    <input  class="section" type="text" autocomplete="off" name="usernamename" placeholder="username" ng-model="username" required>
-
-    <div  class="section" ng-messages="loginForm.usernamename.$error" ng-if="loginForm.usernamename.$dirty">
-      <div class="section" ng-message="required">Username required</div>
+  <form id='authCenter' class="form-signin" name="loginForm" ng-submit="login()" novalidate>
+    <h2>MakerTrails</h2>
+    <div class="form-group">
+      <label for="usernamename" class="sr-only">Username</label>
+      <input class="form-control" type="text" autocomplete="off" name="usernamename" placeholder="username" ng-model="username" required>
+      <div  class="section" ng-messages="loginForm.usernamename.$error" ng-if="loginForm.usernamename.$dirty">
+        <div class="section" ng-message="required">Username required</div>
+      </div>
     </div>
 
-    <input class="section" type="password" autocomplete="off" name="passwordname"placeholder="password" ng-model = "password" required>
-
-    <div class="section" ng-messages = "loginForm.passwordname.$error" ng-if="loginForm.passwordname.$dirty">
-      <div class="section" ng-message="required">Password required</div>
+    <div class="form-group">
+      <label for="passwordname" class="sr-only">Password</label>
+      <input class="form-control" type="password" autocomplete="off" name="passwordname"placeholder="password" ng-model = "password" required>
+      <div class="section" ng-messages = "loginForm.passwordname.$error" ng-if="loginForm.passwordname.$dirty">
+        <div class="section" ng-message="required">Password required</div>
+      </div>
     </div>
 
-    <div class="section">
-      <button class="button" id="loginButton" type="submit" ng-disabled="loginForm.$invalid">login</button>
-    </div>
-
-    <div class="section">
-      <button class="button" id="signupButton" ui-sref="signup">Sign up</button>
+    <div class="button-group">
+      <button class="button btn btn-lg btn-primary btn-block" id="loginButton" type="submit" ng-disabled="loginForm.$invalid">Log In</button>
+      <button class="button btn btn-lg btn-primary btn-block" id="signupButton" ui-sref="signup">Sign up</button>
     </div>
 
   </form>
