@@ -10,10 +10,10 @@
   <trail-map ng-model="selectedLocations"></trail-map>
   <div id="trailsForm">
     <form name="mapForm">
-      <label for="map-name">Give it a Name:</label><br>
+      <label for="map-name">Give Your Map a Name:</label><br>
       <input type="text" id="map-name" name="trailname" ng-model="mapInfo.name" autocomplete="off" required><br>
       <div ng-messages = "mapForm.trailname.$error">
-        <label for="map-description">Give it a Description:</label><br>
+        <label for="map-description">Give Your Map a Description:</label><br>
         <textarea id="map-description" name="traildesc" ng-model="mapInfo.description" rows=4 required></textarea><br>
       </div>
       <div ng-messages = "mapForm.traildesc.$error">
@@ -23,14 +23,16 @@
             <li ng-repeat="location in selectedLocations">
               <div ng-switch on="location.editing">
                 <div ng-switch-when="true">
-                    <input type="text" ng-model="location.name">
-                    <button class="button" ng-click="renameLocation(selectedLocations, markers, $index, location.name)">Save</button>
-                    <button class="redButton" ng-click="removeLocation(selectedLocations, markers, $index, map)">X</button><br>
-                    <span>Radius: {{location.radius}} m.</span> <br>
+                  <input type="text" ng-model="location.name">
+                    <br>
+                  <input type="text" ng-model="location.msg" placeholder="Add a description">
+                  <button class="button" ng-click="renameLocation(selectedLocations, markers, $index, location)">Save</button>
+                  <button class="redButton" ng-click="removeLocation(selectedLocations, markers, $index, map)">X</button><br>
+                  <span>Radius: {{location.radius}} m.</span> <br>
                 </div>
-                <div ng-switch-when="false"
-                    ng-click="location.editing = true">
-                  {{location.name}}
+                <div ng-switch-when="false" ng-click="location.editing = true">
+                  <p>{{ $index + 1 }}. {{ location.name }}</p>
+                  <p>{{ location.msg }}</p>
                 </div>
               </div>
             </li>

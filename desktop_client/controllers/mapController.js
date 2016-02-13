@@ -10,9 +10,12 @@ function MapController($scope, $document, MapFactory){
   var mapOptions = {
     center: new google.maps.LatLng(34.0192118, -118.4942816),
     zoom: 15,
-    mapTypeId: google.maps.MapTypeId.ROADMAP
+    mapTypeId: google.maps.MapTypeId.ROADMAP,
+    scrollwheel: false
   }
+
   $scope.map = new google.maps.Map(document.getElementById("map"), mapOptions);
+
   navigator.geolocation.getCurrentPosition(function(position) {
     var currentLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
     $scope.map.panTo(currentLocation);
@@ -41,6 +44,8 @@ function MapController($scope, $document, MapFactory){
 
   $scope.createMap = function(){
     if($scope.selectedLocations.length !== 0){
+      console.log('$scope.mapInfo ', $scope.mapInfo);
+      console.log('$scope.selectedLocations ', $scope.selectedLocations);
       MapFactory.createMap($scope.mapInfo, $scope.selectedLocations)
       .then(function (success) {
         console.log("Map posted successfully!")
@@ -58,8 +63,20 @@ function MapController($scope, $document, MapFactory){
       })
     }
   };
-  $scope.renameLocation = function (selectedLocations, markers, index, newName) {
-    MapFactory.renameLocation(selectedLocations, markers, index, newName)
+  $scope.renameLocation = function (selectedLocations, markers, index, location) {
+    selectedLocations[index].name = location.name;
+    markers[index].title = location.name;
+    console.log('markers array ', markers);
+    var newContent = '<p>' + location.name + '</p>' +
+                  '<p>' + location.msg + '</p>';
+    markers[index].addListener('click', function() {
+      markers[index].markerWindow.setContent(newContent);
+     // markerWindow.setContent(newContent);
+      markers[index].markerWindow.open($scope.map, markers[index])
+    });
+    
+    selectedLocations[index].editing = false;
+   // MapFactory.renameLocation(selectedLocations, markers, index, location)
   };
 
 }
