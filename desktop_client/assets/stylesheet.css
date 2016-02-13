@@ -1,4 +1,13 @@
 /*==============================*\
+COLORS
+bg-yellow: #fbce5b 
+text-dark: #804c02 
+text-light: #fff
+dark-yellow: #f2ac48 
+\*==============================*/
+
+
+/*==============================*\
 MAIN SECTION
 \*==============================*/
 
@@ -12,22 +21,84 @@ AUTH SECTION
   margin: 0 auto;  
 }
 
-.form-signin .form-control {
-    position: relative;
-    height: auto;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-    padding: 10px;
-    font-size: 16px;
+.form-signin .form-control{
+  font-size: 16px;
+  height: auto;
+  padding: 10px;
+  position: relative;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.form-signin .form-group{
+  color: red;
+}
+.form-signin .button{
+  margin-bottom: 10px;
 }
 
 
 /*==============================*\
-MAP SECTION
+NAVIGATION SIDEBAR
 \*==============================*/
+.makertrailsLogo .navbar-brand{
+  height: 70px;
+  padding-left: 20px;
+  line-height: 70px;
+  float: none;
+  color: #804c02;
+}
+
+#sidebar-wrapper {
+  background: rgba(251, 206, 91, 0.93);
+  height: 100%;
+  left: 0px;
+  overflow-y: auto;
+  position: fixed;
+  z-index: 1030;
+}
+.sidebar-nav {
+  color: #804c02;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  width: 225px;
+}
+.sidebar-nav li {
+  text-indent: 10px;
+  line-height: 35px;
+}
+.sidebar-nav li a {
+  color: #fff;
+  display: block;
+  text-decoration: none;
+}
+.sidebar-nav li a:hover {
+  cursor: pointer;
+}
+.sidebar-nav .links a{
+  color: #804c02;
+}
+.sidebar-nav .links{
+  margin-bottom: 15px;
+}
+.sidebar-nav .links .all-trails:after{
+  color: #fff;
+  content: '|';
+  margin-left: 5px;
+}
+
+#sidebar-wrapper .navbar-header{
+  margin-bottom: 15px;
+  float: none;
+  font-family: Futura, 'Trebuchet MS', Arial, sans-serif;
+  font-size: 30px;
+  width: 100%;
+}
+
 .navbar{
-  /*background: rgba(0,0,0,0.3);*/
+  position: relative;
 }
 .navbar-brand{
   font-size: 25px;
@@ -39,12 +110,65 @@ MAP SECTION
   line-height: 70px;
 }
 
-.makertrailsLogo .navbar-brand{
-  height: 70px;
-  padding-left: 20px;
-  line-height: 70px;
-  float: none;
+.navbar-inner{
+  width: 100%;
 }
+.navbar-inner .navbar-button{
+  background: #f2ac48;
+  color: #804c02;
+  display: block;
+  line-height: 30px;
+  margin: 0 10px;
+  text-align: center;
+}
+.navbar-inner .navbar-button:hover{
+  background: #DB9D40;
+  cursor: pointer;
+  text-decoration: none;
+}
+.navbar-inner-bottom{
+  position:absolute;
+  bottom: 0;
+}
+
+.list-locations{
+  width: 100%;
+}
+.list-locations p{
+  margin: 0;
+}
+.list-locations li{
+  background: #f2ac48;
+  margin-bottom: 2.5px;
+  width: 100%;
+  overflow: auto;
+}
+/*.list-locations li:hover{
+  background: #DB9D40;
+  width: 100%;
+}*/
+.list-locations input{
+  line-height: 10px;
+}
+.list-locations-bottom{
+  position:absolute;
+  bottom: 0;
+}
+
+.list-locations .col-right{
+  margin-right: 10px;
+}
+
+.list-locations .remove-location:hover{
+  color: red;
+}
+
+
+
+
+/*==============================*\
+MAP SECTION
+\*==============================*/
 
 #header{
   margin: 10px 25px 10px 25px;
@@ -64,5 +188,12 @@ MAP SECTION
   margin: auto auto;
   width: 100%;
   /*height: 100vh;*/
-  height: 400px;
+  height: 350px;
 }
+
+/*.trailsForm{
+  background: rgba(255, 255, 255, 0.6);
+  position: fixed;
+  top: 0;
+  right: 0;
+}*/
