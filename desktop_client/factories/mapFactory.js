@@ -46,7 +46,7 @@ function MapFactory($http, $q){
       content : location.name
     });
     marker.addListener('click', function() {
-      markerWindow.open(map, marker)
+      markerWindow.open(map, marker);
     });
     marker.circle = circle;
     marker.markerWindow = markerWindow;
@@ -85,6 +85,7 @@ function MapFactory($http, $q){
         method: 'GET',
         url: '/userMaps'
       }).then(function(resp){
+        console.log("userMaps response (with locations): ",resp);
         return resp;
       }, function(err){
         console.log("this is getUserMaps error", err);
@@ -101,6 +102,7 @@ function MapFactory($http, $q){
         console.log("this is deleteUserMaps error", err);
       });
   };
+
 
   return mapFactory;
 

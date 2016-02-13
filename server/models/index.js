@@ -13,8 +13,8 @@ module.exports = {
     get: function (callback) {
       db.Map.findAll()
       .then(function (allMaps) {
-        callback(allMaps)
-      })
+        callback(allMaps);
+      });
     },
     post: function (newLocations, callback) {
       db.Map.create({
@@ -31,13 +31,13 @@ module.exports = {
             lon: newLocation.lng,
             name: newLocation.name,
             radius: newLocation.radius
-          })
-        })
+          });
+        });
         Promise.all(newLocationsCreated)
         .then(function () {
-          callback(newMap)
-        })
-      })
+          callback(newMap);
+        });
+      });
     }
   },
 
@@ -65,8 +65,25 @@ module.exports = {
         //   console.log("this is userMaps in models index.js", userMaps);
         //   callback(mapInfo);
         // })
-        callback(userMaps);
-      })
+
+        var mapInfo = [];
+        _.each(userMaps, function(singleMap){
+          mapInfo.push(db.Location.findAll({
+            where: {
+              map_id: singleMap.id
+            }
+          }));
+        });
+        Promise.all(mapInfo)
+        .then(function () {
+          _.each(userMaps, function(singleMap, id){
+            console.log(mapInfo[id]);
+            singleMap.dataValues.locations = mapInfo[id];
+          });
+          console.log("this is userMaps in models index.js", userMaps);
+          callback(userMaps);
+        });
+      });
     }
   },
 
@@ -79,7 +96,7 @@ module.exports = {
       })
       .then(function (locations) {
         callback(locations)
-      })
+      });
     }
   },
 
