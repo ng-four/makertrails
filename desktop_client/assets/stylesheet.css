@@ -1,9 +1,9 @@
 /*==============================*\
 COLORS
-bg-yellow: #fbce5b 
-text-dark: #804c02 
+bg-yellow: #fbce5b
+text-dark: #804c02
 text-light: #fff
-dark-yellow: #f2ac48 
+dark-yellow: #f2ac48
 \*==============================*/
 
 
@@ -18,7 +18,7 @@ AUTH SECTION
 .form-signin, .form-login{
   max-width: 330px;
   padding: 15px;
-  margin: 0 auto;  
+  margin: 0 auto;
 }
 
 .form-signin .form-control{
@@ -83,11 +83,11 @@ NAVIGATION SIDEBAR
 .sidebar-nav .links{
   margin-bottom: 15px;
 }
-.sidebar-nav .links .all-trails:after{
+/*.sidebar-nav .links .all-trails:after{
   color: #fff;
   content: '|';
   margin-left: 5px;
-}
+}*/
 
 #sidebar-wrapper .navbar-header{
   margin-bottom: 15px;
