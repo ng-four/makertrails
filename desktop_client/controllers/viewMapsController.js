@@ -3,7 +3,6 @@ angular.module('App.viewMaps', [])
     $scope.getUserMaps = function(){
       MapFactory.getUserMaps().then(function(resp){
         $scope.userMapData = resp.data;
-        console.log("this is $scope.userMapData", $scope.userMapData);
       });
     };
     $scope.getUserMaps();
