@@ -46,6 +46,13 @@ AUTH SECTION
   /*background-color: #fbce5b;*/
 }
 
+.push{
+  padding-left: 250px;
+  padding-top: 30px;
+}
+
+
+
 
 /*==============================*\
 NAVIGATION SIDEBAR
@@ -66,6 +73,16 @@ NAVIGATION SIDEBAR
   position: fixed;
   z-index: 1030;
 }
+
+/*#sidebar-wrapper-push {
+  background: rgba(251, 206, 91, 0.93);
+  height: 100%;
+  left: 0px;
+  overflow-y: auto;
+  position: relative;
+  max-width: 200px
+}*/
+
 .sidebar-nav {
   color: #804c02;
   height: 100vh;
