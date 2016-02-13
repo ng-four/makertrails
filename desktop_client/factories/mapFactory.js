@@ -7,7 +7,10 @@ url = 'http://localhost:8000';
 // url = 'https://still-sands-90078.herokuapp.com'
 // url = 'https://makertrails.herokuapp.com'
 
+
+
 function MapFactory($http, $q){
+  var markerWindow = new google.maps.InfoWindow();
   var mapFactory = {}
 
   mapFactory.removeLocation = function(selectedLocations, markers, index, map){
@@ -42,10 +45,12 @@ function MapFactory($http, $q){
       editable: true,
       map: map
     });
-    var markerWindow = new google.maps.InfoWindow({
-      content : location.name
-    });
+
+    var content = '<p>' + location.name + '</p>' +
+                  '<p>' + location.msg + '</p>';
+
     marker.addListener('click', function() {
+      markerWindow.setContent(content);
       markerWindow.open(map, marker)
     });
     marker.circle = circle;
@@ -53,10 +58,12 @@ function MapFactory($http, $q){
     return marker;
   };
 
-  mapFactory.renameLocation = function (selectedLocations, markers, index, newName) {
-    selectedLocations[index].name = newName;
-    markers[index].title = newName;
-    markers[index].markerWindow.setContent(newName);
+  mapFactory.renameLocation = function (selectedLocations, markers, index, location) {
+    selectedLocations[index].name = location.name;
+    markers[index].title = location.name;
+    var newContent = '<p>' + location.name + '</p>' +
+                  '<p>' + location.msg + '</p>';
+    markers[index].markerWindow.setContent(newContent);
     selectedLocations[index].editing = false;
   };
 
