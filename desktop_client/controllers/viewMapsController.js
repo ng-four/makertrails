@@ -9,7 +9,7 @@ angular.module('App.viewMaps', [])
     $scope.getUserMaps();
 
     $scope.selectMap = function(map) {
-      $state.go('makerMap', {mapID: map}, {reload: true});
+      $state.go('makerMap', {mapID: map.id}, {reload: true});
       return;
     };
 
