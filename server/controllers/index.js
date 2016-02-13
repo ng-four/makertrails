@@ -8,7 +8,7 @@ module.exports = controllers = {
     get: function (request, response) {
       models.mapInfo.get(function (allMaps) {
         response.json({ allMaps });
-      })
+      });
     },
     post: function (request, response) {
       var newLocations = request.body;
