@@ -23,6 +23,15 @@ module.exports = controllers = {
       models.mapInfo.delete(request.params.id, function() {
         response.sendStatus(200);
       });
+    },
+    getOne: function(request, response){
+      var mapId = request.params.id;
+      console.log("mapId",mapId);
+      models.location.get(mapId, function (locations) {
+        console.log(locations);
+        var formattedProgress = utils.zeroProgress(locations);
+        response.status(200).send(formattedProgress);
+      })
     }
   },
 

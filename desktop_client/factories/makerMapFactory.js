@@ -74,6 +74,17 @@ function MakerMapFactory($http, $q, $state, $stateParams) {
     return q.promise;
   };
 
+  makerMapFactory.getLocationsNoProgress = function(mapID) {
+    var q = $q.defer();
+    $http.get(url + '/mapInfo/'+mapID)
+      .then(function(data) {
+        q.resolve(data);
+      },function(err) {
+        q.reject(err);
+      });
+    return q.promise;
+  };
+
   makerMapFactory.userLocationError = function(err) {
     console.log("user location failed", err);
   };

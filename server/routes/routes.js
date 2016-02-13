@@ -16,6 +16,10 @@ router.post('/mapInfo', utils.checkUser, function (request, response) {
   controllers.mapInfo.post(request, response)
 })
 
+router.get('/mapInfo/:id', function (request, response) {
+  controllers.mapInfo.getOne(request, response)
+})
+
 router.delete('/mapInfo/:id', utils.checkUser, function (request, response) {
   controllers.mapInfo.delete(request, response)
 })
