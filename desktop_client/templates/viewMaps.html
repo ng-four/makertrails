@@ -1,16 +1,25 @@
-<nav class="navbar navbar-light" style="background-color: #e3f2fd;">
-  <a class="navbar-brand" href="#">Your Maps</a>
-</nav>
-<div class="col-md-3" ng-repeat="map in userMapData">
-<div class="card card-block">
-  <div class="card-block">
-    <h4 class="card-title">Map: {{map.name}}</h4>
-    <h4>Description: {{map.description}}</h4>
+<nav id="sidebar-wrapper" class="sidebar-wrapper">
+  <div class="sidebar-nav">
+    <div class="navbar-header text-center">
+      <div class="makertrailsLogo">MakerTrails</div>
+    </div>
   </div>
-  <ul class="list-group list-group-flush">
-    <li class="list-group-item" ng-repeat="location in map.locations.fulfillmentValue">{{location.name}}</li>
-  </ul>
-  <button type="button" class="btn btn-primary" ng-click="selectMap(map)">View Map</button>
-  <button type="button" class="btn btn-danger" value="Remove" data-ng-click="removeMap($index, map.id)">Remove Map</button>
+</nav>
+
+<div class="push card-columns">
+<div class="col-md-3" ng-repeat="map in userMapData">
+  <div class="card card-block">
+    <div class="card-block">
+      <h4 class="card-title">{{map.name}}</h4>
+      <p>{{map.description}}</p>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item" ng-repeat="location in map.locations.fulfillmentValue">{{location.name}}</li>
+    </ul>
+    <div class="form-group-row"><br>
+      <button type="button" class="btn btn-primary" ng-click="selectMap(map)">View Map</button>
+      <button type="button" class="btn btn-danger" value="Remove" data-ng-click="removeMap($index, map.id)">Remove Map</button>
+    </div>
+  </div>
 </div>
 </div>
