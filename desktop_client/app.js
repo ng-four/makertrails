@@ -9,6 +9,12 @@ angular.module("App", [
   'ngMessages'
   ])
 .config(function($stateProvider, $urlRouterProvider){
+
+  // $locationProvider.html5Mode({
+  //   enabled: true,
+  //   requireBase: false
+  // });
+
   $stateProvider
     .state('login',{
       url: '/login',
@@ -35,10 +41,9 @@ angular.module("App", [
       authenticate: true
     })
     .state('makerMap', {
-      url: '/makerMap',
+      url: '/makerMap/:mapID',
       templateUrl: 'templates/makerMap.html',
       controller: 'MakerMapController',
-      authenticate: true,
       params: {
         'mapID': null
       }
