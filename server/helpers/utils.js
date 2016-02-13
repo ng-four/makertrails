@@ -11,6 +11,14 @@ exports.formatProgress = function(locations, progresses) {
   return locations
 }
 
+exports.zeroProgress = function(locations) {
+  for (var i=0; i < locations.length; i++) {
+    locations[i].dataValues.visited = false;
+    locations[i].dataValues.progress_id = 0;
+  }
+  return locations;
+};
+
 var decodeToken = exports.decodeToken = function(request){
   return jwt.decode(request.headers['makertrails-token'], 'magic-words');
 }

@@ -26,10 +26,10 @@ function MakerMapFactory($http, $q, $state, $stateParams) {
     return new google.maps.Map(document.getElementById("map"), mapOptions);
   };
 
-  makerMapFactory.deleteMarkers = function(markers){
-    for(i=0; i<markers.length; i++){
-        markers[i].setMap(null);
-        markers[i].circle.setMap(null);
+  makerMapFactory.deleteMarkers = function(markers) {
+    for (i = 0; i < markers.length; i++) {
+      markers[i].setMap(null);
+      markers[i].circle.setMap(null);
     }
     markers = [];
   };
@@ -65,10 +65,21 @@ function MakerMapFactory($http, $q, $state, $stateParams) {
 
   makerMapFactory.getMapLocations = function(mapID) {
     var q = $q.defer();
-    $http.get(url + '/progress?mapId='+mapID)
+    $http.get(url + '/progress?mapId=' + mapID)
       .then(function(data) {
         q.resolve(data);
-      },function(err) {
+      }, function(err) {
+        q.reject(err);
+      });
+    return q.promise;
+  };
+
+  makerMapFactory.getLocationsNoProgress = function(mapID) {
+    var q = $q.defer();
+    $http.get(url + '/mapInfo/' + mapID)
+      .then(function(data) {
+        q.resolve(data);
+      }, function(err) {
         q.reject(err);
       });
     return q.promise;
