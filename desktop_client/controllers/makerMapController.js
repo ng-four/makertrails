@@ -14,8 +14,10 @@ function makerMapController($scope, $http, $state, $stateParams, MakerMapFactory
       $scope.locations = data.data;
       $scope.markers = MakerMapFactory.setMarkers($scope.locations, $scope.map);
       $scope.myLocation = null;
-      navigator.geolocation.watchPosition($scope.userLocationChange,
-        MakerMapFactory.userLocationError);
+      $scope.$apply;
+      // navigator.geolocation.watchPosition($scope.userLocationChange,
+      //   MakerMapFactory.userLocationError);
+      MakerMapFactory.setBounds($scope.map);
     });
   };
 

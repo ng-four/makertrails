@@ -63,20 +63,40 @@ function MapController($scope, $document, MapFactory){
       })
     }
   };
+  
+
+  $scope.sayHello = function(){
+    console.log('Hello!');
+  }
+
   $scope.renameLocation = function (selectedLocations, markers, index, location) {
     selectedLocations[index].name = location.name;
     markers[index].title = location.name;
     console.log('markers array ', markers);
     var newContent = '<p>' + location.name + '</p>' +
-                  '<p>' + location.msg + '</p>';
+                  '<p>' + location.msg + '</p>' +
+                '<a id="delete">remove</a>';
     markers[index].addListener('click', function() {
       markers[index].markerWindow.setContent(newContent);
      // markerWindow.setContent(newContent);
-      markers[index].markerWindow.open($scope.map, markers[index])
+      markers[index].markerWindow.open($scope.map, markers[index]);
+    var del = document.getElementById("delete");
+    del.addEventListener("click", function(/*selectedLocations1, markers1, index1, map1*/){
+      $scope.removeLocation(selectedLocations, markers, index, map);
+      $scope.$apply();
     });
+  });
     
     selectedLocations[index].editing = false;
    // MapFactory.renameLocation(selectedLocations, markers, index, location)
+  };
+
+  $scope.removeLocation = function(selectedLocations, markers, index, map){
+    console.log('remove location clicked ');
+    markers[index].circle.setMap(null);
+    markers[index].setMap(null);
+    selectedLocations.splice(index,1);
+    markers.splice(index, 1);
   };
 
 }

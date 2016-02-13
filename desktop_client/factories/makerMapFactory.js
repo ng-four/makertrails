@@ -8,6 +8,8 @@ url = 'http://localhost:8000';
 // url = 'http://makertrails.herokuapp.com'
 
 function MakerMapFactory($http, $q, $state, $stateParams) {
+  var markerWindow = new google.maps.InfoWindow();
+  var bounds = new google.maps.LatLngBounds();
   var makerMapFactory = {};
 
   makerMapFactory.renderMap = function() {
@@ -35,10 +37,13 @@ function MakerMapFactory($http, $q, $state, $stateParams) {
   };
 
   makerMapFactory.setMarkers = function(locations, map) {
+
     var markers = [];
-    for (var i = 0; i < locations.length; i++) {
+   
+    locations.forEach(function(loc, i){
+      var pos = new google.maps.LatLng(locations[i].lat, locations[i].lon);
       var marker = new google.maps.Marker({
-        position: new google.maps.LatLng(locations[i].lat, locations[i].lon),
+        position: pos,
         icon: {
           path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
           fillColor: locations[i].visited ? "green" : "red",
@@ -57,9 +62,20 @@ function MakerMapFactory($http, $q, $state, $stateParams) {
         fillOpacity: 0.6,
         map: map
       });
+      
+      var content = '<p><strong>' + locations[i].name + '</strong></p>';
+
+      marker.addListener('click', function() {
+        markerWindow.setContent(content);
+        markerWindow.open(map, marker);
+      });
       marker.circle = circle;
+      marker.markerWindow = markerWindow;
+
+      bounds.extend(pos);
+
       markers.push(marker);
-    }
+    });
     return markers;
   };
 
@@ -88,6 +104,10 @@ function MakerMapFactory($http, $q, $state, $stateParams) {
   makerMapFactory.userLocationError = function(err) {
     console.log("user location failed", err);
   };
+
+  makerMapFactory.setBounds = function(map){
+    map.fitBounds(bounds);
+  }
 
   return makerMapFactory;
 }

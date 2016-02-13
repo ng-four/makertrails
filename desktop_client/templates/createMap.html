@@ -22,16 +22,17 @@
     </div>
   </div>
 
-    click on the map to select some locations
+    click on the map to add some locations
 
     <div ng-messages="mapForm.traildesc.$error">
       <div name="traillocs">
         <ul class="list-locations list-unstyled">
           <li ng-repeat="location in selectedLocations">
             <div ng-switch on="location.editing">
+
               <div ng-switch-when="true">
-                <input type="text" ng-model="location.name" placeholder="Edit Location Name">
-                <input type="text" ng-model="location.msg" placeholder="Edit Location Description">
+                <input type="text" ng-model="location.name">
+                <input type="text" ng-model="location.msg" placeholder="Add a Description">
                 <button class="button" ng-click="renameLocation(selectedLocations, markers, $index, location)">Save</button>
                 <!-- <div ng-click="removeLocation(selectedLocations, markers, $index, map)" class="rename-location icon ion-edit"></div> -->
                 <!--   -->
@@ -39,17 +40,18 @@
                 <br>
                 <span>Radius: {{location.radius}} m.</span> <br>
               </div>
+
               <div ng-switch-when="false">
                 <div class="col-left pull-left">
                   <p>{{ $index + 1 }}. {{ location.name }}</p>
                   <p>{{ location.msg }}</p>
-
                 </div>
                 <div class="col-right pull-right">
                   <span ng-click="location.editing = true" class="rename-location icon ion-edit" data-toggle="tooltip" data-placement="left" title="Tooltip on left"></span>
                   <span ng-click="removeLocation(selectedLocations, markers, $index, map)" class="remove-location icon ion-android-close"></span>
                 </div>
               </div>
+
             </div>
           </li>
         </ul>
