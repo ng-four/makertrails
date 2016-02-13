@@ -11,6 +11,10 @@ dark-yellow: #f2ac48
 MAIN SECTION
 \*==============================*/
 
+html, body, .master{
+  height: 100%;
+  color: #804c02;
+}
 
 /*==============================*\
 AUTH SECTION
@@ -35,6 +39,11 @@ AUTH SECTION
 }
 .form-signin .button{
   margin-bottom: 10px;
+}
+
+.login-page, .signup-page {
+  height: 100%;
+  background-color: #fbce5b;
 }
 
 
