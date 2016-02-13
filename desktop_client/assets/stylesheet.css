@@ -34,7 +34,7 @@ AUTH SECTION
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
-.form-signin .form-group{
+.form-signin .form-group p{
   color: red;
 }
 .form-signin .button{
@@ -42,8 +42,8 @@ AUTH SECTION
 }
 
 .login-page, .signup-page {
-  height: 100%;
-  background-color: #fbce5b;
+  /*height: 100%;*/
+  /*background-color: #fbce5b;*/
 }
 
 
@@ -68,7 +68,7 @@ NAVIGATION SIDEBAR
 }
 .sidebar-nav {
   color: #804c02;
-  height: 100%;
+  height: 100vh;
   margin: 0;
   padding: 0;
   position: relative;
@@ -196,8 +196,7 @@ MAP SECTION
 #map{
   margin: auto auto;
   width: 100%;
-  /*height: 100vh;*/
-  height: 350px;
+  height: 100vh;
 }
 
 /*.trailsForm{
@@ -206,3 +205,8 @@ MAP SECTION
   top: 0;
   right: 0;
 }*/
+
+.trailsForm input, .trailsForm textarea{
+  margin: 0 5% 10px 5%;
+  width: 90%;
+}
