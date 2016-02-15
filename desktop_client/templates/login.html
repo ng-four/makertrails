@@ -13,7 +13,7 @@
           <label for="usernamename" class="sr-only">Username</label>
           <input class="form-control" type="text" autocomplete="off" name="usernamename" placeholder="username" ng-model="username" required>
           <div  class="section" ng-messages="loginForm.usernamename.$error" ng-if="loginForm.usernamename.$dirty">
-            <p class="section text-xs-center" ng-message="required">Username required</p>
+            <p class="section text-error" ng-message="required">Username required</p>
           </div>
         </div>
 
@@ -21,7 +21,7 @@
           <label for="passwordname" class="sr-only">Password</label>
           <input class="form-control" type="password" autocomplete="off" name="passwordname"placeholder="password" ng-model = "password" required>
           <div class="section" ng-messages = "loginForm.passwordname.$error" ng-if="loginForm.passwordname.$dirty">
-            <p class="section text-xs-center" ng-message="required">Password required</p>
+            <p class="section text-error" ng-message="required">Password required</p>
           </div>
         </div>
 

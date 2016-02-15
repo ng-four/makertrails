@@ -8,12 +8,15 @@ dark-yellow: #f2ac48
 
 
 /*==============================*\
-MAIN SECTION
+GLOBAL STYLES
 \*==============================*/
 
 html, body, .master{
   height: 100%;
   color: #804c02;
+}
+.form-group .text-error{
+  color: red;
 }
 
 /*==============================*\
@@ -33,9 +36,6 @@ AUTH SECTION
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-}
-.form-signin .form-group p{
-  color: red;
 }
 .form-signin .button{
   margin-bottom: 10px;
@@ -166,8 +166,9 @@ NAVIGATION SIDEBAR
 .list-locations li{
   background: #f2ac48;
   margin-bottom: 2.5px;
-  width: 100%;
   overflow: auto;
+  padding: 5px;
+  width: 100%;
 }
 /*.list-locations li:hover{
   background: #DB9D40;

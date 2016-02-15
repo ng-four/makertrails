@@ -8,21 +8,24 @@
     </div>
 
 <div id="trailsForm" class="trailsForm navbar-inner-top navbar-inner">
-  <form name="mapForm">
-    <label for="map-name" class="sr-only">Give Your Map a Name:</label>
-    <input type="text" id="map-name" class="map-name" name="trailname" ng-model="mapInfo.name" placeholder="Name the Map" autocomplete="off" required>
-    <div ng-messages = "mapForm.trailname.$error" ng-if="mapForm.trailname.$dirty">
-        <p ng-message="required">please name your map</p>
+  <form name="mapForm" class="text-xs-center">
+    <div class="form-group">
+      <label for="map-name" class="sr-only">Give Your Map a Name:</label>
+      <input type="text" id="map-name" class="map-name form-control" name="trailname" ng-model="mapInfo.name" placeholder="Name the Map" autocomplete="off" required>
+      <div ng-messages = "mapForm.trailname.$error" ng-if="mapForm.trailname.$dirty">
+        <p ng-message="required" class="text-xs-center text-error">please name your map</p>
+      </div>
     </div>
 
-    <label for="map-description" class="sr-only">Give Your Map a Description:</label>
-    <textarea id="map-description" name="traildesc" ng-model="mapInfo.description" rows=4 placeholder="Give it a Description" required></textarea>
-    <div ng-messages = "mapForm.traildesc.$error" ng-if="mapForm.traildesc.$dirty">
-      <p ng-message="required">please describe your map</p>
+    <div class="form-group">
+      <label for="map-description" class="sr-only">Give Your Map a Description:</label>
+      <textarea id="map-description" class="form-control" name="traildesc" ng-model="mapInfo.description" rows="3" placeholder="Give it a Description" required></textarea>
+      <div ng-messages = "mapForm.traildesc.$error" ng-if="mapForm.traildesc.$dirty">
+        <p ng-message="required" class="text-xs-center text-error">please describe your map</p>
+      </div>
     </div>
-  </div>
 
-    click on the map to add some locations
+    <p ng-show="selectedLocations.length === 0">click on the map to add some locations</p>
 
     <div ng-messages="mapForm.traildesc.$error">
       <div name="traillocs">
@@ -31,14 +34,10 @@
             <div ng-switch on="location.editing">
 
               <div ng-switch-when="true">
-                <input type="text" ng-model="location.name">
-                <input type="text" ng-model="location.msg" placeholder="Add a Description">
+                <input type="text" ng-model="location.name" class="form-control" placeholder="Edit Name">
+                <input type="text" ng-model="location.msg" class="form-control" placeholder="Add a Description">
+                <span>Radius: {{location.radius}} m.</span>
                 <button class="button" ng-click="renameLocation(selectedLocations, markers, $index, location)">Save</button>
-                <!-- <div ng-click="removeLocation(selectedLocations, markers, $index, map)" class="rename-location icon ion-edit"></div> -->
-                <!--   -->
-                <!-- <button class="redButton" ng-click="removeLocation(selectedLocations, markers, $index, map)">X</button> -->
-                <br>
-                <span>Radius: {{location.radius}} m.</span> <br>
               </div>
 
               <div ng-switch-when="false">
@@ -60,7 +59,7 @@
         6 Locations maximum!
       </div>
       <div class="section">
-        <button class="navbar-buton create-map" ng-click="createMap()" ng-disabled="mapForm.$invalid" data-toggle="modal" data-target="#confirmModal" >Create Map</button>
+        <button class="navbar-buton create-map" ng-click="createMap(); mapForm.$setPristine(true)" ng-disabled="mapForm.$invalid || selectedLocations.length === 0" data-toggle="modal" data-target="#confirmModal" >Create Map</button>
       </div>
     </div>
   </form>
