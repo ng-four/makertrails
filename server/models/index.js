@@ -25,11 +25,13 @@ module.exports = {
       .then(function (newMap) {
         var newLocationsCreated = [];
         _.each(newLocations.locationsInfo, function (newLocation) {
+          console.log('newLocation in DB ', newLocation);
           db.Location.create({
             map_id: newMap.id,
             lat: newLocation.lat,
             lon: newLocation.lng,
             name: newLocation.name,
+            msg: newLocation.msg,
             radius: newLocation.radius
           });
         });
@@ -84,10 +86,10 @@ module.exports = {
         Promise.all(mapInfo)
         .then(function () {
           _.each(userMaps, function(singleMap, id){
-            console.log(mapInfo[id]);
+           // console.log(mapInfo[id]);
             singleMap.dataValues.locations = mapInfo[id];
           });
-          console.log("this is userMaps in models index.js", userMaps);
+        //  console.log("this is userMaps in models index.js", userMaps);
           callback(userMaps);
         });
       });
@@ -196,8 +198,8 @@ module.exports = {
             Promise.all(queries)
             .then(function(){
               // callback(locationReviews)
-              console.log("+++ 171 index.js queries: ", queries)
-              console.log("+++ 173 index.js locationReviews: ", locationReviews)
+            //  console.log("+++ 171 index.js queries: ", queries)
+            //  console.log("+++ 173 index.js locationReviews: ", locationReviews)
               callback(locationReviews);
             })
       },
@@ -214,7 +216,7 @@ module.exports = {
       }).then(function(postedReview){
         callback(postedReview);
       }).catch(function(error){
-        console.log("+++ 178 index.js Review failed to post to db")
+       // console.log("+++ 178 index.js Review failed to post to db")
         console.log(error)
       })
     }
