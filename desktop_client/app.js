@@ -8,7 +8,7 @@ angular.module("App", [
   'App.MakerMapController',
   'ngMessages'
   ])
-.config(function($stateProvider, $urlRouterProvider){
+.config(function($stateProvider, $urlRouterProvider, $httpProvider){
 
   // $locationProvider.html5Mode({
   //   enabled: true,
@@ -49,19 +49,32 @@ angular.module("App", [
       }
     })
 
-  $urlRouterProvider
-    .otherwise('/login');
+  $urlRouterProvider.otherwise('/login');
+  $httpProvider.interceptors.push('AttachTokens');
 })
 
+.factory('AttachTokens', function ($window) {
+  var attach = {
+    request: function (object) {
+      var jwt = $window.localStorage.getItem('makertrails-token');
+      if (jwt) {
+        object.headers['makertrails-token'] = jwt;
+      }
+      object.headers['Allow-Control-Allow-Origin'] = '*';
+      return object;
+    }
+  };
+  return attach;
+})
 .run(function ($rootScope, $state, AppFactory, $window) {
   $rootScope.$on('$stateChangeStart', function (event, toState) {
-    if (!toState.authenticate || AppFactory.authenticateFunction()) {
-      return;
-    }
-    event.preventDefault();
-    if (toState.authenticate) {
+    if (toState.name === "login" && AppFactory.authenticateFunction()) {
+      event.preventDefault();
+      $state.go('createNewMap');
+    }  
+    if (toState.authenticate && !AppFactory.authenticateFunction()) {
+      event.preventDefault();
       $state.go('login');
-      return;
     }
   });
 });
