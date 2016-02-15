@@ -60,7 +60,7 @@
         6 Locations maximum!
       </div>
       <div class="section">
-        <button class="navbar-buton create-map" ng-click="createMap()" ng-disabled="mapForm.$invalid">Create Map</button>
+        <button class="navbar-buton create-map" ng-click="createMap()" ng-disabled="mapForm.$invalid" data-toggle="modal" data-target="#confirmModal" >Create Map</button>
       </div>
     </div>
   </form>
@@ -72,7 +72,26 @@
   </div>
 </nav>
 
-
 <div id="mapContainer" class="mapContainer" style="height:100%">
   <trail-map ng-model="selectedLocations"></trail-map>
 </div>
+
+<!-- CONFIRMATION MODAL -->
+
+<div class="modal fade" id="confirmModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document" >
+    <div class="modal-content" >
+      <div class="modal-header" >
+        <button type="button" class="close" data-dismiss="modal" ></button>
+        <h4 class="modal-title" id="confirmLabel">New Map Created!</h4>
+      </div>
+      <div class="modal-body" >
+        <p>Click on Your Trails to view your new map and share it with friends.</p>
+      </div>
+      <div class="modal-footer" >
+        <button type="button" class="btn btn-default" data-dismiss="modal">Dismiss</button>
+      </div>
+    </div>
+  </div>
+</div>
+

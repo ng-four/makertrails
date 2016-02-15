@@ -24,8 +24,5 @@
     "angular-messages": "^1.4.9",
     "bootstrap": "v4.0.0-alpha.2",
     "tether": "~1.1.1"
-  },
-  "resolutions": {
-    "bootstrap": "v4.0.0-alpha.2"
   }
 }
