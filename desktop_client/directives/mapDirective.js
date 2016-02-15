@@ -13,9 +13,7 @@ function trailMap(MapFactory) {
         google.maps.event.addListenerOnce(this, 'map_changed',function () {
           console.log('POI clicked ');
           var info = this.getContent().innerText;
-
           name = String(info).split("\n")[0];
-
           google.maps.event.trigger($map, 'click', {latLng: this.getPosition()}); 
         });
       }

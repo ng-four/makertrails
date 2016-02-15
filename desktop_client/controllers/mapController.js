@@ -44,8 +44,6 @@ function MapController($scope, $document, MapFactory){
 
   $scope.createMap = function(){
     if($scope.selectedLocations.length !== 0){
-      console.log('$scope.mapInfo ', $scope.mapInfo);
-      console.log('$scope.selectedLocations ', $scope.selectedLocations);
       MapFactory.createMap($scope.mapInfo, $scope.selectedLocations)
       .then(function (success) {
         console.log("Map posted successfully!")
@@ -63,16 +61,10 @@ function MapController($scope, $document, MapFactory){
       })
     }
   };
-  
-
-  $scope.sayHello = function(){
-    console.log('Hello!');
-  }
 
   $scope.renameLocation = function (selectedLocations, markers, index, location) {
     selectedLocations[index].name = location.name;
     markers[index].title = location.name;
-    console.log('markers array ', markers);
     var newContent = '<p>' + location.name + '</p>' +
                   '<p>' + location.msg + '</p>' +
                 '<a id="delete">remove</a>';
@@ -88,11 +80,10 @@ function MapController($scope, $document, MapFactory){
   });
     
     selectedLocations[index].editing = false;
-   // MapFactory.renameLocation(selectedLocations, markers, index, location)
   };
 
   $scope.removeLocation = function(selectedLocations, markers, index, map){
-    console.log('remove location clicked ');
+  //  console.log('remove location clicked ');
     markers[index].circle.setMap(null);
     markers[index].setMap(null);
     selectedLocations.splice(index,1);

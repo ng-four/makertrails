@@ -63,7 +63,8 @@ function MakerMapFactory($http, $q, $state, $stateParams) {
         map: map
       });
       
-      var content = '<p><strong>' + locations[i].name + '</strong></p>';
+      var content = '<p><strong>' + locations[i].name + '</strong></p>' +
+                      '<p>' + locations[i].msg + '</p>';
 
       marker.addListener('click', function() {
         markerWindow.setContent(content);
