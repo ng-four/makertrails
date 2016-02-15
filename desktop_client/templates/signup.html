@@ -13,22 +13,22 @@
           <label for="newusername" class="sr-only">Username</label>
           <input class="form-control" type="text" autocomplete="off" name="newusername" placeholder="username" ng-model="username" required>
           <div  class="section" ng-messages="signupForm.newusername.$error" ng-if="signupForm.newusername.$dirty">
-            <p class="section" ng-message="required">Username Required</p>
+            <p ng-message="required" class="section text-error">Username Required</p>
           </div>
         </div>
         <div class="form-group">
           <label for="passwordname" class="sr-only">Password</label>
           <input class="form-control" type="password" autocomplete="off" name="passwordname" placeholder="password" ng-model="password" required>
           <div class="section" ng-messages="signupForm.passwordname.$error" ng-if="signupForm.passwordname.$dirty">
-            <p class="section" ng-message="required">Password Required</p>
+            <p ng-message="required" class="section text-error" >Password Required</p>
           </div>
         </div>
         <div class="form-group">
           <label for="emailname" class="sr-only">Email</label>
           <input class="form-control" type="email" autocomplete="off" name="emailname" placeholder="email" ng-model="email" required>
           <div ng-messages="signupForm.emailname.$error" ng-if="signupForm.emailname.$dirty">
-            <p ng-show="signupForm.emailname.$invalid">Valid Email Required</p>
-            <p ng-message="required">Email Required</p>
+            <p ng-show="signupForm.emailname.$invalid" class="text-error">Valid Email Required</p>
+            <p ng-message="required text-error" class="text-error">Email Required</p>
           </div>
         </div>
         <div class="button-group text-xs-center">
