@@ -1,7 +1,7 @@
 angular.module("App.createMap", ['ngMessages']) //Placeholder name
 .controller("MapController", MapController)
 
-function MapController($scope, $document, MapFactory){
+function MapController($scope, $document, $timeout, MapFactory){
   angular.extend($scope, MapFactory);
   $scope.markers = [];
   $scope.selectedLocations = [];
