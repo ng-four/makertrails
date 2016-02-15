@@ -3,12 +3,11 @@
 
   <nav id="sidebar-wrapper" class="sidebar-wrapper">
     <div class="sidebar-nav">
-      <div class="navbar-header text-center">
+      <div class="navbar-header text-xs-center">
         <div class="makertrailsLogo">MakerTrails</div>
       </div>
 
-
-      <form id="authCenter" class="form-signin text-center" name="signupForm" ng-submit="signup()" novalidate>
+      <form id="authCenter" class="form-signin text-xs-center" name="signupForm" ng-submit="signup()" novalidate>
         <h4>Sign Up</h4>
         <div class="form-group">
           <label for="newusername" class="sr-only">Username</label>
@@ -32,7 +31,7 @@
             <p ng-message="required">Email Required</p>
           </div>
         </div>
-        <div class="button-group text-center">
+        <div class="button-group text-xs-center">
           <button class="button btn btn-lg btn-primary btn-block" type="submit" ng-disabled="signupForm.$invalid">Create Account</button>
           <a ui-sref="login">Log In</a>
         </div>
