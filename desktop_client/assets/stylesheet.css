@@ -36,6 +36,7 @@ html, body, .master{
 }
 
 
+
 /*==============================*\
 AUTH SECTION
 \*==============================*/
@@ -79,6 +80,16 @@ NAVIGATION SIDEBAR
   line-height: 70px;
   float: none;
   color: #804c02;
+}
+
+.logo {
+  display: block;
+  text-indent: -9999px;
+  margin-left: 12px;
+  width: 200px;
+  height: 100px;
+  background: url("images/makertrails.svg");
+  background-size: 200px 100px;
 }
 
 #sidebar-wrapper {
