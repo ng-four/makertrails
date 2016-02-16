@@ -4,7 +4,7 @@
       <div class="makertrailsLogo">MakerTrails</div>
     </div>
     <div class="links text-xs-center">
-      <a ui-sref="createNewMap" id="viewtrails" class="all-trails">Create a Map</a>
+      <button ui-sref="createNewMap" id="viewtrails" class="all-trails button btn btn-large btn-primary btn-block">Create a Map</button>
     </div>
   </div>
 </nav>
@@ -21,7 +21,7 @@
     </ul>
     <div class="form-group-row"><br>
       <button type="button" class="btn btn-primary" ng-click="selectMap(map)">View Map</button>
-      <button type="button" class="btn btn-danger" value="Remove" data-ng-click="removeMap($index, map.id)">Remove Map</button>
+      <span type="button" class="button-remove icon ion-trash-a pull-xs-right" value="Remove" data-ng-click="removeMap($index, map.id)"></span>
     </div>
   </div>
 </div>
