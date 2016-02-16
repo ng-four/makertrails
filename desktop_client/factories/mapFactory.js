@@ -46,16 +46,13 @@ function MapFactory($http, $q){
 
     var content = '<p><strong>' + location.name + '</strong></p>' +
                   '<p>' + location.msg + '</p>';
-                //  '<a ng-click="$scope.removeLocation(selectedLocations, markers, $index, map)">remove</a>';
-                //  '<a id="hello">sayHello</a>';
+                
     marker.addListener('click', function() {
       markerWindow.setContent(content);
       markerWindow.open(map, marker);
     });
     marker.circle = circle;
     marker.markerWindow = markerWindow;
-    // var el = document.getElementById("hello");
-    // el.addEventListener("click", $scope.sayHello);
     return marker;
   };
 

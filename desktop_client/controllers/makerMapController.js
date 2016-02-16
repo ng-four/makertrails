@@ -7,6 +7,7 @@ function makerMapController($scope, $http, $state, $stateParams, MakerMapFactory
 
   $scope.mapID = $stateParams.mapID;
   $scope.markers = [];
+  $scope.map;
 
   $scope.getMap = function() {
     MakerMapFactory.getLocationsNoProgress($scope.mapID)
@@ -41,6 +42,31 @@ function makerMapController($scope, $http, $state, $stateParams, MakerMapFactory
       fjs.parentNode.insertBefore(js, fjs);
     })(document, 'script', 'facebook-jssdk');
   // });
+
+  $scope.showDirections = function(){
+    var dir = new google.maps.DirectionsRenderer({
+      map: $scope.map
+    });
+    var waypts = [];
+    for(var i = 1; i < $scope.markers.length-1; i++){
+      waypts.push({location: $scope.markers[i].position, stopover: true});
+
+    };
+    var coords = {
+      destination: $scope.markers[$scope.markers.length-1].position,
+      origin: $scope.markers[0].position,
+      waypoints: waypts,
+      travelMode: google.maps.TravelMode.DRIVING,
+      avoidHighways: true
+    };
+
+    var directionsService = new google.maps.DirectionsService();
+    directionsService.route(coords, function(response, status) {
+      if (status == google.maps.DirectionsStatus.OK) {
+        dir.setDirections(response);
+      }
+    });
+  }
 
   $scope.getMap();
 }

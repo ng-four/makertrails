@@ -66,24 +66,49 @@ function MapController($scope, $document, $timeout, MapFactory){
     selectedLocations[index].name = location.name;
     markers[index].title = location.name;
     var newContent = '<p>' + location.name + '</p>' +
-                  '<p>' + location.msg + '</p>' +
-                '<a id="delete">remove</a>';
+                  '<p>' + location.msg + '</p>';
+         //       '<a id="delete">remove</a>';
     markers[index].addListener('click', function() {
       markers[index].markerWindow.setContent(newContent);
      // markerWindow.setContent(newContent);
       markers[index].markerWindow.open($scope.map, markers[index]);
-    var del = document.getElementById("delete");
-    del.addEventListener("click", function(/*selectedLocations1, markers1, index1, map1*/){
-      $scope.removeLocation(selectedLocations, markers, index, map);
-      $scope.$apply();
-    });
+  // var del = document.getElementById("delete");
+    //del.addEventListener("click", function(/*selectedLocations1, markers1, index1, map1*/){
+    //  $scope.removeLocation(selectedLocations, markers, index, map);
+    //  $scope.$apply();
+   // });
+
   });
     
     selectedLocations[index].editing = false;
   };
 
+  $scope.showDirections = function(){
+    var dir = new google.maps.DirectionsRenderer({
+      map: $scope.map
+    });
+    var waypts = [];
+    for(var i = 1; i < $scope.markers.length-1; i++){
+      waypts.push({location: $scope.markers[i].position, stopover: true});
+
+    };
+    var coords = {
+      destination: $scope.markers[$scope.markers.length-1].position,
+      origin: $scope.markers[0].position,
+      waypoints: waypts,
+      travelMode: google.maps.TravelMode.DRIVING
+    };
+
+    var directionsService = new google.maps.DirectionsService();
+    directionsService.route(coords, function(response, status) {
+      if (status == google.maps.DirectionsStatus.OK) {
+        dir.setDirections(response);
+      }
+    });
+
+  }
+
   $scope.removeLocation = function(selectedLocations, markers, index, map){
-  //  console.log('remove location clicked ');
     markers[index].circle.setMap(null);
     markers[index].setMap(null);
     selectedLocations.splice(index,1);
