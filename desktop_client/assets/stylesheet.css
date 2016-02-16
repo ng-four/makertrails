@@ -68,7 +68,37 @@ AUTH SECTION
   padding-top: 30px;
 }
 
+.fullscreen-bg {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    overflow: hidden;
+    z-index: -100;
+}
 
+.fullscreen-bg__video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+@media (min-aspect-ratio: 16/9) {
+  .fullscreen-bg__video {
+    height: 300%;
+    top: -100%;
+  }
+}
+
+@media (max-aspect-ratio: 16/9) {
+  .fullscreen-bg__video {
+    width: 300%;
+    left: -100%;
+  }
+}
 
 
 /*==============================*\
@@ -109,8 +139,7 @@ NAVIGATION SIDEBAR
   width: 225px;
 }
 .sidebar-nav li {
-  text-indent: 10px;
-  line-height: 35px;
+  text-indent: 5px;
 }
 .sidebar-nav li a {
   color: #fff;
@@ -199,47 +228,23 @@ NAVIGATION SIDEBAR
   bottom: 0;
 }
 
+.list-locations .col-left{
+  text-align: left;
+  width: 150px;
+}
+
 .list-locations .col-right{
   margin-right: 10px;
+}
+
+.list-locations .rename-location:hover,
+.list-locations .remove-location:hover{
+  cursor: pointer;
 }
 
 .list-locations .remove-location:hover{
   color: red;
 }
-
-.fullscreen-bg {
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    overflow: hidden;
-    z-index: -100;
-}
-
-.fullscreen-bg__video {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-}
-
-@media (min-aspect-ratio: 16/9) {
-  .fullscreen-bg__video {
-    height: 300%;
-    top: -100%;
-  }
-}
-
-@media (max-aspect-ratio: 16/9) {
-  .fullscreen-bg__video {
-    width: 300%;
-    left: -100%;
-  }
-}
-
-
 
 
 /*==============================*\
@@ -266,17 +271,15 @@ MAP SECTION
   height: 100vh;
 }
 
-/*.trailsForm{
-  background: rgba(255, 255, 255, 0.6);
-  position: fixed;
-  top: 0;
-  right: 0;
-}*/
+.trailsForm{
+  display: block;
+}
 
 .trailsForm input, .trailsForm textarea{
   margin: 0 5% 10px 5%;
   width: 90%;
 }
+
 
 /*==============================*\
 VIEW MAPS SECTION
