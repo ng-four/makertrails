@@ -5,14 +5,14 @@
     </div>
     <div class="links text-xs-center">
       <button ui-sref="viewMaps" id="viewtrails" class="all-trails button btn btn-large btn-primary btn-block">Your Maps</button><br>
-      or save a new map...
+      or create a new map...
     </div>
 
 <div id="trailsForm" class="trailsForm navbar-inner-top navbar-inner">
   <form name="mapForm" class="text-xs-center">
     <div class="form-group">
       <label for="map-name" class="sr-only">Give Your Map a Name:</label>
-      <input type="text" id="map-name" class="map-name form-control" name="trailname" ng-model="mapInfo.name" placeholder="Name the Map" autocomplete="off" required>
+      <input type="text" id="map-name" class="map-name form-control" name="trailname" ng-model="mapInfo.name" placeholder="Name Your Map" autocomplete="off" required>
       <div ng-messages = "mapForm.trailname.$error" ng-if="mapForm.trailname.$dirty">
         <p ng-message="required" class="text-xs-center text-error">please name your map</p>
       </div>
@@ -20,7 +20,7 @@
 
     <div class="form-group">
       <label for="map-description" class="sr-only">Give Your Map a Description:</label>
-      <textarea id="map-description" class="form-control" name="traildesc" ng-model="mapInfo.description" rows="3" placeholder="Give it a Description" required></textarea>
+      <textarea id="map-description" class="form-control" name="traildesc" ng-model="mapInfo.description" rows="3" placeholder="Give Your Map a Description" required></textarea>
       <div ng-messages = "mapForm.traildesc.$error" ng-if="mapForm.traildesc.$dirty">
         <p ng-message="required" class="text-xs-center text-error">please describe your map</p>
       </div>
