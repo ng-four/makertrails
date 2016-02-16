@@ -65,7 +65,7 @@ function MapController($scope, $document, $timeout, MapFactory){
   $scope.renameLocation = function (selectedLocations, markers, index, location) {
     selectedLocations[index].name = location.name;
     markers[index].title = location.name;
-    var newContent = '<p>' + location.name + '</p>' +
+    var newContent = '<p><strong>' + location.name + '</strong></p>' +
                   '<p>' + location.msg + '</p>';
          //       '<a id="delete">remove</a>';
     markers[index].addListener('click', function() {
