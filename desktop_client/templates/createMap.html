@@ -4,7 +4,7 @@
       <div class="makertrailsLogo">MakerTrails</div>
     </div>
     <div class="links text-xs-center">
-      <a ui-sref="viewMaps" id="viewtrails" class="all-trails">Your Trails</a>
+      <button ui-sref="viewMaps" id="viewtrails" class="all-trails button btn btn-large btn-primary btn-block">Your Trails</button>
     </div>
 
 <div id="trailsForm" class="trailsForm navbar-inner-top navbar-inner">
@@ -59,7 +59,7 @@
         6 Locations maximum!
       </div>
       <div class="section">
-        <button class="navbar-buton create-map" ng-click="createMap(); mapForm.$setPristine(true)" ng-disabled="mapForm.$invalid || selectedLocations.length === 0" data-toggle="modal" data-target="#confirmModal" >Create Map</button>
+        <button class="navbar-buton create-map button btn btn-large btn-primary btn-block" ng-click="createMap(); mapForm.$setPristine(true)" ng-disabled="mapForm.$invalid || selectedLocations.length === 0" data-toggle="modal" data-target="#confirmModal" >Create Map</button>
       </div>
     </div>
   </form>
@@ -93,4 +93,3 @@
     </div>
   </div>
 </div>
-

@@ -19,6 +19,23 @@ html, body, .master{
   color: red;
 }
 
+.btn-primary, .btn-primary:active{
+  background: url("images/Melamine-wood-004.png");
+  border-color: transparent;
+  box-shadow: 0px 5px 3px rgba(0, 0, 0, 0.32);
+}
+
+.btn-primary:hover, .btn-primary:disabled:hover,
+.btn-primary:active, .btn-primary:disabled:active,
+.btn-primary:disabled, .btn-primary:active:hover{
+  border-color: transparent;
+}
+
+.button-group a {
+  color: #804c02;
+}
+
+
 /*==============================*\
 AUTH SECTION
 \*==============================*/
@@ -66,7 +83,7 @@ NAVIGATION SIDEBAR
 }
 
 #sidebar-wrapper {
-  background: rgba(251, 206, 91, 0.93);
+  background: url("images/Melamine-wood-001.png"), linear-gradient(to bottom,  rgba(255,255,255,0) 0%,rgba(63,34,42,0.1) 100%);
   height: 100%;
   left: 0px;
   overflow-y: auto;
@@ -140,7 +157,7 @@ NAVIGATION SIDEBAR
   width: 100%;
 }
 .navbar-inner .navbar-button{
-  background: #f2ac48;
+  background: url("images/Melamine-wood-003.png"), linear-gradient(to bottom,  rgba(255,255,255,0) 0%,rgba(63,34,42,0.1) 100%);
   color: #804c02;
   display: block;
   line-height: 30px;
@@ -148,7 +165,7 @@ NAVIGATION SIDEBAR
   text-align: center;
 }
 .navbar-inner .navbar-button:hover{
-  background: #DB9D40;
+  background: url("images/Melamine-wood-003.png"), linear-gradient(to bottom,  rgba(255,255,255,0) 0%,rgba(63,34,42,0.1) 100%);
   cursor: pointer;
   text-decoration: none;
 }
@@ -164,7 +181,7 @@ NAVIGATION SIDEBAR
   margin: 0;
 }
 .list-locations li{
-  background: #f2ac48;
+  background: url("images/Melamine-wood-003.png"), linear-gradient(to bottom,  rgba(255,255,255,0) 0%,rgba(63,34,42,0.1) 100%);
   margin-bottom: 2.5px;
   overflow: auto;
   padding: 5px;
@@ -188,6 +205,38 @@ NAVIGATION SIDEBAR
 
 .list-locations .remove-location:hover{
   color: red;
+}
+
+.fullscreen-bg {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    overflow: hidden;
+    z-index: -100;
+}
+
+.fullscreen-bg__video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+@media (min-aspect-ratio: 16/9) {
+  .fullscreen-bg__video {
+    height: 300%;
+    top: -100%;
+  }
+}
+
+@media (max-aspect-ratio: 16/9) {
+  .fullscreen-bg__video {
+    width: 300%;
+    left: -100%;
+  }
 }
 
 
@@ -227,4 +276,33 @@ MAP SECTION
 .trailsForm input, .trailsForm textarea{
   margin: 0 5% 10px 5%;
   width: 90%;
+}
+
+/*==============================*\
+VIEW MAPS SECTION
+\*==============================*/
+
+#viewtrails, #trailsForm .create-map {
+  margin: 0 5%;
+  width: 90%;
+}
+
+.card-block {
+  background: url("images/Melamine-wood-003.png");
+  border: transparent;
+  box-shadow: 0px 5px 3px rgba(0, 0, 0, 0.32);
+}
+.card-columns .button-remove{
+  font-size: 23px;
+}
+.card-columns .button-remove:hover{
+  cursor: pointer;
+}
+.fb-share-button{
+  text-align: center;
+  width: 100%;
+}
+.list-group-item {
+  background: url("images/Melamine-wood-001.png"), linear-gradient(to bottom,  rgba(255,255,255,0) 0%,rgba(63,34,42,0.1) 100%);
+  border: none;
 }
