@@ -5,7 +5,7 @@ angular.module('App')
 var url;
 //url = 'http://localhost:8000';
 // url = 'http://still-sands-90078.herokuapp.com'
-url = 'http://makertrailsv2.herokuapp.com'
+url = 'https://makertrailsv2.herokuapp.com'
 
 function MakerMapFactory($http, $q, $state, $stateParams) {
   var markerWindow = new google.maps.InfoWindow();
