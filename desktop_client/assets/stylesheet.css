@@ -70,6 +70,24 @@ AUTH SECTION
   padding-top: 30px;
 }
 
+.footer-wrapper{
+  color: #fff;
+  bottom: 0;
+  font-size: 0.75rem;
+  left: 220px;
+  padding-bottom: 0.5rem;
+  position: fixed;
+}
+.footer-wrapper ul{
+  margin-bottom: 0;
+}
+.footer-wrapper ul a, .footer-wrapper ul a:hover{
+  color: #fff;
+}
+.footer-wrapper li{
+  margin-right: 5px;
+}
+
 
 /*==============================*\
 NAVIGATION SIDEBAR
